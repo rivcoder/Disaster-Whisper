@@ -161,6 +161,45 @@ body {
 }
 
 /* Results Layout */
+.location-header {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
+}
+
+.location-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.location-info i {
+    font-size: 1.5rem;
+    color: var(--color-medium);
+}
+
+.location-info h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.update-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.update-info i {
+    font-size: 1rem;
+}
+
 .results-grid {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -256,6 +295,18 @@ body {
     gap: 0.5rem;
     font-size: 0.9rem;
     font-weight: 400;
+}
+
+.critical-alert {
+    background-color: #FED7D7;
+    border: 1px solid #FC8181;
+    animation: alertPulse 2s infinite;
+}
+
+@keyframes alertPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); background-color: #FEB2B2; }
+    100% { transform: scale(1); }
 }
 
 /* Metrics Section */
@@ -359,6 +410,49 @@ body {
     background: var(--accent-hover);
     margin-bottom: 1.5rem;
     animation: ripple 1.5s linear infinite;
+}
+
+/* Trends Section */
+.trends-section {
+    margin-top: 2rem;
+}
+
+.trends-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.tab-group {
+    display: flex;
+    gap: 0.5rem;
+    background: #E2E8F0;
+    padding: 0.25rem;
+    border-radius: 12px;
+}
+
+.tab-btn {
+    border: none;
+    background: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-muted);
+}
+
+.tab-btn.active {
+    background: white;
+    color: var(--text-main);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.chart-container {
+    height: 300px;
+    position: relative;
 }
 
 @keyframes ripple {

@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const valRain = document.getElementById('val-rain');
     const valAqi = document.getElementById('val-aqi');
     
+    let trendChart = null;
+    let currentTrendData = null;
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const city = cityInput.value.trim();
@@ -48,12 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
+            // Store trend data globally for tab switching
+            currentTrendData = data.trends;
+            
             // Simulate slight delay for dramatic effect/loading
             setTimeout(() => {
                 updateUI(data);
                 cityInput.value = data.city; // Update input to show resolved city name
                 loadingState.classList.add('hidden');
                 resultsContainer.classList.remove('hidden');
+                
+                // Render initial chart (hourly)
+                renderTrends('hourly');
             }, 600);
             
         } catch (error) {
@@ -62,6 +71,92 @@ document.addEventListener('DOMContentLoaded', () => {
             loadingState.classList.add('hidden');
         }
     });
+
+    // Tab Switching Logic
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTrends(btn.dataset.tab);
+        });
+    });
+
+    function renderTrends(type) {
+        if (!currentTrendData) return;
+        
+        const ctx = document.getElementById('trends-chart').getContext('2d');
+        const data = currentTrendData[type];
+        
+        if (trendChart) {
+            trendChart.destroy();
+        }
+
+        const labels = data.time.map(t => {
+            const date = new Date(t);
+            return type === 'hourly' 
+                ? date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                : date.toLocaleDateString([], { weekday: 'short', day: 'numeric' });
+        });
+
+        const datasets = [];
+        
+        // Temperature Dataset
+        datasets.push({
+            label: type === 'hourly' ? 'Temperature (°C)' : 'Max Temp (°C)',
+            data: type === 'hourly' ? data.temp : data.temp_max,
+            borderColor: '#ED8936',
+            backgroundColor: 'rgba(237, 137, 54, 0.1)',
+            fill: true,
+            tension: 0.4,
+            yAxisID: 'y'
+        });
+
+        // Rainfall Dataset
+        datasets.push({
+            label: type === 'hourly' ? 'Rain (mm)' : 'Rain Sum (mm)',
+            data: type === 'hourly' ? data.rain : data.rain_sum,
+            borderColor: '#4299E1',
+            backgroundColor: 'rgba(66, 153, 225, 0.4)',
+            type: 'bar',
+            yAxisID: 'y1'
+        });
+
+        trendChart = new Chart(ctx, {
+            type: 'line',
+            data: { labels, datasets },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: { display: true, text: 'Temperature' },
+                        grid: { drawOnChartArea: false }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: { display: true, text: 'Rainfall' },
+                        grid: { drawOnChartArea: true }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { usePointStyle: true, padding: 20 }
+                    }
+                }
+            }
+        });
+    }
     
     function showError(message) {
         const errorBox = document.createElement('div');
@@ -89,6 +184,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function updateUI(res) {
+        // Update Location and Timestamp
+        const locationEl = document.getElementById('resolved-location');
+        const updatedEl = document.getElementById('last-updated');
+        
+        if (locationEl) locationEl.textContent = res.city;
+        if (updatedEl && res.data.timestamp) {
+            const date = new Date(res.data.timestamp);
+            updatedEl.textContent = `Last Updated: ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+        }
+
         // Update Risk Level
         riskText.textContent = res.risk_level;
         riskCard.className = 'status-section card animate-fade-in'; // reset and animate
@@ -123,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.alerts && res.alerts.length > 0) {
             res.alerts.forEach((alert, index) => {
                 const alertEl = document.createElement('div');
-                alertEl.className = 'alert-item animate-fade-in';
+                alertEl.className = 'alert-item animate-fade-in critical-alert';
                 alertEl.style.animationDelay = `${0.2 + (index * 0.15)}s`;
                 alertEl.innerHTML = `<i class="ph ph-warning-circle"></i> <span>${alert}</span>`;
                 alertsContainer.appendChild(alertEl);

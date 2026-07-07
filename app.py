@@ -37,6 +37,33 @@ def predict():
         
     alerts = []
     
+    # 1. Weather Code based Alerts (WMO Codes)
+    w_code = env_data.get('weather_code', 0)
+    if w_code >= 95:
+        alerts.append("Severe Thunderstorm Warning! Seek shelter immediately.")
+    elif w_code >= 80:
+        alerts.append("Violent rain showers detected. Expect localized flooding.")
+    elif w_code >= 71:
+        alerts.append("Heavy snowfall detected. Road conditions may be hazardous.")
+    elif w_code >= 65:
+        alerts.append("Heavy rainfall in progress. High flood risk in low-lying areas.")
+    elif w_code in [66, 67, 56, 57]:
+        alerts.append("Freezing rain/drizzle warning. Extremely slippery surfaces expected.")
+
+    # 2. Threshold based Alerts
+    if env_data['AQI'] > 300:
+        alerts.append("CRITICAL: Hazardous Air Quality! Avoid all outdoor exertion.")
+    elif env_data['AQI'] > 200:
+        alerts.append("Very Unhealthy Air Quality. Stay indoors.")
+        
+    if env_data['Wind_Speed'] > 90:
+        alerts.append("Extreme Wind Warning! Stay away from trees and power lines.")
+        
+    if env_data['Temperature'] > 45:
+        alerts.append("Lethal Heatwave Warning. Use cooling systems and stay hydrated.")
+    elif env_data['Temperature'] < -10:
+        alerts.append("Extreme Cold Warning. Risk of frostbite in minutes.")
+
     # Use ML Model to predict risk level
     if model:
         try:
@@ -90,14 +117,14 @@ def predict():
         else:
             recommendations.append("High risk detected. Follow official local warnings immediately.")
 
-            
     response = {
         "city": resolved_city,
         "risk_level": risk_level,
         "source": source,
         "alerts": alerts,
         "data": env_data,
-        "recommendations": recommendations
+        "recommendations": recommendations,
+        "trends": env_data.get("trends", {})
     }
     
     return jsonify(response)

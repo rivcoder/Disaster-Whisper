@@ -32,6 +32,17 @@
             </section>
 
             <div id="results-container" class="results-container hidden">
+                <div class="location-header card">
+                    <div class="location-info">
+                        <i class="ph ph-map-pin"></i>
+                        <h2 id="resolved-location">New Delhi, India</h2>
+                    </div>
+                    <div class="update-info">
+                        <i class="ph ph-clock-counter-clockwise"></i>
+                        <span id="last-updated">Last Updated: --</span>
+                    </div>
+                </div>
+
                 <div class="results-grid">
                     <section class="status-section card" id="risk-card">
                         <div class="risk-display">
@@ -96,6 +107,19 @@
                         </section>
                     </div>
                 </div>
+
+                <section class="trends-section card">
+                    <div class="trends-header">
+                        <h3>Environmental Trends</h3>
+                        <div class="tab-group">
+                            <button class="tab-btn active" data-tab="hourly">24 Hours</button>
+                            <button class="tab-btn" data-tab="daily">7 Days</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trends-chart"></canvas>
+                    </div>
+                </section>
             </div>
             
             <!-- Loading State -->
@@ -107,6 +131,7 @@
         </main>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
