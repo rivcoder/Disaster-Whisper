@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from backend_utils import get_real_environmental_data
+import risk_engine
 import joblib
-import pandas as pd
 import os
 
 app = Flask(__name__)
@@ -17,10 +17,21 @@ except Exception as e:
 
 @app.route('/')
 def index():
+    """
+    Renders the main Disaster Whisper dashboard.
+    """
     return render_template('index.html')
 
 @app.route('/api/predict', methods=['POST'])
 def predict():
+    """
+    Orchestrates the environmental risk prediction workflow:
+    1. Parse city name from request.
+    2. Fetch live and forecast weather and air quality from Open-Meteo.
+    3. Calculate individual risk vectors.
+    4. Estimate combined risk using ML model.
+    5. Generate alerts, recommendations, and local resource values.
+    """
     data = request.json
     city = data.get('city', '').strip()
     
@@ -28,103 +39,41 @@ def predict():
         return jsonify({"error": "Please enter a valid city name."}), 400
         
     try:
+        # Fetch geocoding, weather, and AQI data
         env_data = get_real_environmental_data(city)
-        resolved_city = env_data.pop("resolved_city") # remove from features, use for display
+        resolved_city = env_data.pop("resolved_city") # extracted to display to the user
     except ValueError as ve:
         return jsonify({"error": f"We couldn't find the city '{city}'. Please double-check the spelling and try again."}), 404
     except ConnectionError as ce:
         return jsonify({"error": "Our weather service is temporarily unavailable. Please try again in a few moments."}), 503
         
-    alerts = []
+    # Generate Alerts
+    alerts = risk_engine.generate_alerts(env_data)
     
-    # 1. Weather Code based Alerts (WMO Codes)
-    w_code = env_data.get('weather_code', 0)
-    if w_code >= 95:
-        alerts.append("Severe Thunderstorm Warning! Seek shelter immediately.")
-    elif w_code >= 80:
-        alerts.append("Violent rain showers detected. Expect localized flooding.")
-    elif w_code >= 71:
-        alerts.append("Heavy snowfall detected. Road conditions may be hazardous.")
-    elif w_code >= 65:
-        alerts.append("Heavy rainfall in progress. High flood risk in low-lying areas.")
-    elif w_code in [66, 67, 56, 57]:
-        alerts.append("Freezing rain/drizzle warning. Extremely slippery surfaces expected.")
-
-    # 2. Threshold based Alerts
-    if env_data['AQI'] > 300:
-        alerts.append("CRITICAL: Hazardous Air Quality! Avoid all outdoor exertion.")
-    elif env_data['AQI'] > 200:
-        alerts.append("Very Unhealthy Air Quality. Stay indoors.")
-        
-    if env_data['Wind_Speed'] > 90:
-        alerts.append("Extreme Wind Warning! Stay away from trees and power lines.")
-        
-    if env_data['Temperature'] > 45:
-        alerts.append("Lethal Heatwave Warning. Use cooling systems and stay hydrated.")
-    elif env_data['Temperature'] < -10:
-        alerts.append("Extreme Cold Warning. Risk of frostbite in minutes.")
-
-    # Use ML Model to predict risk level
-    if model:
-        try:
-            features = pd.DataFrame([{
-                'Temperature': env_data['Temperature'],
-                'Humidity': env_data['Humidity'],
-                'Wind_Speed': env_data['Wind_Speed'],
-                'Rainfall': env_data['Rainfall'],
-                'AQI': env_data['AQI']
-            }])
-            prediction = model.predict(features)[0]
-            risk_level = prediction
-            source = "AI Prediction"
-        except Exception as e:
-            print(f"Prediction error: {e}")
-            risk_level = "Unknown"
-            source = "Prediction Error"
-    else:
-        risk_level = "Unknown"
-        source = "Model not found"
+    # Calculate Risk Breakdown (Individual Threat Vectors in %)
+    risk_breakdown = risk_engine.calculate_risk_breakdown(env_data)
+    
+    # Predict Risk Level & Score using the ML model (blended with forecast)
+    risk_level, risk_score, source = risk_engine.predict_risk(env_data, model, risk_breakdown)
             
-    # Generate Dynamic Recommendations
-    recommendations = []
-    
-    if env_data['Rainfall'] > 50:
-        recommendations.append("Heavy rain detected. Avoid flood-prone areas and drive safely.")
-    elif env_data['Rainfall'] > 0:
-        recommendations.append("Light precipitation expected. Consider carrying an umbrella.")
-        
-    if env_data['Wind_Speed'] > 70:
-        recommendations.append("Dangerous wind speeds! Stay indoors and away from windows.")
-    elif env_data['Wind_Speed'] > 40:
-        recommendations.append("Strong winds detected. Secure loose outdoor items.")
-        
-    if env_data['Temperature'] > 38:
-        recommendations.append("Extreme heat warning. Stay hydrated and limit outdoor activity.")
-    elif env_data['Temperature'] < 0:
-        recommendations.append("Freezing temperatures. Dress warmly and watch for ice.")
-        
-    if env_data['AQI'] > 200:
-        recommendations.append("Hazardous air quality. Stay indoors with windows closed.")
-    elif env_data['AQI'] > 100:
-        recommendations.append("Poor air quality. Sensitive groups should wear masks outdoors.")
-        
-    # Fallback if no specific threshold is crossed
-    if not recommendations:
-        if risk_level == "Low":
-            recommendations.append("Conditions are peaceful. Enjoy your day!")
-        elif risk_level == "Medium":
-            recommendations.append("Exercise minor caution outdoors. Stay aware of changes.")
-        else:
-            recommendations.append("High risk detected. Follow official local warnings immediately.")
+    # Generate safety recommendations
+    recommendations = risk_engine.generate_recommendations(env_data, risk_level, alerts)
+ 
+    # Generate local resource allocation counts
+    resources = risk_engine.generate_resources(resolved_city)
 
+    # Compile the final response payload
     response = {
         "city": resolved_city,
         "risk_level": risk_level,
+        "risk_score": risk_score,
+        "risk_breakdown": risk_breakdown,
         "source": source,
         "alerts": alerts,
         "data": env_data,
         "recommendations": recommendations,
-        "trends": env_data.get("trends", {})
+        "trends": env_data.get("trends", {}),
+        "resources": resources
     }
     
     return jsonify(response)

@@ -60,8 +60,8 @@ def get_real_environmental_data(city):
         weather_url = (
             f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
             f"&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code"
-            f"&hourly=temperature_2m,precipitation"
-            f"&daily=temperature_2m_max,temperature_2m_min,precipitation_sum"
+            f"&hourly=temperature_2m,precipitation,wind_speed_10m,relative_humidity_2m"
+            f"&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,relative_humidity_2m_max"
             f"&timezone=auto"
         )
         weather_response = requests.get(weather_url, timeout=5)
@@ -81,9 +81,25 @@ def get_real_environmental_data(city):
         aqi_data = aqi_response.json()["current"]
         
         # Map to our expected format
+        current_time_str = timestamp or ""
+        hourly_times = hourly_data.get("time", [])
+        current_hour_idx = 0
+        for idx, t in enumerate(hourly_times):
+            if t >= current_time_str:
+                current_hour_idx = idx
+                break
+                
+        sliced_hourly_times  = hourly_times[current_hour_idx : current_hour_idx + 24]
+        sliced_hourly_temp   = hourly_data.get("temperature_2m", [])[current_hour_idx : current_hour_idx + 24]
+        sliced_hourly_rain   = hourly_data.get("precipitation", [])[current_hour_idx : current_hour_idx + 24]
+        sliced_hourly_wind   = hourly_data.get("wind_speed_10m", [])[current_hour_idx : current_hour_idx + 24]
+        sliced_hourly_humid  = hourly_data.get("relative_humidity_2m", [])[current_hour_idx : current_hour_idx + 24]
+
         data = {
             "resolved_city": resolved_city_name,
             "timestamp": timestamp,
+            "latitude": lat,
+            "longitude": lon,
             "Temperature": current_weather.get("temperature_2m", 0),
             "Humidity": current_weather.get("relative_humidity_2m", 0),
             "Wind_Speed": current_weather.get("wind_speed_10m", 0),
@@ -92,15 +108,19 @@ def get_real_environmental_data(city):
             "weather_code": current_weather.get("weather_code", 0),
             "trends": {
                 "hourly": {
-                    "time": hourly_data.get("time", [])[:24], # Next 24 hours
-                    "temp": hourly_data.get("temperature_2m", [])[:24],
-                    "rain": hourly_data.get("precipitation", [])[:24]
+                    "time":     sliced_hourly_times,
+                    "temp":     sliced_hourly_temp,
+                    "rain":     sliced_hourly_rain,
+                    "wind":     sliced_hourly_wind,
+                    "humidity": sliced_hourly_humid,
                 },
                 "daily": {
-                    "time": daily_data.get("time", []),
-                    "temp_max": daily_data.get("temperature_2m_max", []),
-                    "temp_min": daily_data.get("temperature_2m_min", []),
-                    "rain_sum": daily_data.get("precipitation_sum", [])
+                    "time":      daily_data.get("time", []),
+                    "temp_max":  daily_data.get("temperature_2m_max", []),
+                    "temp_min":  daily_data.get("temperature_2m_min", []),
+                    "rain_sum":  daily_data.get("precipitation_sum", []),
+                    "wind_max":  daily_data.get("wind_speed_10m_max", []),
+                    "humid_max": daily_data.get("relative_humidity_2m_max", []),
                 }
             }
         }

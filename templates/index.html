@@ -1,137 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whisper | Environmental Check</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Whisper | Environmental Risk Intelligence</title>
+  <meta name="description" content="Real-time AI-driven environmental risk assessments and safety analytics for any city worldwide.">
+  <meta name="theme-color" content="#03060c">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
-    <div class="app-container">
-        <header class="header">
-            <div class="logo">
-                <i class="ph ph-wind"></i>
-                <h1>Whisper</h1>
-            </div>
-            <p class="subtitle">Your peaceful environmental check</p>
-        </header>
 
-        <main class="main-content">
-            <section class="search-section card">
-                <form id="assessment-form" class="search-form">
-                    <div class="input-group">
-                        <i class="ph ph-map-pin"></i>
-                        <input type="text" id="city-input" placeholder="Where are you?" required autocomplete="off">
+  <!-- Atmospheric Background Layers -->
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="app-container">
+
+    <!-- ── HERO HEADER ──────────────────────────────────── -->
+    <header class="header">
+      <div class="status-badge">
+        <span class="dot"></span>
+        System Operational
+      </div>
+      <div class="logo">
+        <i class="ph-fill ph-shield-checkered"></i>
+        <h1>Disaster Whisper</h1>
+      </div>
+      <p class="subtitle">AI-Driven Environmental Risk Intelligence</p>
+    </header>
+
+    <main>
+
+      <!-- ── SEARCH ──────────────────────────────────────── -->
+      <section class="search-section card">
+        <form id="assessment-form" class="search-form">
+          <div class="input-group">
+            <i class="ph ph-magnifying-glass"></i>
+            <input
+              type="text" id="city-input"
+              placeholder="Search any city on Earth…"
+              required autocomplete="off">
+            <div id="autocomplete-suggestions" class="autocomplete-dropdown hidden"></div>
+          </div>
+          <button type="submit" class="btn-primary" id="analyze-btn" title="Run Assessment">
+            <i class="ph ph-lightning"></i>
+          </button>
+        </form>
+
+        <div class="favorites-bar">
+          <span class="favorites-label">Quick Access:</span>
+          <div id="favorites-list" class="favorites-list"></div>
+        </div>
+      </section>
+
+      <!-- ── LOADING ─────────────────────────────────────── -->
+      <div id="loading-state" class="loading-state hidden">
+        <div class="pulse-ring"></div>
+        <p>Consulting risk database…</p>
+      </div>
+
+      <!-- ── RESULTS ─────────────────────────────────────── -->
+      <div id="results-container" class="results-container hidden">
+
+        <!-- Location Bar -->
+        <div class="location-header card">
+          <div class="location-info">
+            <i class="ph-fill ph-map-pin"></i>
+            <h2 id="resolved-location">New Delhi, India</h2>
+            <button id="favorite-btn" class="btn-favorite" title="Add to Favorites">
+              <i class="ph ph-star"></i>
+            </button>
+          </div>
+          <div class="update-info">
+            <i class="ph ph-clock"></i>
+            <span id="last-updated">Last Updated: --</span>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="command-tabs">
+          <button class="command-tab active" data-panel="radar">
+            <i class="ph-bold ph-shield"></i> Risk Radar
+          </button>
+          <button class="command-tab" data-panel="hazards">
+            <i class="ph-bold ph-warning-octagon"></i> Hazards
+          </button>
+          <button class="command-tab" data-panel="resources">
+            <i class="ph-bold ph-truck"></i> Dispatch
+          </button>
+          <button class="command-tab" id="tab-trend-analysis" data-panel="trends-anchor">
+            <i class="ph-bold ph-chart-line"></i> Trend Analysis
+          </button>
+        </div>
+
+        <!-- ═══════════ PANEL 1 : RISK RADAR ═══════════════ -->
+        <div id="panel-radar" class="tab-panel active">
+          <div class="results-grid">
+
+            <!-- LEFT -->
+            <div class="left-content">
+
+              <!-- Risk Gauge -->
+              <section class="status-section card" id="risk-card">
+                <h3>Risk Assessment</h3>
+                <div class="risk-display">
+                  <div class="risk-gauge-container">
+                    <svg class="gauge-svg" viewBox="0 0 100 100">
+                      <circle class="gauge-bg"   cx="50" cy="50" r="42" fill="none" stroke-width="8"></circle>
+                      <circle class="gauge-fill" id="gauge-fill" cx="50" cy="50" r="42" fill="none"
+                        stroke-width="8" stroke-dasharray="264" stroke-dashoffset="264"
+                        stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
+                    </svg>
+                    <div class="gauge-info">
+                      <span id="risk-score">0%</span>
+                      <h4 id="risk-text">Low</h4>
                     </div>
-                    <button type="submit" class="btn-primary" id="analyze-btn">
-                        <i class="ph ph-magnifying-glass"></i>
+                  </div>
+                </div>
+                <p class="status-subtitle" id="status-subtitle">Analyzing atmospheric conditions…</p>
+                <div class="alerts-container" id="alerts-container"></div>
+              </section>
+
+              <!-- AI Threat Breakdown -->
+              <section class="breakdown-section card">
+                <h3>AI Threat Breakdown</h3>
+                <div class="breakdown-list" id="breakdown-list"></div>
+              </section>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="right-content">
+
+              <!-- Environmental Metrics -->
+              <section class="data-section card">
+                <h3>Environmental Metrics</h3>
+                
+                <div class="metrics-grid" id="metrics-grid">
+                  <div class="metric-box" data-metric="temp">
+                    <i class="ph ph-thermometer"></i>
+                    <div>
+                      <span class="metric-value" id="val-temp">--°C</span>
+                      <span class="metric-label">Temperature</span>
+                    </div>
+                  </div>
+                  <div class="metric-box" data-metric="humidity">
+                    <i class="ph ph-drop"></i>
+                    <div>
+                      <span class="metric-value" id="val-humidity">--%</span>
+                      <span class="metric-label">Humidity</span>
+                    </div>
+                  </div>
+                  <div class="metric-box" data-metric="wind">
+                    <i class="ph ph-wind"></i>
+                    <div>
+                      <span class="metric-value" id="val-wind">-- km/h</span>
+                      <span class="metric-label">Wind Speed</span>
+                    </div>
+                  </div>
+                  <div class="metric-box" data-metric="rain">
+                    <i class="ph ph-cloud-rain"></i>
+                    <div>
+                      <span class="metric-value" id="val-rain">-- mm</span>
+                      <span class="metric-label">Rainfall</span>
+                    </div>
+                  </div>
+                  <div class="metric-box" data-metric="aqi">
+                    <i class="ph ph-leaf"></i>
+                    <div>
+                      <span class="metric-value" id="val-aqi">--</span>
+                      <span class="metric-label">Air Quality</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Interactive Settings Console -->
+                <div class="metric-options-console hidden" id="metric-options-console">
+                  <div class="console-header">
+                    <button class="btn-console-back" id="btn-console-back" type="button" title="Back to metrics">
+                      <i class="ph ph-arrow-left"></i>
                     </button>
-                </form>
-            </section>
-
-            <div id="results-container" class="results-container hidden">
-                <div class="location-header card">
-                    <div class="location-info">
-                        <i class="ph ph-map-pin"></i>
-                        <h2 id="resolved-location">New Delhi, India</h2>
-                    </div>
-                    <div class="update-info">
-                        <i class="ph ph-clock-counter-clockwise"></i>
-                        <span id="last-updated">Last Updated: --</span>
-                    </div>
+                    <h4 id="console-metric-title">Metric Options</h4>
+                  </div>
+                  <div class="console-body" id="console-body">
+                    <!-- Settings widgets injected by JavaScript -->
+                  </div>
                 </div>
+              </section>
 
-                <div class="results-grid">
-                    <section class="status-section card" id="risk-card">
-                        <div class="risk-display">
-                            <div class="risk-ring" id="risk-ring">
-                                <h3 id="risk-text">Low</h3>
-                            </div>
-                        </div>
-                        <p class="status-subtitle" id="status-subtitle">Conditions are peaceful.</p>
-                        
-                        <div class="alerts-container" id="alerts-container">
-                            <!-- Alerts will be injected here -->
-                        </div>
-                    </section>
 
-                    <div class="side-content">
-                        <section class="data-section card">
-                            <h3>Current Climate</h3>
-                            <div class="metrics-grid">
-                                <div class="metric-box">
-                                    <i class="ph ph-thermometer"></i>
-                                    <div>
-                                        <span class="metric-value" id="val-temp">--°C</span>
-                                        <span class="metric-label">Temp</span>
-                                    </div>
-                                </div>
-                                <div class="metric-box">
-                                    <i class="ph ph-drop"></i>
-                                    <div>
-                                        <span class="metric-value" id="val-humidity">--%</span>
-                                        <span class="metric-label">Humidity</span>
-                                    </div>
-                                </div>
-                                <div class="metric-box">
-                                    <i class="ph ph-wind"></i>
-                                    <div>
-                                        <span class="metric-value" id="val-wind">--</span>
-                                        <span class="metric-label">km/h</span>
-                                    </div>
-                                </div>
-                                <div class="metric-box">
-                                    <i class="ph ph-cloud-rain"></i>
-                                    <div>
-                                        <span class="metric-value" id="val-rain">--</span>
-                                        <span class="metric-label">mm Rain</span>
-                                    </div>
-                                </div>
-                                <div class="metric-box">
-                                    <i class="ph ph-leaf"></i>
-                                    <div>
-                                        <span class="metric-value" id="val-aqi">--</span>
-                                        <span class="metric-label">AQI</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
 
-                        <section class="action-section card">
-                            <h3>Suggestions</h3>
-                            <ul class="recommendation-list" id="recommendation-list">
-                                <!-- Recommendations will be injected here -->
-                            </ul>
-                        </section>
-                    </div>
+              <!-- Safety Advisor -->
+              <section class="action-section card">
+                <h3>Safety Advisor</h3>
+                <div class="advisory-categories">
+                  <div class="advisory-card critical hidden" id="adv-critical">
+                    <div class="advisory-header"><i class="ph-fill ph-warning"></i><span>Immediate Actions</span></div>
+                    <ul id="rec-critical"></ul>
+                  </div>
+                  <div class="advisory-card health" id="adv-health">
+                    <div class="advisory-header"><i class="ph-fill ph-activity"></i><span>Health &amp; Comfort</span></div>
+                    <ul id="rec-health"></ul>
+                  </div>
+                  <div class="advisory-card travel" id="adv-travel">
+                    <div class="advisory-header"><i class="ph-fill ph-car"></i><span>Travel &amp; Commute</span></div>
+                    <ul id="rec-travel"></ul>
+                  </div>
                 </div>
+              </section>
 
-                <section class="trends-section card">
-                    <div class="trends-header">
-                        <h3>Environmental Trends</h3>
-                        <div class="tab-group">
-                            <button class="tab-btn active" data-tab="hourly">24 Hours</button>
-                            <button class="tab-btn" data-tab="daily">7 Days</button>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="trends-chart"></canvas>
-                    </div>
-                </section>
             </div>
-            
-            <!-- Loading State -->
-            <div id="loading-state" class="loading-state hidden">
-                <div class="pulse-ring"></div>
-                <p>Feeling the breeze...</p>
-            </div>
-            
-        </main>
-    </div>
+          </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+          <!-- Trends Toggle Bar -->
+          <div class="trends-toggle-wrapper">
+            <button id="btn-toggle-trends" class="btn-trends-toggle" type="button">
+              <i class="ph ph-chart-line"></i>
+              <span>View Environmental Trend Analysis</span>
+              <i class="ph ph-caret-down" id="trends-caret"></i>
+            </button>
+          </div>
+
+          <!-- Trends -->
+          <section class="trends-section card hidden" id="trends-card" style="margin-top:1.5rem;">
+            <div class="trends-header">
+              <div>
+                <h3 style="margin-bottom:0;">Environmental Trends</h3>
+                <p class="trends-subtitle" id="trends-subtitle">Temperature over the next 24 hours</p>
+              </div>
+              <div class="tab-group">
+                <button class="tab-btn active" data-tab="hourly" id="tab-btn-hourly">24 h</button>
+                <button class="tab-btn" data-tab="daily" id="tab-btn-daily">7 d</button>
+              </div>
+            </div>
+
+            <!-- Metric selector row -->
+            <div class="metric-selector-row">
+              <button class="metric-sel-btn active" data-metric-sel="temp" id="sel-temp">
+                <i class="ph ph-thermometer"></i>
+                <span>Temperature</span>
+              </button>
+              <button class="metric-sel-btn" data-metric-sel="rain" id="sel-rain">
+                <i class="ph ph-cloud-rain"></i>
+                <span>Rainfall</span>
+              </button>
+              <button class="metric-sel-btn" data-metric-sel="wind" id="sel-wind">
+                <i class="ph ph-wind"></i>
+                <span>Wind</span>
+              </button>
+              <button class="metric-sel-btn" data-metric-sel="humidity" id="sel-humidity">
+                <i class="ph ph-drop"></i>
+                <span>Humidity</span>
+              </button>
+            </div>
+
+            <div class="chart-container"><canvas id="trends-chart"></canvas></div>
+          </section>
+        </div>
+
+        <!-- ═══════════ PANEL 2 : HAZARDS ═══════════════════ -->
+        <div id="panel-hazards" class="tab-panel hidden">
+          <div class="results-grid">
+            <div class="left-content">
+
+              <section class="flood-card card">
+                <h3>Localized Flood Threat</h3>
+                <div class="flood-meter-container">
+                  <div class="flood-gauge">
+                    <div class="flood-gauge-bar" id="flood-threat-bar" style="width:0%"></div>
+                  </div>
+                  <span class="flood-percentage" id="flood-threat-val">0%</span>
+                </div>
+                <p class="flood-description" id="flood-threat-description">No significant flood danger predicted.</p>
+                <hr class="panel-divider">
+                <div class="flood-metrics">
+                  <div class="f-metric">
+                    <span class="f-label">Accumulated Rain (24h)</span>
+                    <span class="f-val" id="flood-acc-rain">-- mm</span>
+                  </div>
+                  <div class="f-metric">
+                    <span class="f-label">Elevation Risk Factor</span>
+                    <span class="f-val">Standard Inland Terrain</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="outbreak-card card">
+                <h3>Extreme Warnings Monitor</h3>
+                <ul class="outbreak-list" id="outbreaks-list">
+                  <li class="warning-item inactive" id="heatwave-item">
+                    <i class="ph ph-thermometer-hot"></i>
+                    <div>
+                      <strong>Extreme Heatwave Alerts</strong>
+                      <span id="heatwave-status-desc">No active hazard</span>
+                    </div>
+                  </li>
+                  <li class="warning-item inactive" id="outbreak-item">
+                    <i class="ph ph-virus"></i>
+                    <div>
+                      <strong>Disaster Outbreaks Alerts</strong>
+                      <span>Biological/health warning level: Clear</span>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ PANEL 3 : DISPATCH ══════════════════ -->
+        <div id="panel-resources" class="tab-panel hidden">
+          <div class="results-grid">
+            <div class="left-content">
+              <section class="dispatch-control-card card">
+                <h3>Allocation Sliders</h3>
+                <p class="dispatch-instructions">Deploy emergency assets to the region. Increasing allocations lowers the community threat coefficient.</p>
+
+                <div class="slider-group">
+                  <div class="slider-header">
+                    <span>Rescue Squads</span>
+                    <span class="slider-status"><strong id="val-allocated-rescue">0</strong> / <span id="max-rescue">10</span></span>
+                  </div>
+                  <input type="range" id="slider-rescue" class="dispatch-slider" min="0" max="10" value="0">
+                </div>
+                <div class="slider-group">
+                  <div class="slider-header">
+                    <span>Medical Units</span>
+                    <span class="slider-status"><strong id="val-allocated-medical">0</strong> / <span id="max-medical">10</span></span>
+                  </div>
+                  <input type="range" id="slider-medical" class="dispatch-slider" min="0" max="10" value="0">
+                </div>
+                <div class="slider-group">
+                  <div class="slider-header">
+                    <span>Fire Engines</span>
+                    <span class="slider-status"><strong id="val-allocated-fire">0</strong> / <span id="max-fire">10</span></span>
+                  </div>
+                  <input type="range" id="slider-fire" class="dispatch-slider" min="0" max="10" value="0">
+                </div>
+                <div class="slider-group">
+                  <div class="slider-header">
+                    <span>Emergency Shelters</span>
+                    <span class="slider-status"><strong id="val-allocated-shelter">0</strong> / <span id="max-shelter">5</span></span>
+                  </div>
+                  <input type="range" id="slider-shelter" class="dispatch-slider" min="0" max="5" value="0">
+                </div>
+                <div class="slider-group">
+                  <div class="slider-header">
+                    <span>Supply Rations Kits</span>
+                    <span class="slider-status"><strong id="val-allocated-supplies">0</strong> / <span id="max-supplies">300</span></span>
+                  </div>
+                  <input type="range" id="slider-supplies" class="dispatch-slider" min="0" max="300" step="10" value="0">
+                </div>
+              </section>
+            </div>
+
+            <div class="right-content">
+              <section class="dispatch-summary-card card">
+                <h3>Command Console</h3>
+                <div class="mitigation-status">
+                  <div class="mitigation-ring">
+                    <svg class="mitigation-svg" viewBox="0 0 100 100">
+                      <circle class="mitigation-bg" cx="50" cy="50" r="42" fill="none" stroke-width="8"></circle>
+                      <circle class="mitigation-fill" id="mitigation-fill" cx="50" cy="50" r="42" fill="none"
+                        stroke-width="8" stroke-dasharray="264" stroke-dashoffset="264"
+                        stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
+                    </svg>
+                    <div class="mitigation-text">
+                      <span id="mitigation-score">0%</span>
+                      <h4>Mitigated</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="dispatch-stats">
+                  <div class="d-stat-row"><span>Deployed Personnel</span><span class="d-stat-val" id="stat-personnel">0</span></div>
+                  <div class="d-stat-row"><span>Shelter Capacity Filled</span><span class="d-stat-val" id="stat-shelter-capacity">0 / 0</span></div>
+                  <div class="d-stat-row"><span>Remaining Risk Score</span><span class="d-stat-val" id="stat-remaining-risk">--</span></div>
+                </div>
+                <button class="btn-primary dispatch-submit-btn" id="btn-dispatch-submit">
+                  <i class="ph ph-broadcast"></i> Transmit Dispatch Orders
+                </button>
+              </section>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div><!-- /results-container -->
+    </main>
+  </div><!-- /app-container -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>
