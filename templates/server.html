@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster-Whisper: Server Command Center</title>
+    <!-- Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .page-header {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .server-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+        @media (max-width: 1024px) {
+            .server-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .broadcast-panel {
+            background: rgba(6, 182, 212, 0.05) !important;
+            border: 1px solid rgba(6, 182, 212, 0.2) !important;
+        }
+        .broadcast-btn-main {
+            background: linear-gradient(135deg, var(--accent-cyan), #0891b2) !important;
+            color: #0b0f19 !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .broadcast-btn-main:hover {
+            box-shadow: var(--shadow-glow-cyan) !important;
+            transform: translateY(-2px);
+        }
+        .broadcast-log-box {
+            background: #05070c;
+            border: 1px solid var(--bg-card-border);
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.75rem;
+            max-height: 150px;
+            overflow-y: auto;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">📡</span>
+                <div class="logo-text">
+                    <h1>Disaster-Whisper Server</h1>
+                    <span class="tagline">Centralized Forecasting & Broadcast Station</span>
+                </div>
+            </div>
+            <a href="/" class="btn btn-sm btn-outline">🏠 Main Menu</a>
+        </header>
+
+        <div class="page-header">
+            <div class="status-indicator">
+                <span class="pulse-dot green"></span>
+                <span class="status-lbl">Transmitter Active (Indore Grid)</span>
+            </div>
+        </div>
+
+        <div class="server-grid">
+            <!-- Left Side: Map and Parameters -->
+            <div class="panel glass">
+                <div class="panel-header">
+                    <h2>🗺️ Evacuation Corridor Configuration</h2>
+                    <span class="sub-header-lbl">Specify the disaster parameters and coordinate waypoints</span>
+                </div>
+                <div class="panel-content">
+                    <!-- Hazard Choice -->
+                    <div class="form-group">
+                        <label>Disaster Hazard Classification</label>
+                        <div class="hazard-grid" id="hazard-selector"></div>
+                    </div>
+
+                    <!-- Role Flags -->
+                    <div class="form-group">
+                        <label>Target Vulnerable Groups (Bitmask flags)</label>
+                        <div class="role-grid" id="role-selector"></div>
+                        <div class="role-summary-bar">
+                            <span>Active Flag: <strong id="selected-hex">0x00</strong> (Binary: <span id="selected-bin" class="mono">0b0000</span>)</span>
+                        </div>
+                    </div>
+
+                    <!-- Route Map -->
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <label>Evacuation Corridor Waypoints</label>
+                            <button class="btn btn-sm btn-outline" id="clear-route-btn">Clear Corridor</button>
+                        </div>
+                        <div id="route-map" class="map-container"></div>
+                        <div class="map-hint">Click on map grid to place waypoints (1st point = hazard origin, last point = safe relief shelter)</div>
+                        <ul class="waypoint-list" id="waypoint-list">
+                            <li class="empty-list-msg">No coordinates placed yet. Click on the map.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Encoding output and Broadcast Trigger -->
+            <div class="panel glass">
+                <div class="panel-header">
+                    <h2>📦 Compression Codec & Transmitter</h2>
+                    <span class="sub-header-lbl">Generate sub-32-byte payload & broadcast over the air</span>
+                </div>
+                <div class="panel-content">
+                    <!-- Plaintext Fallback suffix -->
+                    <div class="form-group">
+                        <label>Fallback Plain-Text Instruction (SMS fallback tail)</label>
+                        <input type="text" id="plaintext-suffix" placeholder="e.g. Move to Scheme 54. Call 112." value=" Move to Scheme 54. Call 112.">
+                    </div>
+
+                    <!-- Visualizer -->
+                    <div class="encoding-output-box">
+                        <div class="form-label-row">
+                            <label class="accent-lbl">Active Payload Prefix</label>
+                            <span class="char-counter" id="char-counter">0 / 160 Chars</span>
+                        </div>
+                        <div class="broadcast-string-container">
+                            <div class="payload-visualizer" id="payload-visualizer">
+                                <span class="text-muted">No waypoints configured</span>
+                            </div>
+                        </div>
+                        
+                        <div class="budget-meter-container">
+                            <div class="budget-progress-bar">
+                                <div class="progress-fill" id="budget-progress-fill"></div>
+                            </div>
+                            <div class="budget-legend">
+                                <span>0B</span>
+                                <span>160B (Max SMS)</span>
+                            </div>
+                        </div>
+
+                        <div class="codec-stats">
+                            <div class="stat-card">
+                                <span class="stat-val" id="stat-payload-size">0B</span>
+                                <span class="stat-lbl">Payload Size</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-val" id="stat-avail-fallback">160</span>
+                                <span class="stat-lbl">Plaintext Space</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-val">4-dec</span>
+                                <span class="stat-lbl">Precision</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Broadcast panel -->
+                    <div class="panel glass broadcast-panel">
+                        <div class="panel-content" style="padding: 16px; gap: 12px;">
+                            <label class="accent-lbl" style="color: var(--accent-cyan) !important;">Wireless Data-Casting</label>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                                Broadcasting this message will transmit it onto the local simulated cellular network, BLE mesh, and LoRa airwaves.
+                            </p>
+                            <button class="btn btn-primary broadcast-btn-main" id="broadcast-btn">
+                                ⚡ Transmit Emergency Broadcast
+                            </button>
+                            <div class="broadcast-log-box" id="broadcast-log">
+                                <span class="text-muted">// Transmitter logs inactive. Waiting for broadcast...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Store registries
+        let hazardRegistry = {};
+        let roleRegistry = {};
+        let activeHazardCode = 'F';
+        let activeRoleMask = 0;
+        let map = null;
+        let routePathLine = null;
+        let waypoints = [];
+        let waypointCoords = [];
+        let lastEncodedPayload = '';  // Cache clean payload from API — never read from DOM
+
+        // Fallbacks if backend API or network fails
+        const FALLBACK_HAZARDS = {
+            "F": { "name": "Flood", "color": "#1565C0", "icon": "💧", "description": "Flood emergency" },
+            "C": { "name": "Cyclone", "color": "#6A1B9A", "icon": "🌀", "description": "Cyclone storm emergency" },
+            "L": { "name": "Landslide", "color": "#4E342E", "icon": "⛰️", "description": "Landslide emergency" },
+            "W": { "name": "Wildfire", "color": "#BF360C", "icon": "🔥", "description": "Wildfire emergency" },
+            "E": { "name": "Earthquake", "color": "#F57F17", "icon": "🌍", "description": "Earthquake emergency" },
+            "T": { "name": "Tsunami", "color": "#006064", "icon": "🌊", "description": "Tsunami emergency" },
+            "H": { "name": "Heatwave", "color": "#E65100", "icon": "☀️", "description": "Heatwave emergency" }
+        };
+        const FALLBACK_ROLES = {
+            "0": { "label": "Agricultural Workers", "bit": 1 },
+            "1": { "label": "Elderly Populations", "bit": 2 },
+            "2": { "label": "Physically Challenged", "bit": 4 },
+            "3": { "label": "Volunteer Responders", "bit": 8 }
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                initServerMap();
+            } catch (err) {
+                console.warn("Leaflet Map loading skipped or failed:", err);
+                const mapEl = document.getElementById('route-map');
+                if (mapEl) {
+                    mapEl.innerHTML = `
+                        <div style="padding: 20px; text-align: center; color: var(--text-muted); background: rgba(255,255,255,0.02); height: 100%; display: flex; align-items: center; justify-content: center; border: 1px dashed rgba(255,255,255,0.1);">
+                            🗺️ Map CDN Offline (Leaflet could not load). Offline route generation active.
+                        </div>
+                    `;
+                }
+            }
+
+            try {
+                await loadServerRegistries();
+            } catch (err) {
+                console.warn("Failed to fetch registries from backend, using offline fallbacks:", err);
+                renderHazardOptions(FALLBACK_HAZARDS);
+                renderRoleOptions(FALLBACK_ROLES);
+            }
+
+            try {
+                setupServerEventListeners();
+            } catch (err) {
+                console.error("Failed to setup event listeners:", err);
+            }
+
+            try {
+                setDefaultCorridor();
+            } catch (err) {
+                console.warn("Could not load default map corridor:", err);
+            }
+
+            try {
+                updateEncodingState();
+            } catch (err) {
+                console.error("Failed to update initial encoding state:", err);
+            }
+        });
+
+        function initServerMap() {
+            if (typeof L === 'undefined') {
+                throw new Error("L is not defined (Leaflet script failed to load)");
+            }
+            map = L.map('route-map').setView([22.7196, 75.8577], 13);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(map);
+
+            map.on('click', (e) => {
+                if (waypointCoords.length >= 20) {
+                    alert("Max 20 coordinates.");
+                    return;
+                }
+                addServerWaypoint(e.latlng.lat, e.latlng.lng);
+                updateEncodingState();
+            });
+        }
+
+        function addServerWaypoint(lat, lng) {
+            const latRounded = parseFloat(lat.toFixed(4));
+            const lngRounded = parseFloat(lng.toFixed(4));
+            const index = waypointCoords.length + 1;
+
+            if (typeof L !== 'undefined' && map) {
+                const marker = L.marker([latRounded, lngRounded], {
+                    draggable: true,
+                    title: `WP ${index}`
+                }).addTo(map);
+
+                marker.on('dragend', () => {
+                    const position = marker.getLatLng();
+                    const idx = waypoints.indexOf(marker);
+                    if (idx !== -1) {
+                        waypointCoords[idx] = [
+                            parseFloat(position.lat.toFixed(4)),
+                            parseFloat(position.lng.toFixed(4))
+                        ];
+                        updateServerMapLine();
+                        updateEncodingState();
+                    }
+                });
+
+                waypoints.push(marker);
+            }
+
+            waypointCoords.push([latRounded, lngRounded]);
+            updateServerMapLine();
+            renderServerWaypoints();
+        }
+
+        function updateServerMapLine() {
+            if (typeof L === 'undefined' || !map) return;
+            if (routePathLine) map.removeLayer(routePathLine);
+            if (waypointCoords.length > 1) {
+                routePathLine = L.polyline(waypointCoords, {
+                    color: (hazardRegistry[activeHazardCode] || FALLBACK_HAZARDS[activeHazardCode])?.color || '#0ea5e9',
+                    weight: 4,
+                    opacity: 0.8,
+                    dashArray: '5, 10'
+                }).addTo(map);
+                map.fitBounds(routePathLine.getBounds(), { padding: [30, 30] });
+            }
+        }
+
+        function renderServerWaypoints() {
+            const listEl = document.getElementById('waypoint-list');
+            listEl.innerHTML = '';
+            if (waypointCoords.length === 0) {
+                listEl.innerHTML = '<li class="empty-list-msg">No coordinates placed yet. Click on the map.</li>';
+                return;
+            }
+            waypointCoords.forEach((coord, idx) => {
+                const item = document.createElement('li');
+                item.className = 'waypoint-item';
+                item.innerHTML = `
+                    <div>
+                        <span class="wp-index">#${idx + 1}</span>
+                        <span class="wp-coords mono">[${coord[0]}, ${coord[1]}]</span>
+                    </div>
+                    <button class="wp-delete" onclick="deleteServerWaypoint(${idx})">×</button>
+                `;
+                listEl.appendChild(item);
+            });
+        }
+
+        window.deleteServerWaypoint = function(index) {
+            if (typeof L !== 'undefined' && map && waypoints[index]) {
+                try {
+                    map.removeLayer(waypoints[index]);
+                } catch (e) {
+                    console.warn("Could not remove map layer:", e);
+                }
+            }
+            waypoints.splice(index, 1);
+            waypointCoords.splice(index, 1);
+            updateServerMapLine();
+            renderServerWaypoints();
+            updateEncodingState();
+        };
+
+        function setDefaultCorridor() {
+            const defaultPts = [
+                [22.7181, 75.8574],
+                [22.7325, 75.8763],
+                [22.7410, 75.9006],
+                [22.7527, 75.8944],
+                [22.7284, 75.9112]
+            ];
+            defaultPts.forEach(pt => addServerWaypoint(pt[0], pt[1]));
+        }
+
+        function renderHazardOptions(hazards) {
+            hazardRegistry = hazards;
+            const parentH = document.getElementById('hazard-selector');
+            parentH.innerHTML = '';
+            Object.entries(hazards).forEach(([code, meta]) => {
+                const btn = document.createElement('button');
+                btn.className = `hazard-btn ${code === activeHazardCode ? 'active' : ''}`;
+                btn.style.setProperty('--hazard-color', meta.color);
+                btn.style.setProperty('--hazard-color-alpha', meta.color + '4D');
+                btn.innerHTML = `<span class="hazard-icon">${meta.icon}</span><span class="hazard-lbl">${meta.name}</span>`;
+                btn.onclick = () => {
+                    activeHazardCode = code;
+                    document.querySelectorAll('.hazard-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateServerMapLine();
+                    updateEncodingState();
+                };
+                parentH.appendChild(btn);
+            });
+        }
+
+        function renderRoleOptions(roles) {
+            roleRegistry = roles;
+            const parentR = document.getElementById('role-selector');
+            parentR.innerHTML = '';
+            Object.entries(roles).forEach(([bitStr, meta]) => {
+                const bitVal = parseInt(meta.bit);
+                const btn = document.createElement('button');
+                btn.className = 'role-btn';
+                btn.innerHTML = `<span>${meta.label}</span><div class="role-checkbox">✓</div>`;
+                btn.onclick = () => {
+                    if ((activeRoleMask & bitVal) === bitVal) activeRoleMask &= ~bitVal;
+                    else activeRoleMask |= bitVal;
+                    btn.classList.toggle('active');
+                    document.getElementById('selected-hex').innerText = `0x${activeRoleMask.toString(16).toUpperCase().padStart(2, '0')}`;
+                    document.getElementById('selected-bin').innerText = `0b${activeRoleMask.toString(2).padStart(4, '0')}`;
+                    updateEncodingState();
+                };
+                parentR.appendChild(btn);
+            });
+        }
+
+        async function loadServerRegistries() {
+            try {
+                const resH = await fetch('/api/hazards');
+                if (!resH.ok) throw new Error("Hazards status not OK");
+                const hazards = await resH.json();
+                renderHazardOptions(hazards);
+            } catch (err) {
+                console.warn("Could not fetch hazards, using fallbacks:", err);
+                renderHazardOptions(FALLBACK_HAZARDS);
+            }
+
+            try {
+                const resR = await fetch('/api/roles');
+                if (!resR.ok) throw new Error("Roles status not OK");
+                const roleData = await resR.json();
+                renderRoleOptions(roleData.bits);
+            } catch (err) {
+                console.warn("Could not fetch roles, using fallbacks:", err);
+                renderRoleOptions(FALLBACK_ROLES);
+            }
+        }
+
+        async function updateEncodingState() {
+            if (waypointCoords.length < 2) {
+                document.getElementById('payload-visualizer').innerHTML = '<span class="text-muted">Min 2 waypoints required</span>';
+                return;
+            }
+            const suffix = document.getElementById('plaintext-suffix').value;
+            const res = await fetch('/api/encode', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    hazard: activeHazardCode,
+                    role_flags: activeRoleMask,
+                    coordinates: waypointCoords,
+                    plain_text_suffix: suffix
+                })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                renderVisualizer(data.breakdown);
+
+                // Cache the clean payload string directly from the API response.
+                // NEVER read from innerText — whitespace between spans corrupts the payload.
+                lastEncodedPayload = data.payload;
+
+                const counter = document.getElementById('char-counter');
+                counter.innerText = `${data.sms_budget.total_chars} / 160 Chars`;
+                const fill = document.getElementById('budget-progress-fill');
+                fill.style.width = `${Math.min((data.sms_budget.total_chars / 160) * 100, 100)}%`;
+
+                document.getElementById('stat-payload-size').innerText = `${data.sms_budget.payload_chars}B`;
+                document.getElementById('stat-avail-fallback').innerText = `${data.sms_budget.remaining >= 0 ? data.sms_budget.remaining : 0}`;
+            }
+        }
+
+        function renderVisualizer(breakdown) {
+            const parent = document.getElementById('payload-visualizer');
+            parent.innerHTML = `<span class="part-hazard" title="${breakdown.hazard_code.description}">${breakdown.hazard_code.char}</span><span class="part-role" title="${breakdown.role_flag.description}">${breakdown.role_flag.char}</span><span class="part-polyline" title="${breakdown.polyline.description}">${breakdown.polyline.str}</span><span class="part-checksum" title="${breakdown.checksum.description}">${breakdown.checksum.char}</span>`;
+        }
+
+        function setupServerEventListeners() {
+            document.getElementById('clear-route-btn').onclick = () => {
+                if (typeof L !== 'undefined' && map) {
+                    waypoints.forEach(w => {
+                        try {
+                            map.removeLayer(w);
+                        } catch (e) {
+                            console.warn("Could not remove layer:", e);
+                        }
+                    });
+                }
+                waypoints = [];
+                waypointCoords = [];
+                updateServerMapLine();
+                renderServerWaypoints();
+                updateEncodingState();
+            };
+
+            document.getElementById('plaintext-suffix').oninput = () => updateEncodingState();
+
+            // Broadcaster
+            document.getElementById('broadcast-btn').onclick = async () => {
+                if (!lastEncodedPayload) {
+                    alert('Please encode a route first before broadcasting.');
+                    return;
+                }
+                // Use the cached API payload — not DOM innerText which adds whitespace between spans
+                const suffix = document.getElementById('plaintext-suffix').value;
+                const fullMsg = lastEncodedPayload + (suffix ? ' ' + suffix.trim() : '');
+
+                const res = await fetch('/api/broadcast', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ message: fullMsg })
+                });
+
+                const data = await res.json();
+                const logBox = document.getElementById('broadcast-log');
+                const now = new Date().toLocaleTimeString();
+                
+                if (res.ok) {
+                    logBox.innerHTML = `
+                        <div style="color: var(--accent-emerald)">[${now}] Broadcast Sent Successfully!</div>
+                        <div>Payload: <span class="mono" style="color: var(--accent-cyan)">${lastEncodedPayload}</span></div>
+                        <div style="font-size: 0.7rem; margin-top: 4px; border-top: 1px solid rgba(255,255,255,0.05); padding-top:4px;">
+                            Active cell channels: 433 MHz, 868 MHz. Waiting for receivers.
+                        </div>
+                    `;
+                    // Shake effect
+                    logBox.style.animation = 'none';
+                    setTimeout(() => logBox.style.animation = 'pulse 0.4s ease', 10);
+                } else {
+                    logBox.innerHTML = `<div style="color: var(--accent-red)">[${now}] Error: ${data.error}</div>`;
+                }
+            };
+        }
+    </script>
+</body>
+</html>

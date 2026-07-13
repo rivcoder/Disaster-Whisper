@@ -1,0 +1,184 @@
+{
+  "city": "Indore",
+  "state": "Madhya Pradesh",
+  "country": "India",
+  "reference_point": {
+    "lat": 22.7196,
+    "lng": 75.8577,
+    "name": "Indore City Center",
+    "name_hi": "इंदौर शहर केंद्र"
+  },
+  "search_radius_km": 0.5,
+  "landmarks": [
+    {
+      "id": "L001",
+      "name": "Rajwada Palace",
+      "name_hi": "राजवाड़ा महल",
+      "lat": 22.7181,
+      "lng": 75.8574,
+      "type": "landmark",
+      "district": "Old City",
+      "is_safe_zone": false,
+      "tags": ["historic", "open-plaza"]
+    },
+    {
+      "id": "L002",
+      "name": "LIG Square",
+      "name_hi": "एलआईजी चौक",
+      "lat": 22.7325,
+      "lng": 75.8763,
+      "type": "junction",
+      "district": "LIG Colony",
+      "is_safe_zone": false,
+      "tags": ["junction", "transit"]
+    },
+    {
+      "id": "L003",
+      "name": "Geeta Bhawan",
+      "name_hi": "गीता भवन",
+      "lat": 22.7410,
+      "lng": 75.9006,
+      "type": "landmark",
+      "district": "Vijay Nagar",
+      "is_safe_zone": false,
+      "tags": ["temple", "landmark"]
+    },
+    {
+      "id": "L004",
+      "name": "Vijay Nagar Square",
+      "name_hi": "विजय नगर चौक",
+      "lat": 22.7527,
+      "lng": 75.8944,
+      "type": "junction",
+      "district": "Vijay Nagar",
+      "is_safe_zone": false,
+      "tags": ["junction", "commercial"]
+    },
+    {
+      "id": "L005",
+      "name": "Scheme 54",
+      "name_hi": "स्कीम 54",
+      "lat": 22.7284,
+      "lng": 75.9112,
+      "type": "relief_center",
+      "district": "Scheme 54",
+      "is_safe_zone": true,
+      "capacity": 5000,
+      "tags": ["relief-center", "elevated", "safe-zone"]
+    },
+    {
+      "id": "L006",
+      "name": "Sica School",
+      "name_hi": "सीका स्कूल",
+      "lat": 22.7080,
+      "lng": 75.8950,
+      "type": "relief_center",
+      "district": "Scheme 54",
+      "is_safe_zone": true,
+      "capacity": 3000,
+      "tags": ["school", "relief-center", "safe-zone"]
+    },
+    {
+      "id": "L007",
+      "name": "Bhanwarkuan Chowk",
+      "name_hi": "भंवरकुआं चौक",
+      "lat": 22.6982,
+      "lng": 75.8671,
+      "type": "junction",
+      "district": "Bhanwarkuan",
+      "is_safe_zone": false,
+      "tags": ["junction", "residential"]
+    },
+    {
+      "id": "L008",
+      "name": "Bombay Hospital",
+      "name_hi": "बॉम्बे हॉस्पिटल",
+      "lat": 22.7342,
+      "lng": 75.8842,
+      "type": "hospital",
+      "district": "LIG Colony",
+      "is_safe_zone": true,
+      "capacity": 800,
+      "tags": ["hospital", "medical", "safe-zone"]
+    },
+    {
+      "id": "L009",
+      "name": "Devi Ahilya University (DAVV)",
+      "name_hi": "देवी अहिल्या विश्वविद्यालय",
+      "lat": 22.7621,
+      "lng": 75.8921,
+      "type": "relief_center",
+      "district": "Takshashila Campus",
+      "is_safe_zone": true,
+      "capacity": 10000,
+      "tags": ["university", "elevated", "relief-center", "safe-zone"]
+    },
+    {
+      "id": "L010",
+      "name": "Chhatrapati Chowk",
+      "name_hi": "छत्रपति चौक",
+      "lat": 22.7176,
+      "lng": 75.8694,
+      "type": "junction",
+      "district": "Central Indore",
+      "is_safe_zone": false,
+      "tags": ["junction", "central"]
+    },
+    {
+      "id": "L011",
+      "name": "Indore Airport",
+      "name_hi": "इंदौर हवाई अड्डा",
+      "lat": 22.7247,
+      "lng": 75.8013,
+      "type": "landmark",
+      "district": "Aerodrome",
+      "is_safe_zone": false,
+      "tags": ["airport", "western"]
+    },
+    {
+      "id": "L012",
+      "name": "Palasia Square",
+      "name_hi": "पलासिया चौक",
+      "lat": 22.7162,
+      "lng": 75.8783,
+      "type": "junction",
+      "district": "Palasia",
+      "is_safe_zone": false,
+      "tags": ["junction", "commercial"]
+    },
+    {
+      "id": "L013",
+      "name": "Mhow Naka",
+      "name_hi": "महू नाका",
+      "lat": 22.6894,
+      "lng": 75.8569,
+      "type": "junction",
+      "district": "Southern Indore",
+      "is_safe_zone": false,
+      "tags": ["junction", "southern"]
+    },
+    {
+      "id": "L014",
+      "name": "Indore Railway Station",
+      "name_hi": "इंदौर रेलवे स्टेशन",
+      "lat": 22.7203,
+      "lng": 75.7897,
+      "type": "transit",
+      "district": "Indore Junction",
+      "is_safe_zone": false,
+      "tags": ["railway", "transit"]
+    },
+    {
+      "id": "L015",
+      "name": "Nehru Park",
+      "name_hi": "नेहरू पार्क",
+      "lat": 22.7220,
+      "lng": 75.8868,
+      "type": "relief_center",
+      "district": "Central Indore",
+      "is_safe_zone": true,
+      "capacity": 8000,
+      "tags": ["park", "open-ground", "relief-center", "safe-zone"]
+    }
+  ]
+}

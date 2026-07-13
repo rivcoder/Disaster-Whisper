@@ -1,0 +1,44 @@
+{
+  "bits": {
+    "0": {
+      "key": "agricultural",
+      "label": "Agricultural Workers",
+      "label_hi": "कृषि कर्मी",
+      "label_mr": "शेतकरी",
+      "label_ta": "விவசாயிகள்",
+      "bit": 1,
+      "guidance": "Prioritise livestock safety, crop equipment protection, field drainage."
+    },
+    "1": {
+      "key": "elderly",
+      "label": "Elderly Populations",
+      "label_hi": "वरिष्ठ नागरिक",
+      "label_mr": "वृद्ध नागरिक",
+      "label_ta": "முதியோர்",
+      "bit": 2,
+      "guidance": "Provide transport assistance, accessible shelters, medication reminders."
+    },
+    "2": {
+      "key": "physically_challenged",
+      "label": "Physically Challenged Individuals",
+      "label_hi": "दिव्यांग व्यक्ति",
+      "label_mr": "दिव्यांग व्यक्ती",
+      "label_ta": "மாற்றுத் திறனாளிகள்",
+      "bit": 4,
+      "guidance": "Activate mobility-assistance teams, accessible route only."
+    },
+    "3": {
+      "key": "volunteers",
+      "label": "Local Volunteer Responders",
+      "label_hi": "स्थानीय स्वयंसेवी दल",
+      "label_mr": "स्थानिक स्वयंसेवक दल",
+      "label_ta": "உள்ளூர் தன்னார்வலர்கள்",
+      "bit": 8,
+      "guidance": "Deploy to staging area, carry first-aid kits, assist elderly/challenged."
+    }
+  },
+  "special_values": {
+    "0": "General Public",
+    "15": "All Groups"
+  }
+}

@@ -1,6 +1,7 @@
-flask
-scikit-learn
-pandas
-joblib
-numpy
-requests
+pytest>=7.0.0
+Flask>=2.0.0
+psutil>=5.9.0
+pyperclip>=1.8.2
+transformers>=4.36.0
+torch>=2.0.0
+bitsandbytes>=0.41.0

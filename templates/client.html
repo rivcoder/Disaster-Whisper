@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster-Whisper: Client Smartphone Companion</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .client-layout {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        @media (max-width: 768px) {
+            .client-layout {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+        }
+        .phone-frame {
+            margin: 0 auto;
+        }
+        .airwaves-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--accent-emerald);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .wave-animation {
+            display: inline-flex;
+            gap: 2px;
+            align-items: flex-end;
+            height: 8px;
+        }
+        .wave-bar {
+            width: 2px;
+            background: var(--accent-emerald);
+            animation: wave-rise 0.8s ease-in-out infinite alternate;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; height: 6px; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; height: 10px; }
+        @keyframes wave-rise {
+            from { height: 2px; }
+            to { height: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="logo-icon">📱</span>
+                <div class="logo-text">
+                    <h1>Disaster-Whisper Client</h1>
+                    <span class="tagline">Offline Edge Receiver & Personal Synthesizer</span>
+                </div>
+            </div>
+            <a href="/" class="btn btn-sm btn-outline">🏠 Main Menu</a>
+        </header>
+
+        <div class="client-layout">
+            <!-- Simulated Mobile Device Frame -->
+            <div>
+                <div class="phone-frame animate-phone">
+                    <div class="phone-screen">
+                        <div class="phone-status-bar">
+                            <span class="phone-time">17:33</span>
+                            <span class="phone-signal">
+                                📶 📡 <span class="airwaves-badge">
+                                    <div class="wave-animation">
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                        <div class="wave-bar"></div>
+                                    </div>
+                                    Airwaves Listened
+                                </span>
+                            </span>
+                            <span class="phone-battery">🔋 92%</span>
+                        </div>
+                        
+                        <div class="phone-app-content">
+                            <div class="phone-app-header">
+                                <span class="phone-app-logo">📡</span>
+                                <h3>Disaster-Whisper Companion</h3>
+                                <span class="phone-device-lbl" id="device-tier-lbl">Tier 2 | 8GB RAM | SLM-Capable</span>
+                            </div>
+
+                            <div class="phone-app-body">
+                                <!-- Mode Selector Toggle (Airwaves vs Clipboard) -->
+                                <div class="clipboard-box-emulator">
+                                    <div class="box-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>📥 Signal Capture Ingestion</span>
+                                    </div>
+                                    
+                                    <div class="paste-zone">
+                                        <textarea id="paste-broadcast-input" placeholder="Copy/Paste message or scan local airwaves..."></textarea>
+                                        <div class="bridge-action-row" style="margin-top: 8px;">
+                                            <button class="btn btn-sm btn-outline" id="scan-airwaves-btn" title="Directly pull broadcast active on the Flask server">
+                                                📡 Scan Airwaves
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" id="decode-btn">
+                                                ⚙️ Decode Alert
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Loading Status -->
+                                <div class="loading-state hidden" id="phone-loader">
+                                    <div class="spinner"></div>
+                                    <p id="loader-text">Extracting compact payload...</p>
+                                </div>
+
+                                <!-- Rendered Alert Screen -->
+                                <div class="alert-render-area hidden" id="alert-render-area">
+                                    <div class="alert-header" id="render-alert-title">
+                                        ⚠️ FLOOD ALERT
+                                    </div>
+                                    <div class="alert-meta-info">
+                                        <div class="meta-tag" id="meta-tag-audience">Target: General Public</div>
+                                        <div class="meta-tag" id="meta-tag-integrity">Integrity: Verified ✓</div>
+                                    </div>
+                                    <div class="alert-message-text" id="render-alert-text">
+                                        Waiting for alert source...
+                                    </div>
+                                    
+                                    <!-- Route Steps -->
+                                    <div class="reconstructed-route-section">
+                                        <span class="section-title">Reconstructed Evacuation Route:</span>
+                                        <div class="recon-route-flow" id="recon-route-flow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Diagnostics and System Info logs -->
+            <div class="diagnostics-panel glass">
+                <div class="panel-header" style="flex-direction: row; justify-content: space-between; align-items: center;">
+                    <h2>🔬 On-Device Diagnosis Panel</h2>
+                    <div class="tier-selector-group">
+                        <button class="tier-tab active" id="tier2-btn">Tier 2 Device (SLM)</button>
+                        <button class="tier-tab" id="tier1-btn">Tier 1 Device (Template)</button>
+                    </div>
+                </div>
+                
+                <div class="diag-content" style="padding: 20px;">
+                    <div class="diag-item">
+                        <span class="diag-lbl">Detected Hardware profile:</span>
+                        <span class="diag-val" id="diag-ram-spec">16.0 GB RAM (Eligible for Tier 2 SLM)</span>
+                    </div>
+
+                    <div class="diag-item">
+                        <span class="diag-lbl">XOR Checksum Verification:</span>
+                        <span class="diag-val" id="diag-checksum-status">No payload ingested yet</span>
+                    </div>
+
+                    <div class="prompt-box-wrapper" id="prompt-box-wrapper">
+                        <span class="diag-lbl">Formulated SLM Prompt Context:</span>
+                        <pre class="prompt-text mono" id="diag-slm-prompt">// Instruction framework grounded on verified local landmarks to eliminate hallucinations.</pre>
+                    </div>
+
+                    <div class="validator-results-box" id="validator-results-box">
+                        <span class="diag-lbl">Post-Synthesis Output Integrity Gate:</span>
+                        <ul class="validator-checks-list" id="validator-checks-list">
+                            <li class="empty-list-msg">Waiting for alert compilation...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeDeviceTier = 2;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupClientEventListeners();
+        });
+
+        function setupClientEventListeners() {
+            // Tier Toggles
+            document.getElementById('tier2-btn').onclick = () => setDeviceTier(2);
+            document.getElementById('tier1-btn').onclick = () => setDeviceTier(1);
+
+            // Scan Airwaves from Flask
+            document.getElementById('scan-airwaves-btn').onclick = async () => {
+                const res = await fetch('/api/active_broadcast');
+                const data = await res.json();
+                
+                if (res.ok && data.message) {
+                    document.getElementById('paste-broadcast-input').value = data.message;
+                    // Flash success effect
+                    const btn = document.getElementById('scan-airwaves-btn');
+                    btn.innerText = '✓ Signal Captured!';
+                    btn.style.borderColor = 'var(--accent-emerald)';
+                    btn.style.color = 'var(--accent-emerald)';
+                    setTimeout(() => {
+                        btn.innerText = '📡 Scan Airwaves';
+                        btn.style.borderColor = '';
+                        btn.style.color = '';
+                    }, 1500);
+                } else {
+                    alert(data.error || "No active broadcast found on the wireless grid. Broadcast one from the Server Command Center first!");
+                }
+            };
+
+            // Decode Alert Button
+            document.getElementById('decode-btn').onclick = async () => {
+                const input = document.getElementById('paste-broadcast-input').value;
+                if (!input) {
+                    alert("Please write, paste, or scan a broadcast first.");
+                    return;
+                }
+
+                const loader = document.getElementById('phone-loader');
+                const area = document.getElementById('alert-render-area');
+                loader.classList.remove('hidden');
+                area.classList.add('hidden');
+
+                if (activeDeviceTier === 2) {
+                    document.getElementById('loader-text').innerText = 'Starting Local SLM Synthesis...';
+                } else {
+                    document.getElementById('loader-text').innerText = 'Unpacking payload...';
+                }
+
+                try {
+                    const res = await fetch('/api/decode', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            sms_text: input,
+                            tier: activeDeviceTier
+                        })
+                    });
+                    const data = await res.json();
+                    
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                        if (res.ok) {
+                            renderPhoneScreen(data);
+                        } else {
+                            alert(data.error || "Error parsing the message");
+                        }
+                    }, 1200);
+                } catch (e) {
+                    console.error(e);
+                    loader.classList.add('hidden');
+                }
+            };
+        }
+
+        function setDeviceTier(tier) {
+            activeDeviceTier = tier;
+            document.querySelectorAll('.tier-tab').forEach(b => b.classList.remove('active'));
+
+            if (tier === 2) {
+                document.getElementById('tier2-btn').classList.add('active');
+                document.getElementById('device-tier-lbl').innerText = 'Tier 2 | 8GB RAM | SLM-Capable';
+                document.getElementById('diag-ram-spec').innerText = '8.0 GB RAM (Eligible for Tier 2 Local SLM)';
+                document.getElementById('prompt-box-wrapper').classList.remove('hidden');
+            } else {
+                document.getElementById('tier1-btn').classList.add('active');
+                document.getElementById('device-tier-lbl').innerText = 'Tier 1 | <4GB RAM | Template Only';
+                document.getElementById('diag-ram-spec').innerText = '3.0 GB RAM (Tier 1 Fallback enforced)';
+                document.getElementById('prompt-box-wrapper').classList.add('hidden');
+            }
+        }
+
+        function renderPhoneScreen(data) {
+            const area = document.getElementById('alert-render-area');
+            area.classList.remove('hidden');
+
+            const haz = data.payload_decoded.hazard;
+            const titleEl = document.getElementById('render-alert-title');
+            titleEl.innerText = `${haz.icon} ${haz.name.toUpperCase()} ALERT`;
+
+            document.documentElement.style.setProperty('--hazard-bg', haz.color + '26');
+            document.documentElement.style.setProperty('--hazard-border', haz.color);
+            document.documentElement.style.setProperty('--hazard-text', haz.color);
+
+            const targetRoles = data.payload_decoded.role.active_roles.map(r => r.label).join(', ');
+            document.getElementById('meta-tag-audience').innerText = `Target: ${targetRoles}`;
+
+            const checksumOk = data.payload_decoded.checksum_ok;
+            const integrityTag = document.getElementById('meta-tag-integrity');
+            integrityTag.innerText = checksumOk ? 'Integrity: Verified ✓' : 'Integrity: CORRUPTED ❌';
+            integrityTag.style.borderColor = checksumOk ? 'var(--accent-emerald)' : 'var(--accent-red)';
+            integrityTag.style.color = checksumOk ? 'var(--accent-emerald)' : 'var(--accent-red)';
+
+            document.getElementById('render-alert-text').innerText = data.rendered_alert.alert_text;
+
+            const routeFlow = document.getElementById('recon-route-flow');
+            routeFlow.innerHTML = '';
+            data.rendered_alert.route_waypoints.forEach((wp, idx) => {
+                const step = document.createElement('div');
+                step.className = 'flow-step-node';
+                step.innerHTML = `
+                    <span class="flow-step-num">${idx + 1}</span>
+                    <span class="wp-landmark">${wp}</span>
+                `;
+                routeFlow.appendChild(step);
+            });
+
+            document.getElementById('diag-checksum-status').innerText = checksumOk ? 'Checksum Verified MATCHED' : 'Checksum FAILED Mismatch';
+            document.getElementById('diag-checksum-status').style.color = checksumOk ? 'var(--accent-emerald)' : 'var(--accent-red)';
+
+            const promptText = document.getElementById('diag-slm-prompt');
+            if (data.rendered_alert.prompt) {
+                promptText.innerText = data.rendered_alert.prompt;
+            } else {
+                promptText.innerText = "// Prompt not generated (Device running in offline Tier-1 template mode)";
+            }
+
+            const listEl = document.getElementById('validator-checks-list');
+            listEl.innerHTML = '';
+
+            if (data.validation) {
+                data.validation.checks_passed.forEach(check => {
+                    const li = document.createElement('li');
+                    li.className = 'check-item pass';
+                    li.innerHTML = `<span>✓ ${check.replace('_', ' ').toUpperCase()}</span> <span>PASS</span>`;
+                    listEl.appendChild(li);
+                });
+                data.validation.checks_failed.forEach(check => {
+                    const li = document.createElement('li');
+                    li.className = 'check-item fail';
+                    li.innerHTML = `<span>❌ ${check.replace('_', ' ').toUpperCase()}</span> <span>FAIL</span>`;
+                    listEl.appendChild(li);
+                });
+                data.validation.warnings.forEach(warn => {
+                    const li = document.createElement('li');
+                    li.className = 'check-item warn';
+                    li.innerHTML = `<span>⚠️ ${warn}</span>`;
+                    listEl.appendChild(li);
+                });
+                if (data.rendered_alert.fallback_reason) {
+                    const li = document.createElement('li');
+                    li.className = 'check-item fail';
+                    li.innerHTML = `<span>🚨 HALLUCINATION DETECTED: ${data.rendered_alert.fallback_reason}</span>`;
+                    listEl.appendChild(li);
+                }
+            } else {
+                listEl.innerHTML = '<li class="check-item pass"><span>✓ DETERMINISTIC ENCODING</span> <span>PASS (100% SECURE)</span></li>';
+            }
+        }
+    </script>
+</body>
+</html>

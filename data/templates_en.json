@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "FLOOD ALERT",
+    "tier1_general":             "⚠️ FLOOD ALERT — {area}: Evacuate immediately to {destination}. Water levels rising rapidly. Avoid low-lying roads and underpasses.",
+    "tier1_agricultural":        "⚠️ FLOOD ALERT — Farmers in {area}: Move livestock and equipment to higher ground. Proceed to {destination}. Avoid flooded fields and channels.",
+    "tier1_elderly":             "⚠️ FLOOD ALERT — Senior citizens in {area}: Request immediate assistance to evacuate to {destination}. Do NOT attempt to walk through floodwater. Stay visible.",
+    "tier1_physically_challenged":"⚠️ FLOOD ALERT — {area}: Accessible evacuation route to {destination}. Mobility-assistance teams have been deployed. Call 112 for immediate help.",
+    "tier1_volunteers":          "⚠️ FLOOD ALERT — Volunteer Responders: Report immediately to {destination}. Assist evacuation from {area}. Carry first-aid kits and flotation devices.",
+    "tier2_prompt":              "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback":                  "⚠️ FLOOD ALERT {area}: Move to {destination} immediately. Avoid floodwater. Call 112."
+  },
+  "C": {
+    "title": "CYCLONE ALERT",
+    "tier1_general":             "⚠️ CYCLONE ALERT — {area}: Seek shelter immediately at {destination}. Board windows, stay away from trees and power lines. Do NOT go outside.",
+    "tier1_agricultural":        "⚠️ CYCLONE ALERT — Farmers in {area}: Secure livestock in permanent structures. Move to {destination}. Do not stay in field huts or temporary shelters.",
+    "tier1_elderly":             "⚠️ CYCLONE ALERT — Senior citizens in {area}: Move to the inner room at {destination}. Away from windows. Assistance available — call 112.",
+    "tier1_physically_challenged":"⚠️ CYCLONE ALERT — {area}: Accessible shelter at {destination}. Call 112 for mobility assistance. Avoid open areas and roads.",
+    "tier1_volunteers":          "⚠️ CYCLONE ALERT — Volunteer Responders: Secure your own shelter first at {destination}. After storm passes, assist clearing routes from {area}.",
+    "tier2_prompt":              "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback":                  "⚠️ CYCLONE ALERT {area}: Shelter at {destination}. Stay indoors. Call 112."
+  },
+  "L": {
+    "title": "LANDSLIDE ALERT",
+    "tier1_general":             "⚠️ LANDSLIDE ALERT — {area}: Move away from slopes and hillsides immediately. Proceed to {destination}. Avoid hill roads — they may be blocked or unstable.",
+    "tier1_agricultural":        "⚠️ LANDSLIDE ALERT — Farmers in {area}: Leave hillside fields immediately. Do NOT attempt to recover equipment. Proceed to {destination} via flat routes only.",
+    "tier1_elderly":             "⚠️ LANDSLIDE ALERT — Senior citizens in {area}: Evacuate now with assistance to {destination}. Avoid all slopes and hillside paths. Call 112.",
+    "tier1_physically_challenged":"⚠️ LANDSLIDE ALERT — {area}: Flat accessible route to {destination}. Assistance teams deployed. Call 112 immediately for evacuation support.",
+    "tier1_volunteers":          "⚠️ LANDSLIDE ALERT — Volunteer Responders: Clear flat evacuation corridors from {area} to {destination}. Watch for secondary slides. Do not approach slope areas.",
+    "tier2_prompt":              "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback":                  "⚠️ LANDSLIDE ALERT {area}: Move to {destination} via flat routes. Avoid slopes. Call 112."
+  },
+  "W": {
+    "title": "WILDFIRE ALERT",
+    "tier1_general":             "⚠️ WILDFIRE ALERT — {area}: Evacuate immediately in the direction of {destination}. Move crosswind or upwind — do NOT drive into smoke. Close all windows.",
+    "tier1_agricultural":        "⚠️ WILDFIRE ALERT — Farmers in {area}: Release livestock immediately. Do NOT try to save crops. Move quickly to {destination} via the designated route.",
+    "tier1_elderly":             "⚠️ WILDFIRE ALERT — Senior citizens in {area}: Evacuate NOW with assistance to {destination}. Wet cloth over mouth and nose. Call 112 immediately.",
+    "tier1_physically_challenged":"⚠️ WILDFIRE ALERT — {area}: Accessible evacuation route to {destination}. Emergency teams dispatched. Call 112 for immediate assistance.",
+    "tier1_volunteers":          "⚠️ WILDFIRE ALERT — Volunteer Responders: Guide civilians from {area} to {destination}. Use the designated crosswind route. Carry wet cloths. Avoid smoke zones.",
+    "tier2_prompt":              "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback":                  "⚠️ WILDFIRE ALERT {area}: Evacuate to {destination}. Move crosswind. Call 112."
+  },
+  "E": {
+    "title": "EARTHQUAKE ALERT",
+    "tier1_general":             "⚠️ EARTHQUAKE ALERT — {area}: DROP — COVER — HOLD. If outdoors, move to {destination} open ground. Stay away from buildings. Aftershocks expected.",
+    "tier1_agricultural":        "⚠️ EARTHQUAKE ALERT — Farmers in {area}: Move away from structures and trees immediately. Proceed to open ground at {destination}. Beware of landslides.",
+    "tier1_elderly":             "⚠️ EARTHQUAKE ALERT — Senior citizens in {area}: Drop and take cover. After shaking stops, move carefully to {destination}. Assistance available — call 112.",
+    "tier1_physically_challenged":"⚠️ EARTHQUAKE ALERT — {area}: After shaking stops, accessible route to {destination} open ground. Do not use elevators. Call 112 for assistance.",
+    "tier1_volunteers":          "⚠️ EARTHQUAKE ALERT — Volunteer Responders: After shaking stops, assemble at {destination}. Check for trapped persons in {area}. Do not enter damaged structures.",
+    "tier2_prompt":              "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback":                  "⚠️ EARTHQUAKE ALERT {area}: DROP-COVER-HOLD. After shaking, move to {destination}. Call 112."
+  },
+  "T": {
+    "title": "TSUNAMI ALERT",
+    "tier1_general":             "⚠️ TSUNAMI ALERT — {area}: Move inland immediately to {destination}. Do NOT wait for visual confirmation of waves. Move on foot if roads are blocked.",
+    "tier1_agricultural":        "⚠️ TSUNAMI ALERT — Farmers in {area}: Leave all equipment. Move immediately inland to {destination}. Tsunami moves faster than you can drive on congested roads.",
+    "tier1_elderly":             "⚠️ TSUNAMI ALERT — Senior citizens in {area}: Evacuate NOW with assistance to {destination}. If you cannot walk, go to the highest nearby floor. Call 112.",
+    "tier1_physically_challenged":"⚠️ TSUNAMI ALERT — {area}: Move to highest floor or inland to {destination}. Mobility-assistance teams are en route. Call 112.",
+    "tier1_volunteers":          "⚠️ TSUNAMI ALERT — Volunteer Responders: Guide civilians inland to {destination}. Assist those who cannot self-evacuate from {area}. Avoid coastal roads.",
+    "tier2_prompt":              "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback":                  "⚠️ TSUNAMI ALERT {area}: Move inland to {destination} NOW. Do not wait. Call 112."
+  },
+  "H": {
+    "title": "HEATWAVE ALERT",
+    "tier1_general":             "⚠️ HEATWAVE ALERT — {area}: Temperature dangerous. Move to air-conditioned shelter at {destination}. Drink water every 15 minutes. Avoid outdoor activity 11am–5pm.",
+    "tier1_agricultural":        "⚠️ HEATWAVE ALERT — Farmers in {area}: Stop outdoor work immediately. Drink water. Move to cool shelter at {destination}. Resume work only after 6pm.",
+    "tier1_elderly":             "⚠️ HEATWAVE ALERT — Senior citizens in {area}: High heat risk. Move to cool shelter at {destination}. Drink ORS. If dizzy or confused, call 112 immediately.",
+    "tier1_physically_challenged":"⚠️ HEATWAVE ALERT — {area}: Cool, accessible shelter available at {destination}. ORS and medical staff on site. Call 112 for transport assistance.",
+    "tier1_volunteers":          "⚠️ HEATWAVE ALERT — Volunteer Responders: Distribute ORS and water in {area}. Escort vulnerable persons to cooling centre at {destination}. Watch for heat stroke.",
+    "tier2_prompt":              "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback":                  "⚠️ HEATWAVE ALERT {area}: Seek shade at {destination}. Drink water. Call 112 if unwell."
+  }
+}
