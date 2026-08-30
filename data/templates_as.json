@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "বানপানী সতর্কতা",
+    "tier1_general": "⚠️ বানপানী সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ বানপানী সতর্কতা — Assamese Farmers: Protect crops/livestock. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_elderly": "⚠️ বানপানী সতর্কতা — Assamese Seniors: Contact authorities. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_physically_challenged": "⚠️ বানপানী সতর্কতা — Assamese Accessibility Support Active. অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক.",
+    "tier1_volunteers": "⚠️ বানপানী সতর্কতা — Assamese Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ বানপানী সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক."
+  },
+  "C": {
+    "title": "ঘূর্ণিঝড় সতর্কতা",
+    "tier1_general": "⚠️ ঘূর্ণিঝড় সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ঘূর্ণিঝড় সতর্কতা — Assamese Farmers: Protect crops/livestock. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_elderly": "⚠️ ঘূর্ণিঝড় সতর্কতা — Assamese Seniors: Contact authorities. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_physically_challenged": "⚠️ ঘূর্ণিঝড় সতর্কতা — Assamese Accessibility Support Active. অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক.",
+    "tier1_volunteers": "⚠️ ঘূর্ণিঝড় সতর্কতা — Assamese Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ ঘূর্ণিঝড় সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক."
+  },
+  "L": {
+    "title": "ভূমিস্খলন সতর্কতা",
+    "tier1_general": "⚠️ ভূমিস্খলন সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ভূমিস্খলন সতর্কতা — Assamese Farmers: Protect crops/livestock. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_elderly": "⚠️ ভূমিস্খলন সতর্কতা — Assamese Seniors: Contact authorities. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_physically_challenged": "⚠️ ভূমিস্খলন সতর্কতা — Assamese Accessibility Support Active. অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক.",
+    "tier1_volunteers": "⚠️ ভূমিস্খলন সতর্কতা — Assamese Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ ভূমিস্খলন সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক."
+  },
+  "W": {
+    "title": "দাবানল সতর্কতা",
+    "tier1_general": "⚠️ দাবানল সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ দাবানল সতর্কতা — Assamese Farmers: Protect crops/livestock. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_elderly": "⚠️ দাবানল সতর্কতা — Assamese Seniors: Contact authorities. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_physically_challenged": "⚠️ দাবানল সতর্কতা — Assamese Accessibility Support Active. অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক.",
+    "tier1_volunteers": "⚠️ দাবানল সতর্কতা — Assamese Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ দাবানল সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক."
+  },
+  "E": {
+    "title": "ভূমিকম্প সতর্কতা",
+    "tier1_general": "⚠️ ভূমিকম্প সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ভূমিকম্প সতর্কতা — Assamese Farmers: Protect crops/livestock. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_elderly": "⚠️ ভূমিকম্প সতর্কতা — Assamese Seniors: Contact authorities. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_physically_challenged": "⚠️ ভূমিকম্প সতর্কতা — Assamese Accessibility Support Active. অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক.",
+    "tier1_volunteers": "⚠️ ভূমিকম্প সতর্কতা — Assamese Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ ভূমিকম্প সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক."
+  },
+  "T": {
+    "title": "চুনামী সতর্কতা",
+    "tier1_general": "⚠️ চুনামী সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ চুনামী সতর্কতা — Assamese Farmers: Protect crops/livestock. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_elderly": "⚠️ চুনামী সতর্কতা — Assamese Seniors: Contact authorities. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_physically_challenged": "⚠️ চুনামী সতর্কতা — Assamese Accessibility Support Active. অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক.",
+    "tier1_volunteers": "⚠️ চুনামী সতর্কতা — Assamese Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ চুনামী সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক."
+  },
+  "H": {
+    "title": "গৰম বতাহ সতর্কতা",
+    "tier1_general": "⚠️ গৰম বতাহ সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ গৰম বতাহ সতর্কতা — Assamese Farmers: Protect crops/livestock. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_elderly": "⚠️ গৰম বতাহ সতর্কতা — Assamese Seniors: Contact authorities. অবিলম্বে {destination} লৈ খালী কৰক.",
+    "tier1_physically_challenged": "⚠️ গৰম বতাহ সতর্কতা — Assamese Accessibility Support Active. অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক.",
+    "tier1_volunteers": "⚠️ গৰম বতাহ সতর্কতা — Assamese Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ গৰম বতাহ সতর্কতা — {area}: অবিলম্বে {destination} লৈ খালী কৰক. 112 কল কৰক."
+  }
+}

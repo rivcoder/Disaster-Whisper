@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="manifest" href="/manifest.json">
+
     <style>
         .client-layout {
             display: grid;
@@ -67,98 +69,153 @@
             <a href="/" class="btn btn-sm btn-outline">🏠 Main Menu</a>
         </header>
 
-        <div class="client-layout">
-            <!-- Simulated Mobile Device Frame -->
-            <div>
-                <div class="phone-frame animate-phone">
-                    <div class="phone-screen">
-                        <div class="phone-status-bar">
-                            <span class="phone-time">17:33</span>
-                            <span class="phone-signal">
-                                📶 📡 <span class="airwaves-badge">
-                                    <div class="wave-animation">
-                                        <div class="wave-bar"></div>
-                                        <div class="wave-bar"></div>
-                                        <div class="wave-bar"></div>
-                                    </div>
-                                    Airwaves Listened
-                                </span>
-                            </span>
-                            <span class="phone-battery">🔋 92%</span>
-                        </div>
+        <div class="client-dashboard-grid animate-phone">
+            <!-- Column 1: Ingestion Control -->
+            <div class="panel glass">
+                <div class="panel-header">
+                    <h2>📥 Signal Capture Ingestion</h2>
+                    <span class="sub-header-lbl">Scan local airwaves or parse cellular packet segments</span>
+                </div>
+                <div class="panel-content" style="gap: 15px;">
+                    <div class="paste-zone" style="display: flex; flex-direction: column; gap: 12px; height: 100%;">
+                        <textarea id="paste-broadcast-input" placeholder="Copy/Paste compressed binary packet or scan airwaves..." style="width: 100%; height: 120px; background: rgba(5,7,12,0.5); border: 1px solid var(--bg-card-border); border-radius: 8px; color: var(--text-primary); padding: 10px; font-family: inherit; resize: none;"></textarea>
                         
-                        <div class="phone-app-content">
-                            <div class="phone-app-header">
-                                <span class="phone-app-logo">📡</span>
-                                <h3>Disaster-Whisper Companion</h3>
-                                <span class="phone-device-lbl" id="device-tier-lbl">Tier 2 | 8GB RAM | SLM-Capable</span>
-                            </div>
-
-                            <div class="phone-app-body">
-                                <!-- Mode Selector Toggle (Airwaves vs Clipboard) -->
-                                <div class="clipboard-box-emulator">
-                                    <div class="box-header" style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span>📥 Signal Capture Ingestion</span>
-                                    </div>
-                                    
-                                    <div class="paste-zone">
-                                        <textarea id="paste-broadcast-input" placeholder="Copy/Paste message or scan local airwaves..."></textarea>
-                                        <div class="bridge-action-row" style="margin-top: 8px;">
-                                            <button class="btn btn-sm btn-outline" id="scan-airwaves-btn" title="Directly pull broadcast active on the Flask server">
-                                                📡 Scan Airwaves
-                                            </button>
-                                            <button class="btn btn-sm btn-primary" id="decode-btn">
-                                                ⚙️ Decode Alert
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Loading Status -->
-                                <div class="loading-state hidden" id="phone-loader">
-                                    <div class="spinner"></div>
-                                    <p id="loader-text">Extracting compact payload...</p>
-                                </div>
-
-                                <!-- Rendered Alert Screen -->
-                                <div class="alert-render-area hidden" id="alert-render-area">
-                                    <div class="alert-header" id="render-alert-title">
-                                        ⚠️ FLOOD ALERT
-                                    </div>
-                                    <div class="alert-meta-info">
-                                        <div class="meta-tag" id="meta-tag-audience">Target: General Public</div>
-                                        <div class="meta-tag" id="meta-tag-integrity">Integrity: Verified ✓</div>
-                                    </div>
-                                    <div class="alert-message-text" id="render-alert-text">
-                                        Waiting for alert source...
-                                    </div>
-                                    
-                                    <!-- Route Steps -->
-                                    <div class="reconstructed-route-section">
-                                        <span class="section-title">Reconstructed Evacuation Route:</span>
-                                        <div class="recon-route-flow" id="recon-route-flow"></div>
-                                    </div>
-                                </div>
-                            </div>
+                        <label class="accent-lbl" style="color: var(--accent-blue) !important; font-size: 0.8rem;">Personalization Language</label>
+                        <select id="language-select" style="background: rgba(5,7,12,0.8); border: 1px solid var(--bg-card-border); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; padding: 10px; outline: none; cursor: pointer; width: 100%;">
+                            <option value="en">English (Default)</option>
+                            <option value="as">Assamese (অসমীয়া)</option>
+                            <option value="bn">Bengali (বাংলা)</option>
+                            <option value="brx">Bodo (बर')</option>
+                            <option value="doi">Dogri (डोगरी)</option>
+                            <option value="gu">Gujarati (ગુજરાતી)</option>
+                            <option value="hi">Hindi (हिन्दी)</option>
+                            <option value="kn">Kannada (ಕನ್ನಡ)</option>
+                            <option value="ks">Kashmiri (کٲشुर)</option>
+                            <option value="kok">Konkani (कोंकणी)</option>
+                            <option value="mai">Maithili (मैथिली)</option>
+                            <option value="ml">Malayalam (മലയാളം)</option>
+                            <option value="mni">Manipuri (মৈতৈলোন্)</option>
+                            <option value="mr">Marathi (मराठी)</option>
+                            <option value="ne">Nepali (नेपाली)</option>
+                            <option value="or">Odia (ଓଡ଼ିଆ)</option>
+                            <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+                            <option value="sa">Sanskrit (संस्कृतम्)</option>
+                            <option value="sat">Santali (ᱥᱟᱱᱛᱟᱲᱤ)</option>
+                            <option value="sd">Sindhi (سنڌي)</option>
+                            <option value="ta">Tamil (தமிழ்)</option>
+                            <option value="te">Telugu (తెలుగు)</option>
+                            <option value="ur">Urdu (اردو)</option>
+                        </select>
+                        
+                        <div style="display: flex; gap: 10px; margin-top: auto;">
+                            <button class="btn btn-outline" id="scan-airwaves-btn" title="Scan local cellular waves" style="flex: 1;">
+                                📡 Scan Airwaves
+                            </button>
+                            <button class="btn btn-primary" id="decode-btn" style="flex: 1;">
+                                ⚙️ Decode Alert
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Column 2: Decryption Hub -->
+            <div class="panel glass">
+                <div class="panel-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <h2>⚠️ Evacuation Hub & Decryption</h2>
+                    <span class="airwaves-badge" style="background: rgba(16,185,129,0.15); color: var(--accent-emerald);">SLM Decoder Active</span>
+                </div>
+                <div class="panel-content" style="gap: 15px; position: relative;">
+                    <!-- Loading Status -->
+                    <div class="loading-state hidden" id="phone-loader" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+                        <div class="spinner" style="border: 4px solid rgba(255,255,255,0.05); border-top: 4px solid var(--accent-blue); width: 40px; height: 40px; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                        <p id="loader-text" style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">Decrypting...</p>
+                    </div>
+
+                    <!-- Rendered Alert Screen -->
+                    <div class="alert-render-area hidden" id="alert-render-area" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                        <div class="alert-header" id="render-alert-title" style="padding: 12px 18px; border-radius: 8px; font-weight: bold; background: var(--hazard-bg, rgba(239, 68, 68, 0.15)); border: 1px solid var(--hazard-border, var(--accent-red)); color: var(--hazard-text, var(--accent-red)); font-size: 1.1rem; text-align: center;">
+                            Waiting for Alert Ingestion
+                        </div>
+                        <div class="alert-meta-info" style="display: flex; gap: 10px;">
+                            <div class="meta-tag" id="meta-tag-audience" style="font-size: 0.75rem; padding: 4px 10px; border-radius: 9999px; background: rgba(255,255,255,0.05); border: 1px solid var(--bg-card-border);">Target: -</div>
+                            <div class="meta-tag" id="meta-tag-integrity" style="font-size: 0.75rem; padding: 4px 10px; border-radius: 9999px; background: rgba(255,255,255,0.05); border: 1px solid var(--bg-card-border);">Integrity: -</div>
+                        </div>
+                        <div class="alert-message-text" id="render-alert-text" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); background: rgba(0,0,0,0.15); border: 1px solid var(--bg-card-border); padding: 15px; border-radius: 10px; min-height: 100px;">
+                            Input alert above and decode to synthesize rich guidance logs.
+                        </div>
+                        
+                        <button class="btn btn-outline" id="tts-btn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; border-color: rgba(6,182,212,0.3); color: var(--accent-cyan);">
+                            🔊 Read Aloud (Offline Voice)
+                        </button>
+
+                        <!-- Route Steps -->
+                        <div class="reconstructed-route-section" style="margin-top: 10px;">
+                            <span class="section-title" style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">Reconstructed Evacuation Corridor:</span>
+                            <div class="recon-route-flow" id="recon-route-flow" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Core Quick SOS Signaling -->
+                    <div id="sos-panel" style="margin-top: auto; display: flex; flex-direction: column; gap: 12px; background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.15); border-radius: 12px; padding: 15px; width: 100%;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-red); display: flex; align-items: center; gap: 6px;">🚨 CRITICAL SOS BROADCAST UPLINK</span>
+                            <span class="mono" style="font-size: 0.75rem; color: var(--text-muted);" id="user-coords-lbl">GPS: [22.7196, 75.8577]</span>
+                        </div>
+                        <button class="btn btn-primary" id="instant-sos-btn" style="background: linear-gradient(135deg, var(--accent-red), #b91c1c) !important; color: white !important; font-weight: 800; font-size: 0.95rem; padding: 12px; border-radius: 8px; border: none; animation: pulse 1.5s infinite; cursor: pointer; text-transform: uppercase; width: 100%;">
+                            ⚡ TRANSMIT INSTANT SOS
+                        </button>
+                        <button class="btn btn-outline hidden" id="stop-sos-btn" style="border-color: var(--accent-red); color: var(--accent-red); font-weight: 800; font-size: 0.95rem; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; width: 100%;">
+                            🛑 STOP EMERGENCY SIREN
+                        </button>
+                        <div id="queue-status-lbl" style="font-size: 0.75rem; color: var(--text-muted); text-align: center; font-weight: 600;">
+                            Status: Connected
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3: Relief Services -->
+            <div class="panel glass">
+                <div class="panel-header">
+                    <h2>💬 Relief Communications & Services</h2>
+                    <span class="sub-header-lbl">Two-way operational chat and closest safe spots</span>
+                </div>
+                <div class="panel-content" style="gap: 15px; display: flex; flex-direction: column;">
+                    <!-- Two-Way Chat -->
+                    <div style="display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.01); border: 1px solid var(--bg-card-border); border-radius: 12px; padding: 15px; flex: 1;">
+                        <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan);">💬 Relief Assistance Uplink</span>
+                        <div id="chat-messages-container" style="height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; background: rgba(0,0,0,0.2);">
+                            <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 60px; font-style: italic;">No communication history. Sent signals will register here.</div>
+                        </div>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <input type="text" id="chat-user-input" placeholder="Type message to rescuers..." style="flex: 1; font-size: 0.85rem; background: rgba(5,7,12,0.6); border: 1px solid var(--bg-card-border); border-radius: 8px; padding: 8px 12px; color: var(--text-primary); outline: none;">
+                            <button class="btn btn-primary" id="chat-send-btn" style="padding: 8px 16px; border-radius: 8px; font-weight: 700;">Send</button>
+                        </div>
+                    </div>
+
+                    <!-- Nearby Services -->
+                    <div style="display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.01); border: 1px solid var(--bg-card-border); border-radius: 12px; padding: 15px;">
+                        <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald);">🏥 Nearby Emergency Support Nodes</span>
+                        <div style="display: flex; flex-direction: column; gap: 8px;" id="nearby-services-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
             <!-- Client Diagnostics and System Info logs -->
             <div class="diagnostics-panel glass">
+
                 <div class="panel-header" style="flex-direction: row; justify-content: space-between; align-items: center;">
-                    <h2>🔬 On-Device Diagnosis Panel</h2>
-                    <div class="tier-selector-group">
-                        <button class="tier-tab active" id="tier2-btn">Tier 2 Device (SLM)</button>
-                        <button class="tier-tab" id="tier1-btn">Tier 1 Device (Template)</button>
-                    </div>
+                    <h2>🔬 On-Device AI Diagnosis Panel</h2>
+                    <div class="airwaves-badge" style="background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.2); color: var(--accent-cyan);">Offline SLM Guardrails Active</div>
                 </div>
                 
                 <div class="diag-content" style="padding: 20px;">
                     <div class="diag-item">
                         <span class="diag-lbl">Detected Hardware profile:</span>
-                        <span class="diag-val" id="diag-ram-spec">16.0 GB RAM (Eligible for Tier 2 SLM)</span>
+                        <span class="diag-val" id="diag-ram-spec">Eligible for Local SLM Synthesis (Guardrails Enabled)</span>
                     </div>
 
                     <div class="diag-item">
@@ -180,20 +237,305 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>
-        let activeDeviceTier = 2;
+        // Generate a persistent random clientId to map chats & rescue logs
+        const clientId = localStorage.getItem('disaster_whisper_client_id') || `client_${Math.random().toString(36).substring(2, 11)}`;
+        localStorage.setItem('disaster_whisper_client_id', clientId);
+
+        // Simulated user coordinates in Indore (near Rajwada)
+        let userLatitude = 22.7196;
+        let userLongitude = 75.8577;
+
+        let activeDeviceTier = 2; // Always compile via offline SLM endpoint
+        let lastDecodedAlertText = '';
+
+        // Alarm variables
+        let audioCtx = null;
+        let osc1 = null;
+        let osc2 = null;
+        let gainNode = null;
+        let sirenInterval = null;
+        let vibrationInterval = null;
+
+        // Offline queue
+        let sosQueue = [];
+
+        function loadQueue() {
+            const data = localStorage.getItem('disaster_whisper_sos_queue');
+            if (data) {
+                try {
+                    sosQueue = JSON.parse(data);
+                } catch(e) {
+                    sosQueue = [];
+                }
+            }
+        }
+
+        function saveQueue() {
+            localStorage.setItem('disaster_whisper_sos_queue', JSON.stringify(sosQueue));
+        }
+
+        function updateQueueUI() {
+            const statusLbl = document.getElementById('queue-status-lbl');
+            if (!statusLbl) return;
+            if (sosQueue.length > 0) {
+                statusLbl.innerText = `⚠️ ${sosQueue.length} SOS Signals Queued (Weak Net...)`;
+                statusLbl.style.color = 'var(--accent-red)';
+            } else {
+                statusLbl.innerText = `✓ Uplink Synced`;
+                statusLbl.style.color = 'var(--accent-emerald)';
+                setTimeout(() => {
+                    if (sosQueue.length === 0) {
+                        statusLbl.innerText = `Status: Connected`;
+                        statusLbl.style.color = 'var(--text-muted)';
+                    }
+                }, 3000);
+            }
+        }
+
+        let isProcessingQueue = false;
+        async function processQueue() {
+            if (isProcessingQueue) return;
+            if (sosQueue.length === 0) {
+                updateQueueUI();
+                return;
+            }
+            isProcessingQueue = true;
+            updateQueueUI();
+
+            while (sosQueue.length > 0) {
+                const item = sosQueue[0];
+                try {
+                    const res = await fetch('/api/rescue_request', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(item)
+                    });
+                    if (res.ok) {
+                        sosQueue.shift();
+                        saveQueue();
+                        updateQueueUI();
+                    } else {
+                        break;
+                    }
+                } catch(err) {
+                    break;
+                }
+            }
+            isProcessingQueue = false;
+            if (sosQueue.length > 0) {
+                setTimeout(processQueue, 5000);
+            }
+        }
+
+        function startAlarmSound() {
+            if (audioCtx) return;
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                osc1 = audioCtx.createOscillator();
+                osc2 = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+
+                osc1.type = 'sawtooth';
+                osc2.type = 'sine';
+
+                osc1.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc2.frequency.setValueAtTime(450, audioCtx.currentTime);
+
+                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+
+                osc1.connect(gainNode);
+                osc2.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                osc1.start();
+                osc2.start();
+
+                let toggle = true;
+                sirenInterval = setInterval(() => {
+                    if (!audioCtx) return;
+                    const targetFreq = toggle ? 880 : 440;
+                    osc1.frequency.exponentialRampToValueAtTime(targetFreq, audioCtx.currentTime + 0.6);
+                    osc2.frequency.exponentialRampToValueAtTime(targetFreq + 10, audioCtx.currentTime + 0.6);
+                    toggle = !toggle;
+                }, 700);
+            } catch(e) {
+                console.error("Web Audio API not supported or blocked: ", e);
+            }
+        }
+
+        function stopAlarmSound() {
+            if (sirenInterval) {
+                clearInterval(sirenInterval);
+                sirenInterval = null;
+            }
+            if (osc1) { try { osc1.stop(); } catch(e){} osc1 = null; }
+            if (osc2) { try { osc2.stop(); } catch(e){} osc2 = null; }
+            if (audioCtx) { try { audioCtx.close(); } catch(e){} audioCtx = null; }
+        }
+
+        function startVibrationLoop() {
+            if (navigator.vibrate) {
+                navigator.vibrate([400, 200, 400]);
+                vibrationInterval = setInterval(() => {
+                    if (navigator.vibrate) {
+                        navigator.vibrate([400, 200, 400]);
+                    }
+                }, 1200);
+            }
+        }
+
+        function stopVibrationLoop() {
+            if (vibrationInterval) {
+                clearInterval(vibrationInterval);
+                vibrationInterval = null;
+            }
+            if (navigator.vibrate) {
+                navigator.vibrate(0);
+            }
+        }
+
+        function appendLocalChatMessage(sender, message, timestamp) {
+            const container = document.getElementById('chat-messages-container');
+            if (!container) return;
+            
+            const placeholder = container.querySelector('div[style*="font-style: italic"]');
+            if (placeholder) {
+                placeholder.remove();
+            }
+
+            const bubble = document.createElement('div');
+            bubble.style.padding = '8px 12px';
+            bubble.style.borderRadius = '8px';
+            bubble.style.maxWidth = '80%';
+            bubble.style.fontSize = '0.85rem';
+            bubble.style.lineHeight = '1.4';
+            bubble.style.marginTop = '6px';
+            
+            if (sender === 'user') {
+                bubble.style.alignSelf = 'flex-end';
+                bubble.style.background = 'rgba(6,182,212,0.15)';
+                bubble.style.border = '1px solid rgba(6,182,212,0.3)';
+                bubble.style.color = 'var(--accent-cyan)';
+            } else {
+                bubble.style.alignSelf = 'flex-start';
+                bubble.style.background = 'rgba(255,255,255,0.05)';
+                bubble.style.border = '1px solid var(--bg-card-border)';
+                bubble.style.color = 'var(--text-primary)';
+            }
+
+            bubble.innerHTML = `
+                <div>${message}</div>
+                <div style="font-size: 0.65rem; color: var(--text-muted); text-align: right; margin-top: 4px;">${timestamp}</div>
+            `;
+            container.appendChild(bubble);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function pollUserMessages() {
+            try {
+                const res = await fetch(`/api/user_messages?clientId=${clientId}`);
+                if (res.ok) {
+                    const messages = await res.json();
+                    const container = document.getElementById('chat-messages-container');
+                    if (!container) return;
+
+                    const activeBubbles = container.querySelectorAll('div[style*="border"]');
+                    if (messages.length === activeBubbles.length) return;
+
+                    container.innerHTML = '';
+                    if (messages.length === 0) {
+                        container.innerHTML = `<div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 60px; font-style: italic;">No communication history. Sent signals will register here.</div>`;
+                        return;
+                    }
+
+                    messages.forEach(msg => {
+                        appendLocalChatMessage(msg.sender, msg.message, msg.timestamp);
+                    });
+                }
+            } catch(e) {
+                console.log("Error polling user messages:", e);
+            }
+        }
+
+
+        // Nearby Help Directory
+        const NEARBY_SERVICES = [
+            { name: "Indore General Hospital", type: "Hospital", coords: [22.7212, 75.8601], distance: "0.4 km", icon: "🏥" },
+            { name: "LIG Square Police Station", type: "Police", coords: [22.7328, 75.8765], distance: "2.3 km", icon: "👮" },
+            { name: "Apollo Medics Pharmacy", type: "Pharmacy", coords: [22.7188, 75.8552], distance: "0.3 km", icon: "💊" }
+        ];
 
         document.addEventListener('DOMContentLoaded', () => {
+            loadQueue();
             setupClientEventListeners();
+            registerPWA();
+            renderNearbyServices();
+            
+            // Periodically check for replies from Gov
+            pollUserMessages();
+            setInterval(pollUserMessages, 3000);
+            
+            // Start queue upload loop
+            processQueue();
+
+            // Attempt to get actual GPS coordinates
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(pos => {
+                    userLatitude = pos.coords.latitude;
+                    userLongitude = pos.coords.longitude;
+                    document.getElementById('user-coords-lbl').innerText = `GPS: [${userLatitude.toFixed(4)}, ${userLongitude.toFixed(4)}]`;
+                }, err => {
+                    console.log("Using default simulated Indore GPS coordinates.");
+                });
+            }
         });
 
-        function setupClientEventListeners() {
-            // Tier Toggles
-            document.getElementById('tier2-btn').onclick = () => setDeviceTier(2);
-            document.getElementById('tier1-btn').onclick = () => setDeviceTier(1);
 
+        function registerPWA() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Client PWA Service Worker Registered', reg))
+                    .catch(err => console.error('PWA Registration failed', err));
+            }
+        }
+
+        function renderNearbyServices() {
+            const listEl = document.getElementById('nearby-services-list');
+            listEl.innerHTML = '';
+            NEARBY_SERVICES.forEach(service => {
+                const row = document.createElement('div');
+                row.style.background = 'rgba(255,255,255,0.02)';
+                row.style.border = '1px solid var(--bg-card-border)';
+                row.style.borderRadius = '8px';
+                row.style.padding = '8px 10px';
+                row.style.display = 'flex';
+                row.style.justifyContent = 'space-between';
+                row.style.alignItems = 'center';
+                row.style.cursor = 'pointer';
+                row.style.transition = 'all 0.2s';
+                
+                row.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:1.1rem;">${service.icon}</span>
+                        <div style="display:flex; flex-direction:column;">
+                            <span style="font-size:0.8rem; font-weight:600; color:var(--text-primary);">${service.name}</span>
+                            <span style="font-size:0.65rem; color:var(--text-muted);">${service.type}</span>
+                        </div>
+                    </div>
+                    <span style="font-size:0.75rem; color:var(--accent-emerald); font-weight:bold;">${service.distance}</span>
+                `;
+                row.onclick = () => {
+                    alert(`Emergency Node: ${service.name}\nType: ${service.type}\nLocation: [${service.coords[0]}, ${service.coords[1]}]\nEvacuation Direction: Head towards safest corridor.`);
+                };
+                listEl.appendChild(row);
+            });
+        }
+
+        function setupClientEventListeners() {
             // Scan Airwaves from Flask
             document.getElementById('scan-airwaves-btn').onclick = async () => {
                 const res = await fetch('/api/active_broadcast');
@@ -241,9 +583,11 @@
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             sms_text: input,
-                            tier: activeDeviceTier
+                            tier: activeDeviceTier,
+                            language: document.getElementById('language-select').value
                         })
                     });
+
                     const data = await res.json();
                     
                     setTimeout(() => {
@@ -259,7 +603,60 @@
                     loader.classList.add('hidden');
                 }
             };
+
+            // Instant SOS Rescue button
+            document.getElementById('instant-sos-btn').onclick = () => {
+                startAlarmSound();
+                startVibrationLoop();
+
+                document.getElementById('instant-sos-btn').classList.add('hidden');
+                document.getElementById('stop-sos-btn').classList.remove('hidden');
+
+                const sosPayload = {
+                    clientId: clientId,
+                    latitude: userLatitude,
+                    longitude: userLongitude,
+                    status: "SOS",
+                    message: "URGENT SOS SIGNALLING ACTIVATED from client dashboard. Assistance required."
+                };
+
+                sosQueue.push(sosPayload);
+                saveQueue();
+                processQueue();
+            };
+
+            // Stop Alarm button
+            document.getElementById('stop-sos-btn').onclick = () => {
+                stopAlarmSound();
+                stopVibrationLoop();
+
+                document.getElementById('stop-sos-btn').classList.add('hidden');
+                document.getElementById('instant-sos-btn').classList.remove('hidden');
+            };
+
+            // Chat sending button
+            document.getElementById('chat-send-btn').onclick = () => {
+                const chatInput = document.getElementById('chat-user-input');
+                const msg = chatInput.value.trim();
+                if (!msg) return;
+
+                chatInput.value = '';
+                appendLocalChatMessage("user", msg, new Date().toLocaleTimeString());
+
+                const chatPayload = {
+                    clientId: clientId,
+                    latitude: userLatitude,
+                    longitude: userLongitude,
+                    status: "CHAT",
+                    message: msg
+                };
+
+                sosQueue.push(chatPayload);
+                saveQueue();
+                processQueue();
+            };
         }
+
 
         function setDeviceTier(tier) {
             activeDeviceTier = tier;

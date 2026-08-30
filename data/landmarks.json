@@ -179,6 +179,17 @@
       "is_safe_zone": true,
       "capacity": 8000,
       "tags": ["park", "open-ground", "relief-center", "safe-zone"]
+    },
+    {
+      "id": "L016",
+      "name": "Khan River",
+      "name_hi": "खान नदी",
+      "lat": 22.7196,
+      "lng": 75.8577,
+      "type": "river",
+      "district": "Central Indore",
+      "is_safe_zone": false,
+      "tags": ["river", "water-body"]
     }
   ]
 }

@@ -183,9 +183,44 @@
                 </div>
             </div>
         </div>
+
+        <!-- Live SOS & Rescue Control Center -->
+        <div class="panel glass" style="margin-top: 20px; border-color: rgba(239, 68, 68, 0.25);">
+            <div class="panel-header" style="background: rgba(239, 68, 68, 0.03); display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 15px 24px;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <h2 style="color: var(--accent-red); margin: 0; display: flex; align-items: center; gap: 10px;">🚨 Live SOS & Rescue Operations Center</h2>
+                    <span class="sub-header-lbl">Real-time distress telemetry and two-way tactical guidance coordinates</span>
+                </div>
+                <div class="status-indicator" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 9999px; padding: 6px 12px; display: flex; align-items: center; gap: 8px;">
+                    <span class="pulse-dot" style="background-color: var(--accent-red); box-shadow: 0 0 10px rgba(239, 68, 68, 0.7); animation: pulse 1.5s infinite;"></span>
+                    <span class="status-lbl" style="color: var(--accent-red);">Live Monitoring Active</span>
+                </div>
+            </div>
+            <div style="padding: 24px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; min-height: 380px;">
+                <!-- Left: Distress Signals List -->
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <h3 style="font-size: 1rem; color: var(--text-primary); border-bottom: 1px solid var(--bg-card-border); padding-bottom: 8px; font-weight: 600;">Distress Telemetry Feeds</h3>
+                    <div id="rescue-list" style="max-height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 5px;">
+                        <div class="text-muted" style="text-align: center; padding: 40px 20px; font-style: italic;">No active signals received. Scanning airwaves...</div>
+                    </div>
+                </div>
+
+                <!-- Right: Operator Reply -->
+                <div style="display: flex; flex-direction: column; gap: 14px; background: rgba(17, 24, 39, 0.4); border: 1px solid var(--bg-card-border); border-radius: 16px; padding: 20px; backdrop-filter: blur(8px);">
+                    <h3 style="font-size: 1rem; color: var(--text-primary); border-bottom: 1px solid var(--bg-card-border); padding-bottom: 8px; font-weight: 600;">Tactical Response Uplink</h3>
+                    <div id="response-target" style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4;">
+                        Select a distress beacon from the telemetry feeds to open the response channel.
+                    </div>
+                    <textarea id="operator-reply-msg" placeholder="Enter emergency instructions, routing corrections, or rescue dispatcher status..." style="width: 100%; height: 120px; background: rgba(5, 7, 12, 0.6); border: 1px solid var(--bg-card-border); border-radius: 10px; color: var(--text-primary); padding: 12px; font-family: inherit; font-size: 0.9rem; resize: none; outline: none; transition: border-color 0.2s;" disabled></textarea>
+                    <button class="btn btn-primary" id="send-reply-btn" style="align-self: flex-end; background: linear-gradient(135deg, var(--accent-emerald), #059669) !important; color: #0b0f19; font-weight: 700; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);" disabled>⚡ Uplink Response</button>
+                    <div id="reply-status-log" style="font-size: 0.75rem; color: var(--text-muted); min-height: 18px; margin-top: 2px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Leaflet JS -->
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         // Store registries
@@ -193,11 +228,17 @@
         let roleRegistry = {};
         let activeHazardCode = 'F';
         let activeRoleMask = 0;
+        let lastEncodedPayload = '';  // Cache clean payload from API — never read from DOM
+
+        // Rescue/SOS tracking
+        let rescueMarkers = {}; // clientId -> L.Marker
+        let selectedClientIdForReply = null;
+        let activeRescueRequests = [];
+
         let map = null;
         let routePathLine = null;
         let waypoints = [];
         let waypointCoords = [];
-        let lastEncodedPayload = '';  // Cache clean payload from API — never read from DOM
 
         // Fallbacks if backend API or network fails
         const FALLBACK_HAZARDS = {
@@ -256,7 +297,17 @@
             } catch (err) {
                 console.error("Failed to update initial encoding state:", err);
             }
+
+            try {
+                // Initialize rescue monitoring
+                setupRescueControlListeners();
+                fetchRescueRequests();
+                setInterval(fetchRescueRequests, 3000);
+            } catch (err) {
+                console.error("Failed to initialize rescue requests:", err);
+            }
         });
+
 
         function initServerMap() {
             if (typeof L === 'undefined') {
@@ -529,6 +580,194 @@
                 }
             };
         }
+
+        // ── RESCUE MONITORING & TWO-WAY CHAT FUNCTIONS ───────────────────────
+
+        async function fetchRescueRequests() {
+            try {
+                const res = await fetch('/api/rescue_requests');
+                if (!res.ok) throw new Error("Fetch failed");
+                const data = await res.json();
+                activeRescueRequests = data;
+                
+                renderRescueList(data);
+                updateRescueMarkers(data);
+            } catch (err) {
+                console.warn("Failed to retrieve live rescue requests:", err);
+            }
+        }
+
+        function renderRescueList(requests) {
+            const container = document.getElementById('rescue-list');
+            if (requests.length === 0) {
+                container.innerHTML = '<div class="text-muted" style="text-align: center; padding: 40px 20px; font-style: italic;">No active signals received. Scanning airwaves...</div>';
+                return;
+            }
+
+            container.innerHTML = '';
+            requests.forEach(req => {
+                const item = document.createElement('div');
+                const isSelected = selectedClientIdForReply === req.clientId;
+                item.className = `waypoint-item ${isSelected ? 'active' : ''}`;
+                item.style.cursor = 'pointer';
+                item.style.padding = '12px';
+                item.style.borderRadius = '10px';
+                item.style.background = isSelected ? 'rgba(239, 68, 68, 0.08)' : 'rgba(255,255,255,0.02)';
+                item.style.border = isSelected ? '1px solid var(--accent-red)' : '1px solid var(--bg-card-border)';
+                item.style.display = 'flex';
+                item.style.flexDirection = 'column';
+                item.style.gap = '6px';
+                item.style.transition = 'all 0.2s';
+                
+                const statusBadgeColor = req.status === 'SOS' ? 'var(--accent-red)' : 'var(--accent-amber)';
+                
+                item.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 700; color: ${statusBadgeColor}; font-size: 0.85rem; display: flex; align-items: center; gap: 4px;">
+                            ${req.status === 'SOS' ? '🚨 URGENT SOS' : '⚠️ RESCUE REQUEST'}
+                        </span>
+                        <span class="mono" style="font-size: 0.7rem; color: var(--text-muted);">${req.timestamp}</span>
+                    </div>
+                    <div style="font-size: 0.85rem; color: var(--text-primary); font-weight: 500;">
+                        ${req.message || '(No status message attached)'}
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px; font-size: 0.75rem;">
+                        <span class="mono" style="color: var(--accent-cyan);">GPS: [${req.latitude.toFixed(4)}, ${req.longitude.toFixed(4)}]</span>
+                        <button class="btn btn-sm btn-outline" style="font-size: 0.65rem; padding: 2px 6px; border-color: rgba(255,255,255,0.15);" onclick="event.stopPropagation(); focusRescueMarker('${req.clientId}', ${req.latitude}, ${req.longitude})">🎯 Locate</button>
+                    </div>
+                `;
+                
+                item.onclick = () => selectRescueRequest(req);
+                container.appendChild(item);
+            });
+        }
+
+        function updateRescueMarkers(requests) {
+            if (typeof L === 'undefined' || !map) return;
+
+            // Remove markers for clients no longer in requests
+            const activeClientIds = requests.map(r => r.clientId);
+            Object.keys(rescueMarkers).forEach(clientId => {
+                if (!activeClientIds.includes(clientId)) {
+                    map.removeLayer(rescueMarkers[clientId]);
+                    delete rescueMarkers[clientId];
+                }
+            });
+
+            // Add or update markers
+            requests.forEach(req => {
+                const color = req.status === 'SOS' ? '#ef4444' : '#f59e0b';
+                const shadow = req.status === 'SOS' ? 'rgba(239, 68, 68, 0.7)' : 'rgba(245, 158, 11, 0.7)';
+                const markerHtml = `
+                    <div style="
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 50%;
+                        background-color: ${color};
+                        border: 2px solid white;
+                        box-shadow: 0 0 10px ${shadow};
+                    "></div>
+                `;
+
+                if (rescueMarkers[req.clientId]) {
+                    // Move existing marker
+                    rescueMarkers[req.clientId].setLatLng([req.latitude, req.longitude]);
+                } else {
+                    // Create new marker
+                    const customIcon = L.divIcon({
+                        html: markerHtml,
+                        className: 'rescue-pulse-marker',
+                        iconSize: [16, 16],
+                        iconAnchor: [8, 8]
+                    });
+
+                    const marker = L.marker([req.latitude, req.longitude], { icon: customIcon }).addTo(map);
+                    marker.bindPopup(`
+                        <strong style="color: ${color};">${req.status === 'SOS' ? '🚨 SOS Alert' : '⚠️ Rescue Coordinates'}</strong><br>
+                        <span style="font-size: 0.8rem; color: #333;">${req.message || 'Needs rescue assistance'}</span><br>
+                        <button style="margin-top: 5px; font-size: 0.7rem; padding: 2px 6px; cursor: pointer;" onclick="window.selectRescueFromMap('${req.clientId}')">Select Uplink</button>
+                    `);
+                    rescueMarkers[req.clientId] = marker;
+                }
+            });
+        }
+
+        window.focusRescueMarker = function(clientId, lat, lng) {
+            if (typeof L !== 'undefined' && map && rescueMarkers[clientId]) {
+                map.setView([lat, lng], 15);
+                rescueMarkers[clientId].openPopup();
+            }
+        };
+
+        window.selectRescueFromMap = function(clientId) {
+            const req = activeRescueRequests.find(r => r.clientId === clientId);
+            if (req) {
+                selectRescueRequest(req);
+            }
+        };
+
+        function selectRescueRequest(req) {
+            selectedClientIdForReply = req.clientId;
+            
+            // Re-render list to highlight selected item
+            renderRescueList(activeRescueRequests);
+
+            const targetEl = document.getElementById('response-target');
+            const statusColor = req.status === 'SOS' ? 'var(--accent-red)' : 'var(--accent-amber)';
+            
+            targetEl.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>Responding to client: <strong class="mono" style="color: var(--accent-cyan); font-size: 0.8rem;">${req.clientId.substring(0,8)}...</strong></span>
+                    <span style="background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; color: ${statusColor}; font-weight: bold;">
+                        ${req.status}
+                    </span>
+                </div>
+                <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted); background: rgba(0,0,0,0.2); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.02);">
+                    Last message: "${req.message || 'No status message'}"
+                </div>
+            `;
+
+            document.getElementById('operator-reply-msg').disabled = false;
+            document.getElementById('send-reply-btn').disabled = false;
+            document.getElementById('operator-reply-msg').focus();
+            document.getElementById('reply-status-log').innerText = '';
+        }
+
+        function setupRescueControlListeners() {
+            document.getElementById('send-reply-btn').onclick = async () => {
+                const message = document.getElementById('operator-reply-msg').value.trim();
+                if (!message || !selectedClientIdForReply) return;
+
+                const statusLog = document.getElementById('reply-status-log');
+                statusLog.innerText = 'Transmitting guidance response...';
+                statusLog.style.color = 'var(--text-muted)';
+
+                try {
+                    const res = await fetch('/api/respond_rescue', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            clientId: selectedClientIdForReply,
+                            message: message
+                        })
+                    });
+
+                    if (res.ok) {
+                        statusLog.innerText = '✓ Guidance transmitted successfully onto cellular carrier!';
+                        statusLog.style.color = 'var(--accent-emerald)';
+                        document.getElementById('operator-reply-msg').value = '';
+                    } else {
+                        const data = await res.json();
+                        statusLog.innerText = `Error: ${data.error || 'Uplink transmission failed'}`;
+                        statusLog.style.color = 'var(--accent-red)';
+                    }
+                } catch (err) {
+                    statusLog.innerText = 'Error: Connection lost';
+                    statusLog.style.color = 'var(--accent-red)';
+                }
+            };
+        }
     </script>
+
 </body>
 </html>

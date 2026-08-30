@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "पूर इशारा",
+    "tier1_general": "⚠️ पूर इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ पूर इशारा — Marathi Farmers: Protect crops/livestock. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_elderly": "⚠️ पूर इशारा — Marathi Seniors: Contact authorities. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_physically_challenged": "⚠️ पूर इशारा — Marathi Accessibility Support Active. ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा.",
+    "tier1_volunteers": "⚠️ पूर इशारा — Marathi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ पूर इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा."
+  },
+  "C": {
+    "title": "वादळ इशारा",
+    "tier1_general": "⚠️ वादळ इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ वादळ इशारा — Marathi Farmers: Protect crops/livestock. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_elderly": "⚠️ वादळ इशारा — Marathi Seniors: Contact authorities. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_physically_challenged": "⚠️ वादळ इशारा — Marathi Accessibility Support Active. ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा.",
+    "tier1_volunteers": "⚠️ वादळ इशारा — Marathi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ वादळ इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा."
+  },
+  "L": {
+    "title": "दरड कोसळणे इशारा",
+    "tier1_general": "⚠️ दरड कोसळणे इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ दरड कोसळणे इशारा — Marathi Farmers: Protect crops/livestock. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_elderly": "⚠️ दरड कोसळणे इशारा — Marathi Seniors: Contact authorities. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_physically_challenged": "⚠️ दरड कोसळणे इशारा — Marathi Accessibility Support Active. ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा.",
+    "tier1_volunteers": "⚠️ दरड कोसळणे इशारा — Marathi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ दरड कोसळणे इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा."
+  },
+  "W": {
+    "title": "दावानल इशारा",
+    "tier1_general": "⚠️ दावानल इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ दावानल इशारा — Marathi Farmers: Protect crops/livestock. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_elderly": "⚠️ दावानल इशारा — Marathi Seniors: Contact authorities. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_physically_challenged": "⚠️ दावानल इशारा — Marathi Accessibility Support Active. ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा.",
+    "tier1_volunteers": "⚠️ दावानल इशारा — Marathi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ दावानल इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा."
+  },
+  "E": {
+    "title": "भूकंप इशारा",
+    "tier1_general": "⚠️ भूकंप इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ भूकंप इशारा — Marathi Farmers: Protect crops/livestock. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_elderly": "⚠️ भूकंप इशारा — Marathi Seniors: Contact authorities. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_physically_challenged": "⚠️ भूकंप इशारा — Marathi Accessibility Support Active. ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा.",
+    "tier1_volunteers": "⚠️ भूकंप इशारा — Marathi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ भूकंप इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा."
+  },
+  "T": {
+    "title": "सुनामी इशारा",
+    "tier1_general": "⚠️ सुनामी इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ सुनामी इशारा — Marathi Farmers: Protect crops/livestock. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_elderly": "⚠️ सुनामी इशारा — Marathi Seniors: Contact authorities. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_physically_challenged": "⚠️ सुनामी इशारा — Marathi Accessibility Support Active. ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा.",
+    "tier1_volunteers": "⚠️ सुनामी इशारा — Marathi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ सुनामी इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा."
+  },
+  "H": {
+    "title": "अतिउष्णता इशारा",
+    "tier1_general": "⚠️ अतिउष्णता इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ अतिउष्णता इशारा — Marathi Farmers: Protect crops/livestock. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_elderly": "⚠️ अतिउष्णता इशारा — Marathi Seniors: Contact authorities. ताबडतोब {destination} कडे स्थलांतरित व्हा.",
+    "tier1_physically_challenged": "⚠️ अतिउष्णता इशारा — Marathi Accessibility Support Active. ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा.",
+    "tier1_volunteers": "⚠️ अतिउष्णता इशारा — Marathi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ अतिउष्णता इशारा — {area}: ताबडतोब {destination} कडे स्थलांतरित व्हा. 112 वर कॉल करा."
+  }
+}

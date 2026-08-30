@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "ਹੜ੍ਹ ਦੀ ਚੇਤਾਵਨੀ",
+    "tier1_general": "⚠️ ਹੜ੍ਹ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ਹੜ੍ਹ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Farmers: Protect crops/livestock. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_elderly": "⚠️ ਹੜ੍ਹ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Seniors: Contact authorities. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_physically_challenged": "⚠️ ਹੜ੍ਹ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Accessibility Support Active. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ.",
+    "tier1_volunteers": "⚠️ ਹੜ੍ਹ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ ਹੜ੍ਹ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ."
+  },
+  "C": {
+    "title": "ਚੱਕਰਵਾਤ ਚੇਤਾਵਨੀ",
+    "tier1_general": "⚠️ ਚੱਕਰਵਾਤ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ਚੱਕਰਵਾਤ ਚੇਤਾਵਨੀ — Punjabi Farmers: Protect crops/livestock. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_elderly": "⚠️ ਚੱਕਰਵਾਤ ਚੇਤਾਵਨੀ — Punjabi Seniors: Contact authorities. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_physically_challenged": "⚠️ ਚੱਕਰਵਾਤ ਚੇਤਾਵਨੀ — Punjabi Accessibility Support Active. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ.",
+    "tier1_volunteers": "⚠️ ਚੱਕਰਵਾਤ ਚੇਤਾਵਨੀ — Punjabi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ ਚੱਕਰਵਾਤ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ."
+  },
+  "L": {
+    "title": "ਜ਼ਮੀਨ ਖਿਸਕਣ ਦੀ ਚੇਤਾਵਨੀ",
+    "tier1_general": "⚠️ ਜ਼ਮੀਨ ਖਿਸਕਣ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ਜ਼ਮੀਨ ਖਿਸਕਣ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Farmers: Protect crops/livestock. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_elderly": "⚠️ ਜ਼ਮੀਨ ਖਿਸਕਣ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Seniors: Contact authorities. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_physically_challenged": "⚠️ ਜ਼ਮੀਨ ਖਿਸਕਣ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Accessibility Support Active. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ.",
+    "tier1_volunteers": "⚠️ ਜ਼ਮੀਨ ਖਿਸਕਣ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ ਜ਼ਮੀਨ ਖਿਸਕਣ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ."
+  },
+  "W": {
+    "title": "ਜੰਗਲ ਦੀ ਅੱਗ ਦੀ ਚੇਤਾਵਨੀ",
+    "tier1_general": "⚠️ ਜੰਗਲ ਦੀ ਅੱਗ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ਜੰਗਲ ਦੀ ਅੱਗ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Farmers: Protect crops/livestock. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_elderly": "⚠️ ਜੰਗਲ ਦੀ ਅੱਗ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Seniors: Contact authorities. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_physically_challenged": "⚠️ ਜੰਗਲ ਦੀ ਅੱਗ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Accessibility Support Active. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ.",
+    "tier1_volunteers": "⚠️ ਜੰਗਲ ਦੀ ਅੱਗ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ ਜੰਗਲ ਦੀ ਅੱਗ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ."
+  },
+  "E": {
+    "title": "ਭੂਚਾਲ ਦੀ ਚੇਤਾਵਨੀ",
+    "tier1_general": "⚠️ ਭੂਚਾਲ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ਭੂਚਾਲ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Farmers: Protect crops/livestock. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_elderly": "⚠️ ਭੂਚਾਲ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Seniors: Contact authorities. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_physically_challenged": "⚠️ ਭੂਚਾਲ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Accessibility Support Active. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ.",
+    "tier1_volunteers": "⚠️ ਭੂਚਾਲ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ ਭੂਚਾਲ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ."
+  },
+  "T": {
+    "title": "ਸੁਨਾਮੀ ਚੇਤਾਵਨੀ",
+    "tier1_general": "⚠️ ਸੁਨਾਮੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ਸੁਨਾਮੀ ਚੇਤਾਵਨੀ — Punjabi Farmers: Protect crops/livestock. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_elderly": "⚠️ ਸੁਨਾਮੀ ਚੇਤਾਵਨੀ — Punjabi Seniors: Contact authorities. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_physically_challenged": "⚠️ ਸੁਨਾਮੀ ਚੇਤਾਵਨੀ — Punjabi Accessibility Support Active. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ.",
+    "tier1_volunteers": "⚠️ ਸੁਨਾਮੀ ਚੇਤਾਵਨੀ — Punjabi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ ਸੁਨਾਮੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ."
+  },
+  "H": {
+    "title": "ਲੂ ਦੀ ਚੇਤਾਵਨੀ",
+    "tier1_general": "⚠️ ਲੂ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ਲੂ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Farmers: Protect crops/livestock. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_elderly": "⚠️ ਲੂ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Seniors: Contact authorities. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ.",
+    "tier1_physically_challenged": "⚠️ ਲੂ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Accessibility Support Active. ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ.",
+    "tier1_volunteers": "⚠️ ਲੂ ਦੀ ਚੇਤਾਵਨੀ — Punjabi Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ ਲੂ ਦੀ ਚੇਤਾਵਨੀ — {area}: ਤੁਰੰਤ {destination} ਵੱਲ ਜਾਓ. 112 'ਤੇ ਕਾਲ ਕਰੋ."
+  }
+}

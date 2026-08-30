@@ -1,0 +1,17 @@
+{
+  "short_name": "DisasterWhisper",
+  "name": "Disaster-Whisper Emergency Portal",
+  "description": "Asymmetric offline-first disaster communication & alerting system",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/564/564793.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0b0f19",
+  "theme_color": "#0b0f19",
+  "display": "standalone",
+  "orientation": "portrait"
+}

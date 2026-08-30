@@ -28,6 +28,11 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 # Simulated active cell broadcast transmission channel
 ACTIVE_BROADCAST_MESSAGE: str | None = None
 
+# Simulated databases for 2-way rescue requests and communication
+RESCUE_REQUESTS: list[dict] = []
+USER_MESSAGES: dict[str, list[dict]] = {}
+
+
 
 def _read_data_file(filename: str) -> dict:
     path = os.path.join(DATA_DIR, filename)
@@ -41,6 +46,17 @@ def _read_data_file(filename: str) -> dict:
 def index():
     """Render the main landing menu page."""
     return render_template("index.html")
+
+
+@app.route("/manifest.json")
+def serve_manifest():
+    return app.send_static_file("manifest.json")
+
+
+@app.route("/sw.js")
+def serve_sw():
+    return app.send_static_file("sw.js")
+
 
 
 @app.route("/server")
@@ -147,6 +163,7 @@ def api_decode():
     
     sms_text = req_data.get("sms_text", "")
     tier     = int(req_data.get("tier", 1))
+    language = req_data.get("language", "en")
 
     if not sms_text:
         return jsonify({"error": "No message text provided."}), 400
@@ -172,22 +189,23 @@ def api_decode():
                 hazard_code=hazard_code,
                 role_flags=role_flags,
                 coordinates=coordinates,
-                language="en",
+                language=language,
             )
             validation = validate_alert_output(
                 generated_text=rendered_alert["alert_text"],
                 hazard_code=hazard_code,
                 coordinates=coordinates,
-                language="en",
+                language=language,
             )
         else:
             rendered_alert = render_tier1(
                 hazard_code=hazard_code,
                 role_flags=role_flags,
                 coordinates=coordinates,
-                language="en",
+                language=language,
             )
             validation = None
+
 
         return jsonify({
             "extraction":      extraction,
@@ -200,6 +218,98 @@ def api_decode():
         return jsonify({"error": str(e)}), 400
     except Exception as e:
         return jsonify({"error": f"Internal processing error: {str(e)}"}), 500
+
+
+# ── RESCUE & 2-WAY COMMUNICATION API ──────────────────────────────────────────
+
+@app.route("/api/rescue_request", methods=["POST"])
+def post_rescue_request():
+    """Submit a rescue request or SOS signal from a client."""
+    import time
+    req_data = request.get_json() or {}
+    client_id = req_data.get("clientId")
+    latitude = req_data.get("latitude")
+    longitude = req_data.get("longitude")
+    status = req_data.get("status", "SOS")
+    message = req_data.get("message", "")
+    
+    if not client_id or latitude is None or longitude is None:
+        return jsonify({"error": "Missing clientId, latitude, or longitude."}), 400
+        
+    req_id = f"req_{int(time.time() * 1000)}"
+    request_record = {
+        "id": req_id,
+        "clientId": client_id,
+        "latitude": float(latitude),
+        "longitude": float(longitude),
+        "status": status,
+        "message": message,
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    
+    # Store or update the rescue request
+    # If client already has a request, update it, otherwise add
+    for r in RESCUE_REQUESTS:
+        if r["clientId"] == client_id:
+            r.update(request_record)
+            break
+    else:
+        RESCUE_REQUESTS.append(request_record)
+        
+    # Append the message to the user communication logs
+    if client_id not in USER_MESSAGES:
+        USER_MESSAGES[client_id] = []
+        
+    if message:
+        USER_MESSAGES[client_id].append({
+            "sender": "user",
+            "message": message,
+            "timestamp": request_record["timestamp"]
+        })
+        
+    return jsonify({"status": "success", "request": request_record})
+
+
+@app.route("/api/rescue_requests", methods=["GET"])
+def get_rescue_requests():
+    """Retrieve all active rescue requests (Government dashboard)."""
+    return jsonify(RESCUE_REQUESTS)
+
+
+@app.route("/api/respond_rescue", methods=["POST"])
+def respond_rescue():
+    """Send a response message from Government operator to a user."""
+    import time
+    req_data = request.get_json() or {}
+    client_id = req_data.get("clientId")
+    message = req_data.get("message")
+    
+    if not client_id or not message:
+        return jsonify({"error": "Missing clientId or message."}), 400
+        
+    if client_id not in USER_MESSAGES:
+        USER_MESSAGES[client_id] = []
+        
+    msg_record = {
+        "sender": "gov",
+        "message": message,
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+    }
+    USER_MESSAGES[client_id].append(msg_record)
+    
+    return jsonify({"status": "success", "message": msg_record})
+
+
+@app.route("/api/user_messages", methods=["GET"])
+def get_user_messages():
+    """Get chat logs for a specific client."""
+    client_id = request.args.get("clientId")
+    if not client_id:
+        return jsonify({"error": "Missing clientId parameter."}), 400
+        
+    messages = USER_MESSAGES.get(client_id, [])
+    return jsonify(messages)
+
 
 
 if __name__ == "__main__":

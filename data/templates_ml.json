@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "പ്രളയ മുന്നറിയിപ്പ്",
+    "tier1_general": "⚠️ പ്രളയ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ പ്രളയ മുന്നറിയിപ്പ് — Malayalam Farmers: Protect crops/livestock. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_elderly": "⚠️ പ്രളയ മുന്നറിയിപ്പ് — Malayalam Seniors: Contact authorities. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_physically_challenged": "⚠️ പ്രളയ മുന്നറിയിപ്പ് — Malayalam Accessibility Support Active. ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക.",
+    "tier1_volunteers": "⚠️ പ്രളയ മുന്നറിയിപ്പ് — Malayalam Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ പ്രളയ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക."
+  },
+  "C": {
+    "title": "ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ്",
+    "tier1_general": "⚠️ ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ് — Malayalam Farmers: Protect crops/livestock. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_elderly": "⚠️ ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ് — Malayalam Seniors: Contact authorities. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_physically_challenged": "⚠️ ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ് — Malayalam Accessibility Support Active. ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക.",
+    "tier1_volunteers": "⚠️ ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ് — Malayalam Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ ചുഴലിക്കാറ്റ് മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക."
+  },
+  "L": {
+    "title": "ഉരുൾപൊട്ടൽ മുന്നറിയിപ്പ്",
+    "tier1_general": "⚠️ ഉരുൾപൊട്ടൽ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ഉരുൾപൊട്ടൽ മുന്നറിയിപ്പ് — Malayalam Farmers: Protect crops/livestock. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_elderly": "⚠️ ഉരുൾപൊട്ടൽ മുന്നറിയിപ്പ് — Malayalam Seniors: Contact authorities. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_physically_challenged": "⚠️ ഉരുൾപൊട്ടൽ മുന്നറിയിപ്പ് — Malayalam Accessibility Support Active. ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക.",
+    "tier1_volunteers": "⚠️ ഉരുൾപൊട്ടൽ മുന്നറിയിപ്പ് — Malayalam Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ ഉരുൾപൊട്ടൽ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക."
+  },
+  "W": {
+    "title": "കാട്ടുതീ മുന്നറിയിപ്പ്",
+    "tier1_general": "⚠️ കാട്ടുതീ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ കാട്ടുതീ മുന്നറിയിപ്പ് — Malayalam Farmers: Protect crops/livestock. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_elderly": "⚠️ കാട്ടുതീ മുന്നറിയിപ്പ് — Malayalam Seniors: Contact authorities. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_physically_challenged": "⚠️ കാട്ടുതീ മുന്നറിയിപ്പ് — Malayalam Accessibility Support Active. ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക.",
+    "tier1_volunteers": "⚠️ കാട്ടുതീ മുന്നറിയിപ്പ് — Malayalam Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ കാട്ടുതീ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക."
+  },
+  "E": {
+    "title": "ഭൂകമ്പ മുന്നറിയിപ്പ്",
+    "tier1_general": "⚠️ ഭൂകമ്പ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ഭൂകമ്പ മുന്നറിയിപ്പ് — Malayalam Farmers: Protect crops/livestock. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_elderly": "⚠️ ഭൂകമ്പ മുന്നറിയിപ്പ് — Malayalam Seniors: Contact authorities. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_physically_challenged": "⚠️ ഭൂകമ്പ മുന്നറിയിപ്പ് — Malayalam Accessibility Support Active. ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക.",
+    "tier1_volunteers": "⚠️ ഭൂകമ്പ മുന്നറിയിപ്പ് — Malayalam Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ ഭൂകമ്പ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക."
+  },
+  "T": {
+    "title": "സുനാമി മുന്നറിയിപ്പ്",
+    "tier1_general": "⚠️ സുനാമി മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ സുനാമി മുന്നറിയിപ്പ് — Malayalam Farmers: Protect crops/livestock. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_elderly": "⚠️ സുനാമി മുന്നറിയിപ്പ് — Malayalam Seniors: Contact authorities. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_physically_challenged": "⚠️ സുനാമി മുന്നറിയിപ്പ് — Malayalam Accessibility Support Active. ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക.",
+    "tier1_volunteers": "⚠️ സുനാമി മുന്നറിയിപ്പ് — Malayalam Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ സുനാമി മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക."
+  },
+  "H": {
+    "title": "ഉഷ്ണതരംഗ മുന്നറിയിപ്പ്",
+    "tier1_general": "⚠️ ഉഷ്ണതരംഗ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ഉഷ്ണതരംഗ മുന്നറിയിപ്പ് — Malayalam Farmers: Protect crops/livestock. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_elderly": "⚠️ ഉഷ്ണതരംഗ മുന്നറിയിപ്പ് — Malayalam Seniors: Contact authorities. ഉടനടി {destination} ലേക്ക് മാറുക.",
+    "tier1_physically_challenged": "⚠️ ഉഷ്ണതരംഗ മുന്നറിയിപ്പ് — Malayalam Accessibility Support Active. ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക.",
+    "tier1_volunteers": "⚠️ ഉഷ്ണതരംഗ മുന്നറിയിപ്പ് — Malayalam Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ ഉഷ്ണതരംഗ മുന്നറിയിപ്പ് — {area}: ഉടനടി {destination} ലേക്ക് മാറുക. 112 ലേക്ക് വിളിക്കുക."
+  }
+}

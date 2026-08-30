@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "जलौघः चेतावनी",
+    "tier1_general": "⚠️ जलौघः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ जलौघः चेतावनी — Sanskrit Farmers: Protect crops/livestock. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_elderly": "⚠️ जलौघः चेतावनी — Sanskrit Seniors: Contact authorities. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_physically_challenged": "⚠️ जलौघः चेतावनी — Sanskrit Accessibility Support Active. शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु.",
+    "tier1_volunteers": "⚠️ जलौघः चेतावनी — Sanskrit Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ जलौघः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु."
+  },
+  "C": {
+    "title": "चक्रवातः चेतावनी",
+    "tier1_general": "⚠️ चक्रवातः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ चक्रवातः चेतावनी — Sanskrit Farmers: Protect crops/livestock. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_elderly": "⚠️ चक्रवातः चेतावनी — Sanskrit Seniors: Contact authorities. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_physically_challenged": "⚠️ चक्रवातः चेतावनी — Sanskrit Accessibility Support Active. शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु.",
+    "tier1_volunteers": "⚠️ चक्रवातः चेतावनी — Sanskrit Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ चक्रवातः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु."
+  },
+  "L": {
+    "title": "भूसङ्क्रमणम् चेतावनी",
+    "tier1_general": "⚠️ भूसङ्क्रमणम् चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ भूसङ्क्रमणम् चेतावनी — Sanskrit Farmers: Protect crops/livestock. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_elderly": "⚠️ भूसङ्क्रमणम् चेतावनी — Sanskrit Seniors: Contact authorities. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_physically_challenged": "⚠️ भूसङ्क्रमणम् चेतावनी — Sanskrit Accessibility Support Active. शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु.",
+    "tier1_volunteers": "⚠️ भूसङ्क्रमणम् चेतावनी — Sanskrit Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ भूसङ्क्रमणम् चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु."
+  },
+  "W": {
+    "title": "वनाग्निः चेतावनी",
+    "tier1_general": "⚠️ वनाग्निः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ वनाग्निः चेतावनी — Sanskrit Farmers: Protect crops/livestock. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_elderly": "⚠️ वनाग्निः चेतावनी — Sanskrit Seniors: Contact authorities. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_physically_challenged": "⚠️ वनाग्निः चेतावनी — Sanskrit Accessibility Support Active. शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु.",
+    "tier1_volunteers": "⚠️ वनाग्निः चेतावनी — Sanskrit Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ वनाग्निः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु."
+  },
+  "E": {
+    "title": "भूकम्पः चेतावनी",
+    "tier1_general": "⚠️ भूकम्पः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ भूकम्पः चेतावनी — Sanskrit Farmers: Protect crops/livestock. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_elderly": "⚠️ भूकम्पः चेतावनी — Sanskrit Seniors: Contact authorities. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_physically_challenged": "⚠️ भूकम्पः चेतावनी — Sanskrit Accessibility Support Active. शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु.",
+    "tier1_volunteers": "⚠️ भूकम्पः चेतावनी — Sanskrit Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ भूकम्पः चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु."
+  },
+  "T": {
+    "title": "सुनामी चेतावनी",
+    "tier1_general": "⚠️ सुनामी चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ सुनामी चेतावनी — Sanskrit Farmers: Protect crops/livestock. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_elderly": "⚠️ सुनामी चेतावनी — Sanskrit Seniors: Contact authorities. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_physically_challenged": "⚠️ सुनामी चेतावनी — Sanskrit Accessibility Support Active. शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु.",
+    "tier1_volunteers": "⚠️ सुनामी चेतावनी — Sanskrit Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ सुनामी चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु."
+  },
+  "H": {
+    "title": "ऊष्णलहरी चेतावनी",
+    "tier1_general": "⚠️ ऊष्णलहरी चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ऊष्णलहरी चेतावनी — Sanskrit Farmers: Protect crops/livestock. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_elderly": "⚠️ ऊष्णलहरी चेतावनी — Sanskrit Seniors: Contact authorities. शीघ्रं {destination} गच्छन्तु.",
+    "tier1_physically_challenged": "⚠️ ऊष्णलहरी चेतावनी — Sanskrit Accessibility Support Active. शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु.",
+    "tier1_volunteers": "⚠️ ऊष्णलहरी चेतावनी — Sanskrit Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ ऊष्णलहरी चेतावनी — {area}: शीघ्रं {destination} गच्छन्तु. 112 इति दूरभाषं कुर्वन्तु."
+  }
+}

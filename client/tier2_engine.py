@@ -399,9 +399,13 @@ def render_tier2(
 
     # ── Mock response path ────────────────────────────────────────────────────
     key = f"{hazard_code}_{language}"
-    if key not in _MOCK_RESPONSES:
-        key = f"{hazard_code}_en"   # English fallback
-    mock_text = _MOCK_RESPONSES.get(key, _MOCK_RESPONSES.get("F_en", ""))
+    if key in _MOCK_RESPONSES:
+        mock_text = _MOCK_RESPONSES[key]
+    else:
+        from client.tier1_engine import render_tier1
+        t1 = render_tier1(hazard_code, role_flags, coordinates, language)
+        mock_text = t1["alert_text"]
+
 
     return {
         "alert_text":       mock_text,

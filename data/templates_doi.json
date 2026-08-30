@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "बाढ़ चेतावनी",
+    "tier1_general": "⚠️ बाढ़ चेतावनी — {area}: झटपट {destination} गी निकलो. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ बाढ़ चेतावनी — Dogri Farmers: Protect crops/livestock. झटपट {destination} गी निकलो.",
+    "tier1_elderly": "⚠️ बाढ़ चेतावनी — Dogri Seniors: Contact authorities. झटपट {destination} गी निकलो.",
+    "tier1_physically_challenged": "⚠️ बाढ़ चेतावनी — Dogri Accessibility Support Active. झटपट {destination} गी निकलो. 112 पर काल करो.",
+    "tier1_volunteers": "⚠️ बाढ़ चेतावनी — Dogri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ बाढ़ चेतावनी — {area}: झटपट {destination} गी निकलो. 112 पर काल करो."
+  },
+  "C": {
+    "title": "चक्रवात चेतावनी",
+    "tier1_general": "⚠️ चक्रवात चेतावनी — {area}: झटपट {destination} गी निकलो. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ चक्रवात चेतावनी — Dogri Farmers: Protect crops/livestock. झटपट {destination} गी निकलो.",
+    "tier1_elderly": "⚠️ चक्रवात चेतावनी — Dogri Seniors: Contact authorities. झटपट {destination} गी निकलो.",
+    "tier1_physically_challenged": "⚠️ चक्रवात चेतावनी — Dogri Accessibility Support Active. झटपट {destination} गी निकलो. 112 पर काल करो.",
+    "tier1_volunteers": "⚠️ चक्रवात चेतावनी — Dogri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ चक्रवात चेतावनी — {area}: झटपट {destination} गी निकलो. 112 पर काल करो."
+  },
+  "L": {
+    "title": "भूस्खलन चेतावनी",
+    "tier1_general": "⚠️ भूस्खलन चेतावनी — {area}: झटपट {destination} गी निकलो. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ भूस्खलन चेतावनी — Dogri Farmers: Protect crops/livestock. झटपट {destination} गी निकलो.",
+    "tier1_elderly": "⚠️ भूस्खलन चेतावनी — Dogri Seniors: Contact authorities. झटपट {destination} गी निकलो.",
+    "tier1_physically_challenged": "⚠️ भूस्खलन चेतावनी — Dogri Accessibility Support Active. झटपट {destination} गी निकलो. 112 पर काल करो.",
+    "tier1_volunteers": "⚠️ भूस्खलन चेतावनी — Dogri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ भूस्खलन चेतावनी — {area}: झटपट {destination} गी निकलो. 112 पर काल करो."
+  },
+  "W": {
+    "title": "जंगल दी अग्गी दी चेतावनी",
+    "tier1_general": "⚠️ जंगल दी अग्गी दी चेतावनी — {area}: झटपट {destination} गी निकलो. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ जंगल दी अग्गी दी चेतावनी — Dogri Farmers: Protect crops/livestock. झटपट {destination} गी निकलो.",
+    "tier1_elderly": "⚠️ जंगल दी अग्गी दी चेतावनी — Dogri Seniors: Contact authorities. झटपट {destination} गी निकलो.",
+    "tier1_physically_challenged": "⚠️ जंगल दी अग्गी दी चेतावनी — Dogri Accessibility Support Active. झटपट {destination} गी निकलो. 112 पर काल करो.",
+    "tier1_volunteers": "⚠️ जंगल दी अग्गी दी चेतावनी — Dogri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ जंगल दी अग्गी दी चेतावनी — {area}: झटपट {destination} गी निकलो. 112 पर काल करो."
+  },
+  "E": {
+    "title": "भुचाल चेतावनी",
+    "tier1_general": "⚠️ भुचाल चेतावनी — {area}: झटपट {destination} गी निकलो. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ भुचाल चेतावनी — Dogri Farmers: Protect crops/livestock. झटपट {destination} गी निकलो.",
+    "tier1_elderly": "⚠️ भुचाल चेतावनी — Dogri Seniors: Contact authorities. झटपट {destination} गी निकलो.",
+    "tier1_physically_challenged": "⚠️ भुचाल चेतावनी — Dogri Accessibility Support Active. झटपट {destination} गी निकलो. 112 पर काल करो.",
+    "tier1_volunteers": "⚠️ भुचाल चेतावनी — Dogri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ भुचाल चेतावनी — {area}: झटपट {destination} गी निकलो. 112 पर काल करो."
+  },
+  "T": {
+    "title": "सुनामी चेतावनी",
+    "tier1_general": "⚠️ सुनामी चेतावनी — {area}: झटपट {destination} गी निकलो. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ सुनामी चेतावनी — Dogri Farmers: Protect crops/livestock. झटपट {destination} गी निकलो.",
+    "tier1_elderly": "⚠️ सुनामी चेतावनी — Dogri Seniors: Contact authorities. झटपट {destination} गी निकलो.",
+    "tier1_physically_challenged": "⚠️ सुनामी चेतावनी — Dogri Accessibility Support Active. झटपट {destination} गी निकलो. 112 पर काल करो.",
+    "tier1_volunteers": "⚠️ सुनामी चेतावनी — Dogri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ सुनामी चेतावनी — {area}: झटपट {destination} गी निकलो. 112 पर काल करो."
+  },
+  "H": {
+    "title": "लू दी चेतावनी",
+    "tier1_general": "⚠️ लू दी चेतावनी — {area}: झटपट {destination} गी निकलो. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ लू दी चेतावनी — Dogri Farmers: Protect crops/livestock. झटपट {destination} गी निकलो.",
+    "tier1_elderly": "⚠️ लू दी चेतावनी — Dogri Seniors: Contact authorities. झटपट {destination} गी निकलो.",
+    "tier1_physically_challenged": "⚠️ लू दी चेतावनी — Dogri Accessibility Support Active. झटपट {destination} गी निकलो. 112 पर काल करो.",
+    "tier1_volunteers": "⚠️ लू दी चेतावनी — Dogri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ लू दी चेतावनी — {area}: झटपट {destination} गी निकलो. 112 पर काल करो."
+  }
+}

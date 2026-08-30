@@ -1013,3 +1013,50 @@ textarea {
 .hidden {
     display: none !important;
 }
+
+/* SOS & Chat premium extensions */
+@keyframes sos-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+    70% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.rescue-pulse-marker {
+    animation: sos-pulse 1.5s infinite;
+}
+
+#chat-messages-container::-webkit-scrollbar,
+#rescue-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+#chat-messages-container::-webkit-scrollbar-thumb,
+#rescue-list::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+}
+
+.waypoint-item:hover {
+    background: rgba(255,255,255,0.05) !important;
+    border-color: rgba(255,255,255,0.1) !important;
+}
+
+.waypoint-item.active {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+}
+
+/* Client Companion Web App Grid Layout */
+.client-dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 20px;
+    min-height: 600px;
+}
+
+@media (max-width: 1024px) {
+    .client-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+

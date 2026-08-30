@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "ବନ୍ୟା ସତର୍କତା",
+    "tier1_general": "⚠️ ବନ୍ୟା ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ବନ୍ୟା ସତର୍କତା — Odia Farmers: Protect crops/livestock. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_elderly": "⚠️ ବନ୍ୟା ସତର୍କତା — Odia Seniors: Contact authorities. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_physically_challenged": "⚠️ ବନ୍ୟା ସତର୍କତା — Odia Accessibility Support Active. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ.",
+    "tier1_volunteers": "⚠️ ବନ୍ୟା ସତର୍କତା — Odia Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ ବନ୍ୟା ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ."
+  },
+  "C": {
+    "title": "ବାତ୍ୟା ସତର୍କତା",
+    "tier1_general": "⚠️ ବାତ୍ୟା ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ବାତ୍ୟା ସତର୍କତା — Odia Farmers: Protect crops/livestock. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_elderly": "⚠️ ବାତ୍ୟା ସତର୍କତା — Odia Seniors: Contact authorities. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_physically_challenged": "⚠️ ବାତ୍ୟା ସତର୍କତା — Odia Accessibility Support Active. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ.",
+    "tier1_volunteers": "⚠️ ବାତ୍ୟା ସତର୍କତା — Odia Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ ବାତ୍ୟା ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ."
+  },
+  "L": {
+    "title": "ଭୂସ୍ଖଳନ ସତର୍କତା",
+    "tier1_general": "⚠️ ଭୂସ୍ଖଳନ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ଭୂସ୍ଖଳନ ସତର୍କତା — Odia Farmers: Protect crops/livestock. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_elderly": "⚠️ ଭୂସ୍ଖଳନ ସତର୍କତା — Odia Seniors: Contact authorities. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_physically_challenged": "⚠️ ଭୂସ୍ଖଳନ ସତର୍କତା — Odia Accessibility Support Active. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ.",
+    "tier1_volunteers": "⚠️ ଭୂସ୍ଖଳନ ସତର୍କତା — Odia Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ ଭୂସ୍ଖଳନ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ."
+  },
+  "W": {
+    "title": "ଦାବାନଳ ସତର୍କତା",
+    "tier1_general": "⚠️ ଦାବାନଳ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ଦାବାନଳ ସତର୍କତା — Odia Farmers: Protect crops/livestock. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_elderly": "⚠️ ଦାବାନଳ ସତର୍କତା — Odia Seniors: Contact authorities. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_physically_challenged": "⚠️ ଦାବାନଳ ସତର୍କତା — Odia Accessibility Support Active. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ.",
+    "tier1_volunteers": "⚠️ ଦାବାନଳ ସତର୍କତା — Odia Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ ଦାବାନଳ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ."
+  },
+  "E": {
+    "title": "ଭୂକମ୍ପ ସତର୍କତା",
+    "tier1_general": "⚠️ ଭୂକମ୍ପ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ଭୂକମ୍ପ ସତର୍କତା — Odia Farmers: Protect crops/livestock. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_elderly": "⚠️ ଭୂକମ୍ପ ସତର୍କତା — Odia Seniors: Contact authorities. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_physically_challenged": "⚠️ ଭୂକମ୍ପ ସତର୍କତା — Odia Accessibility Support Active. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ.",
+    "tier1_volunteers": "⚠️ ଭୂକମ୍ପ ସତର୍କତା — Odia Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ ଭୂକମ୍ପ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ."
+  },
+  "T": {
+    "title": "ସୁନାମି ସତର୍କତା",
+    "tier1_general": "⚠️ ସୁନାମି ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ସୁନାମି ସତର୍କତା — Odia Farmers: Protect crops/livestock. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_elderly": "⚠️ ସୁନାମି ସତର୍କତା — Odia Seniors: Contact authorities. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_physically_challenged": "⚠️ ସୁନାମି ସତର୍କତା — Odia Accessibility Support Active. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ.",
+    "tier1_volunteers": "⚠️ ସୁନାମି ସତର୍କତା — Odia Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ ସୁନାମି ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ."
+  },
+  "H": {
+    "title": "ଅଂଶୁଘାତ ସତର୍କତା",
+    "tier1_general": "⚠️ ଅଂଶୁଘାତ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ଅଂଶୁଘାତ ସତର୍କତା — Odia Farmers: Protect crops/livestock. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_elderly": "⚠️ ଅଂଶୁଘାତ ସତର୍କତା — Odia Seniors: Contact authorities. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ.",
+    "tier1_physically_challenged": "⚠️ ଅଂଶୁଘାତ ସତର୍କତା — Odia Accessibility Support Active. ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ.",
+    "tier1_volunteers": "⚠️ ଅଂଶୁଘାତ ସତର୍କତା — Odia Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ ଅଂଶୁଘାତ ସତର୍କତା — {area}: ତୁରନ୍ତ {destination} କୁ ଚାଲିଯାଆନ୍ତୁ. 112 କୁ କଲ୍ କରନ୍ତୁ."
+  }
+}

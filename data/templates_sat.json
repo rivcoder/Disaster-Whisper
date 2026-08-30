@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "ᱫᱟᱜ ᱵᱟᱰ ᱦᱚᱥᱤᱭᱟᱹᱨ",
+    "tier1_general": "⚠️ ᱫᱟᱜ ᱵᱟᱰ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ᱫᱟᱜ ᱵᱟᱰ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Farmers: Protect crops/livestock. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_elderly": "⚠️ ᱫᱟᱜ ᱵᱟᱰ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Seniors: Contact authorities. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_physically_challenged": "⚠️ ᱫᱟᱜ ᱵᱟᱰ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Accessibility Support Active. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ.",
+    "tier1_volunteers": "⚠️ ᱫᱟᱜ ᱵᱟᱰ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ ᱫᱟᱜ ᱵᱟᱰ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ."
+  },
+  "C": {
+    "title": "ᱦᱚᱭ ᱵᱟᱹᱨᱰᱩ ᱦᱚᱥᱤᱭᱟᱹᱨ",
+    "tier1_general": "⚠️ ᱦᱚᱭ ᱵᱟᱹᱨᱰᱩ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ᱦᱚᱭ ᱵᱟᱹᱨᱰᱩ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Farmers: Protect crops/livestock. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_elderly": "⚠️ ᱦᱚᱭ ᱵᱟᱹᱨᱰᱩ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Seniors: Contact authorities. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_physically_challenged": "⚠️ ᱦᱚᱭ ᱵᱟᱹᱨᱰᱩ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Accessibility Support Active. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ.",
+    "tier1_volunteers": "⚠️ ᱦᱚᱭ ᱵᱟᱹᱨᱰᱩ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ ᱦᱚᱭ ᱵᱟᱹᱨᱰᱩ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ."
+  },
+  "L": {
+    "title": "ᱦᱟᱥᱟ ᱫᱷᱟᱥᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ",
+    "tier1_general": "⚠️ ᱦᱟᱥᱟ ᱫᱷᱟᱥᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ᱦᱟᱥᱟ ᱫᱷᱟᱥᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Farmers: Protect crops/livestock. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_elderly": "⚠️ ᱦᱟᱥᱟ ᱫᱷᱟᱥᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Seniors: Contact authorities. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_physically_challenged": "⚠️ ᱦᱟᱥᱟ ᱫᱷᱟᱥᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Accessibility Support Active. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ.",
+    "tier1_volunteers": "⚠️ ᱦᱟᱥᱟ ᱫᱷᱟᱥᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ ᱦᱟᱥᱟ ᱫᱷᱟᱥᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ."
+  },
+  "W": {
+    "title": "ᱵᱤᱨ ᱥᱮᱸᱜᱮᱞ ᱦᱚᱥᱤᱭᱟᱹᱨ",
+    "tier1_general": "⚠️ ᱵᱤᱨ ᱥᱮᱸᱜᱮᱞ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ᱵᱤᱨ ᱥᱮᱸᱜᱮᱞ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Farmers: Protect crops/livestock. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_elderly": "⚠️ ᱵᱤᱨ ᱥᱮᱸᱜᱮᱞ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Seniors: Contact authorities. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_physically_challenged": "⚠️ ᱵᱤᱨ ᱥᱮᱸᱜᱮᱞ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Accessibility Support Active. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ.",
+    "tier1_volunteers": "⚠️ ᱵᱤᱨ ᱥᱮᱸᱜᱮᱞ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ ᱵᱤᱨ ᱥᱮᱸᱜᱮᱞ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ."
+  },
+  "E": {
+    "title": "ᱚᱛ ᱞᱟᱲᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ",
+    "tier1_general": "⚠️ ᱚᱛ ᱞᱟᱲᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ᱚᱛ ᱞᱟᱲᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Farmers: Protect crops/livestock. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_elderly": "⚠️ ᱚᱛ ᱞᱟᱲᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Seniors: Contact authorities. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_physically_challenged": "⚠️ ᱚᱛ ᱞᱟᱲᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Accessibility Support Active. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ.",
+    "tier1_volunteers": "⚠️ ᱚᱛ ᱞᱟᱲᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ ᱚᱛ ᱞᱟᱲᱟᱣ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ."
+  },
+  "T": {
+    "title": "ᱥᱩᱱᱟᱢᱤ ᱦᱚᱥᱤᱭᱟᱹᱨ",
+    "tier1_general": "⚠️ ᱥᱩᱱᱟᱢᱤ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ᱥᱩᱱᱟᱢᱤ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Farmers: Protect crops/livestock. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_elderly": "⚠️ ᱥᱩᱱᱟᱢᱤ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Seniors: Contact authorities. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_physically_challenged": "⚠️ ᱥᱩᱱᱟᱢᱤ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Accessibility Support Active. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ.",
+    "tier1_volunteers": "⚠️ ᱥᱩᱱᱟᱢᱤ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ ᱥᱩᱱᱟᱢᱤ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ."
+  },
+  "H": {
+    "title": "ᱞᱚᱞᱚ ᱦᱚᱭ ᱦᱚᱥᱤᱭᱟᱹᱨ",
+    "tier1_general": "⚠️ ᱞᱚᱞᱚ ᱦᱚᱭ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ᱞᱚᱞᱚ ᱦᱚᱭ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Farmers: Protect crops/livestock. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_elderly": "⚠️ ᱞᱚᱞᱚ ᱦᱚᱭ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Seniors: Contact authorities. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ.",
+    "tier1_physically_challenged": "⚠️ ᱞᱚᱞᱚ ᱦᱚᱭ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Accessibility Support Active. ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ.",
+    "tier1_volunteers": "⚠️ ᱞᱚᱞᱚ ᱦᱚᱭ ᱦᱚᱥᱤᱭᱟᱹᱨ — Santali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ ᱞᱚᱞᱚ ᱦᱚᱭ ᱦᱚᱥᱤᱭᱟᱹᱨ — {area}: ᱞᱚᱜᱚᱱ {destination} ᱛᱮ ᱥᱮᱱᱚᱜ ᱯᱮ. 112 ᱛᱮ ᱯᱷᱳᱱ ᱢᱮ."
+  }
+}

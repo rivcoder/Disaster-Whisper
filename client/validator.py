@@ -79,12 +79,12 @@ def _extract_candidate_locations(text: str) -> List[str]:
 def _location_in_database(loc_name: str, landmarks: list) -> bool:
     """
     Check if a location name matches any landmark (fuzzy, partial match).
-    A match requires the candidate to be a substring of a known landmark name
-    or vice versa (both normalised).
+    A match requires the candidate to be a substring of a known landmark name,
+    district, or vice versa (both normalised).
     """
     candidate = _normalise(loc_name)
     for lm in landmarks:
-        for field in ("name", "name_hi"):
+        for field in ("name", "name_hi", "district"):
             stored = _normalise(lm.get(field, ""))
             if candidate in stored or stored in candidate:
                 return True
@@ -158,18 +158,23 @@ def validate_alert_output(
     _NON_LOCATION_WORDS = {
         # Generic alert words
         "alert", "flood", "india", "call", "road", "move", "stay",
-        "north", "south", "east", "west", "please", "emergency",
+        "north", "south", "east", "west", "please", "emergency", "warning",
         # Common action / descriptive words mistaken for place names
         "residents", "proceed", "water", "levels", "ground", "higher",
         "evacuate", "evacuation", "contact", "assistance", "supplies",
         "route", "routes", "shelter", "use", "tuned", "updates",
-        "activated", "rising", "rapidly", "immediately",
+        "activated", "rising", "rapidly", "immediately", "extremely",
         # Institutional / broadcast names that are not landmarks
         "relief", "centre", "center", "agricultural", "elderly", "india",
         "radio", "workers", "community", "government", "district",
-        "volunteers", "help", "support", "department",
+        "volunteers", "help", "support", "department", "rescue", "report",
         # Directional/structural
         "low", "lying", "roads", "underpasses",
+        # Common verbs starting sentences
+        "avoid", "head", "go", "take", "do", "use", "severe", "senior",
+        # Environmental and general subject words
+        "citizens", "people", "families", "everyone", "winds", "speeds",
+        "rains", "river", "rivers", "flooding", "safety",
     }
 
     if language == "en":
@@ -177,30 +182,26 @@ def validate_alert_output(
         bad_locs   = []
         for cand in candidates:
             cand_lower = cand.lower().strip()
-            # Skip short words or known non-location words (each token of the candidate)
+            # Skip if the candidate name itself is short or is a known generic word
+            if len(cand) < 5 or cand_lower in _NON_LOCATION_WORDS:
+                continue
+            
             tokens = cand_lower.split()
-            if len(cand) < 5 or all(t in _NON_LOCATION_WORDS for t in tokens):
+            # If all tokens are non-location words, skip it (e.g. "Elderly Residents")
+            if all(t in _NON_LOCATION_WORDS for t in tokens):
                 continue
-            if any(t in _NON_LOCATION_WORDS for t in tokens):
-                continue
+                
+            # Perform location validation
             if not _location_in_database(cand, landmarks):
                 bad_locs.append(cand)
 
         if bad_locs:
             unknown_locations = bad_locs
-            warnings.append(
-                f"Possible invented locations not in offline DB: {bad_locs}. "
-                "Review before broadcasting."
+            issues.append(
+                f"Unverified or hallucinated locations detected: {bad_locs}. "
+                "Alert rejected — using template fallback."
             )
-            # Escalate to hard error only if clearly many invented locations (> 5)
-            if len(bad_locs) > 5:
-                issues.append(
-                    f"Too many unverified locations ({len(bad_locs)}): {bad_locs}. "
-                    "Alert rejected — using template fallback."
-                )
-                checks_failed.append("location_integrity")
-            else:
-                checks_passed.append("location_integrity")
+            checks_failed.append("location_integrity")
         else:
             checks_passed.append("location_integrity")
     else:

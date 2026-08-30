@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "बाढ़ि चेतावनी",
+    "tier1_general": "⚠️ बाढ़ि चेतावनी — {area}: तुरंत {destination} चलि जाउ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ बाढ़ि चेतावनी — Maithili Farmers: Protect crops/livestock. तुरंत {destination} चलि जाउ.",
+    "tier1_elderly": "⚠️ बाढ़ि चेतावनी — Maithili Seniors: Contact authorities. तुरंत {destination} चलि जाउ.",
+    "tier1_physically_challenged": "⚠️ बाढ़ि चेतावनी — Maithili Accessibility Support Active. तुरंत {destination} चलि जाउ. 112 पर कॉल करू.",
+    "tier1_volunteers": "⚠️ बाढ़ि चेतावनी — Maithili Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ बाढ़ि चेतावनी — {area}: तुरंत {destination} चलि जाउ. 112 पर कॉल करू."
+  },
+  "C": {
+    "title": "तुफान चेतावनी",
+    "tier1_general": "⚠️ तुफान चेतावनी — {area}: तुरंत {destination} चलि जाउ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ तुफान चेतावनी — Maithili Farmers: Protect crops/livestock. तुरंत {destination} चलि जाउ.",
+    "tier1_elderly": "⚠️ तुफान चेतावनी — Maithili Seniors: Contact authorities. तुरंत {destination} चलि जाउ.",
+    "tier1_physically_challenged": "⚠️ तुफान चेतावनी — Maithili Accessibility Support Active. तुरंत {destination} चलि जाउ. 112 पर कॉल करू.",
+    "tier1_volunteers": "⚠️ तुफान चेतावनी — Maithili Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ तुफान चेतावनी — {area}: तुरंत {destination} चलि जाउ. 112 पर कॉल करू."
+  },
+  "L": {
+    "title": "भूस्खलन चेतावनी",
+    "tier1_general": "⚠️ भूस्खलन चेतावनी — {area}: तुरंत {destination} चलि जाउ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ भूस्खलन चेतावनी — Maithili Farmers: Protect crops/livestock. तुरंत {destination} चलि जाउ.",
+    "tier1_elderly": "⚠️ भूस्खलन चेतावनी — Maithili Seniors: Contact authorities. तुरंत {destination} चलि जाउ.",
+    "tier1_physically_challenged": "⚠️ भूस्खलन चेतावनी — Maithili Accessibility Support Active. तुरंत {destination} चलि जाउ. 112 पर कॉल करू.",
+    "tier1_volunteers": "⚠️ भूस्खलन चेतावनी — Maithili Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ भूस्खलन चेतावनी — {area}: तुरंत {destination} चलि जाउ. 112 पर कॉल करू."
+  },
+  "W": {
+    "title": "वनक आगि चेतावनी",
+    "tier1_general": "⚠️ वनक आगि चेतावनी — {area}: तुरंत {destination} चलि जाउ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ वनक आगि चेतावनी — Maithili Farmers: Protect crops/livestock. तुरंत {destination} चलि जाउ.",
+    "tier1_elderly": "⚠️ वनक आगि चेतावनी — Maithili Seniors: Contact authorities. तुरंत {destination} चलि जाउ.",
+    "tier1_physically_challenged": "⚠️ वनक आगि चेतावनी — Maithili Accessibility Support Active. तुरंत {destination} चलि जाउ. 112 पर कॉल करू.",
+    "tier1_volunteers": "⚠️ वनक आगि चेतावनी — Maithili Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ वनक आगि चेतावनी — {area}: तुरंत {destination} चलि जाउ. 112 पर कॉल करू."
+  },
+  "E": {
+    "title": "भूकंप चेतावनी",
+    "tier1_general": "⚠️ भूकंप चेतावनी — {area}: तुरंत {destination} चलि जाउ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ भूकंप चेतावनी — Maithili Farmers: Protect crops/livestock. तुरंत {destination} चलि जाउ.",
+    "tier1_elderly": "⚠️ भूकंप चेतावनी — Maithili Seniors: Contact authorities. तुरंत {destination} चलि जाउ.",
+    "tier1_physically_challenged": "⚠️ भूकंप चेतावनी — Maithili Accessibility Support Active. तुरंत {destination} चलि जाउ. 112 पर कॉल करू.",
+    "tier1_volunteers": "⚠️ भूकंप चेतावनी — Maithili Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ भूकंप चेतावनी — {area}: तुरंत {destination} चलि जाउ. 112 पर कॉल करू."
+  },
+  "T": {
+    "title": "सुनामी चेतावनी",
+    "tier1_general": "⚠️ सुनामी चेतावनी — {area}: तुरंत {destination} चलि जाउ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ सुनामी चेतावनी — Maithili Farmers: Protect crops/livestock. तुरंत {destination} चलि जाउ.",
+    "tier1_elderly": "⚠️ सुनामी चेतावनी — Maithili Seniors: Contact authorities. तुरंत {destination} चलि जाउ.",
+    "tier1_physically_challenged": "⚠️ सुनामी चेतावनी — Maithili Accessibility Support Active. तुरंत {destination} चलि जाउ. 112 पर कॉल करू.",
+    "tier1_volunteers": "⚠️ सुनामी चेतावनी — Maithili Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ सुनामी चेतावनी — {area}: तुरंत {destination} चलि जाउ. 112 पर कॉल करू."
+  },
+  "H": {
+    "title": "लूक चेतावनी",
+    "tier1_general": "⚠️ लूक चेतावनी — {area}: तुरंत {destination} चलि जाउ. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ लूक चेतावनी — Maithili Farmers: Protect crops/livestock. तुरंत {destination} चलि जाउ.",
+    "tier1_elderly": "⚠️ लूक चेतावनी — Maithili Seniors: Contact authorities. तुरंत {destination} चलि जाउ.",
+    "tier1_physically_challenged": "⚠️ लूक चेतावनी — Maithili Accessibility Support Active. तुरंत {destination} चलि जाउ. 112 पर कॉल करू.",
+    "tier1_volunteers": "⚠️ लूक चेतावनी — Maithili Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ लूक चेतावनी — {area}: तुरंत {destination} चलि जाउ. 112 पर कॉल करू."
+  }
+}

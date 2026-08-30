@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "বন্যা সতর্কতা",
+    "tier1_general": "⚠️ বন্যা সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ বন্যা সতর্কতা — Bengali Farmers: Protect crops/livestock. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_elderly": "⚠️ বন্যা সতর্কতা — Bengali Seniors: Contact authorities. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_physically_challenged": "⚠️ বন্যা সতর্কতা — Bengali Accessibility Support Active. অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন.",
+    "tier1_volunteers": "⚠️ বন্যা সতর্কতা — Bengali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ বন্যা সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন."
+  },
+  "C": {
+    "title": "ঘূর্ণিঝড় সতর্কতা",
+    "tier1_general": "⚠️ ঘূর্ণিঝড় সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ঘূর্ণিঝড় সতর্কতা — Bengali Farmers: Protect crops/livestock. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_elderly": "⚠️ ঘূর্ণিঝড় সতর্কতা — Bengali Seniors: Contact authorities. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_physically_challenged": "⚠️ ঘূর্ণিঝড় সতর্কতা — Bengali Accessibility Support Active. অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন.",
+    "tier1_volunteers": "⚠️ ঘূর্ণিঝড় সতর্কতা — Bengali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ ঘূর্ণিঝড় সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন."
+  },
+  "L": {
+    "title": "ধস সতর্কতা",
+    "tier1_general": "⚠️ ধস সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ধস সতর্কতা — Bengali Farmers: Protect crops/livestock. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_elderly": "⚠️ ধস সতর্কতা — Bengali Seniors: Contact authorities. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_physically_challenged": "⚠️ ধস সতর্কতা — Bengali Accessibility Support Active. অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন.",
+    "tier1_volunteers": "⚠️ ধস সতর্কতা — Bengali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ ধস সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন."
+  },
+  "W": {
+    "title": "দাবানল সতর্কতা",
+    "tier1_general": "⚠️ দাবানল সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ দাবানল সতর্কতা — Bengali Farmers: Protect crops/livestock. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_elderly": "⚠️ দাবানল সতর্কতা — Bengali Seniors: Contact authorities. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_physically_challenged": "⚠️ দাবানল সতর্কতা — Bengali Accessibility Support Active. অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন.",
+    "tier1_volunteers": "⚠️ দাবানল সতর্কতা — Bengali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ দাবানল সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন."
+  },
+  "E": {
+    "title": "ভূমিকম্প সতর্কতা",
+    "tier1_general": "⚠️ ভূমিকম্প সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ভূমিকম্প সতর্কতা — Bengali Farmers: Protect crops/livestock. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_elderly": "⚠️ ভূমিকম্প সতর্কতা — Bengali Seniors: Contact authorities. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_physically_challenged": "⚠️ ভূমিকম্প সতর্কতা — Bengali Accessibility Support Active. অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন.",
+    "tier1_volunteers": "⚠️ ভূমিকম্প সতর্কতা — Bengali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ ভূমিকম্প সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন."
+  },
+  "T": {
+    "title": "সুনামি সতর্কতা",
+    "tier1_general": "⚠️ সুনামি সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ সুনামি সতর্কতা — Bengali Farmers: Protect crops/livestock. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_elderly": "⚠️ সুনামি সতর্কতা — Bengali Seniors: Contact authorities. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_physically_challenged": "⚠️ সুনামি সতর্কতা — Bengali Accessibility Support Active. অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন.",
+    "tier1_volunteers": "⚠️ সুনামি সতর্কতা — Bengali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ সুনামি সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন."
+  },
+  "H": {
+    "title": "তীব্র তাপ্রবাহ সতর্কতা",
+    "tier1_general": "⚠️ তীব্র তাপ্রবাহ সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ তীব্র তাপ্রবাহ সতর্কতা — Bengali Farmers: Protect crops/livestock. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_elderly": "⚠️ তীব্র তাপ্রবাহ সতর্কতা — Bengali Seniors: Contact authorities. অবিলম্বে {destination} এ চলে যান.",
+    "tier1_physically_challenged": "⚠️ তীব্র তাপ্রবাহ সতর্কতা — Bengali Accessibility Support Active. অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন.",
+    "tier1_volunteers": "⚠️ তীব্র তাপ্রবাহ সতর্কতা — Bengali Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ তীব্র তাপ্রবাহ সতর্কতা — {area}: অবিলম্বে {destination} এ চলে যান. 112 এ কল করুন."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "سیلاب ہوشیار",
+    "tier1_general": "⚠️ سیلاب ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ سیلاب ہوشیار — Kashmiri Farmers: Protect crops/livestock. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_elderly": "⚠️ سیلاب ہوشیار — Kashmiri Seniors: Contact authorities. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_physically_challenged": "⚠️ سیلاب ہوشیار — Kashmiri Accessibility Support Active. فوری طور پٹہ {destination} گژھیو. 112 کریو فون.",
+    "tier1_volunteers": "⚠️ سیلاب ہوشیار — Kashmiri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ سیلاب ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. 112 کریو فون."
+  },
+  "C": {
+    "title": "طوفان ہوشیار",
+    "tier1_general": "⚠️ طوفان ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ طوفان ہوشیار — Kashmiri Farmers: Protect crops/livestock. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_elderly": "⚠️ طوفان ہوشیار — Kashmiri Seniors: Contact authorities. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_physically_challenged": "⚠️ طوفان ہوشیار — Kashmiri Accessibility Support Active. فوری طور پٹہ {destination} گژھیو. 112 کریو فون.",
+    "tier1_volunteers": "⚠️ طوفان ہوشیار — Kashmiri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ طوفان ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. 112 کریو فون."
+  },
+  "L": {
+    "title": "پہاڑ پھٹنے کی وارننگ",
+    "tier1_general": "⚠️ پہاڑ پھٹنے کی وارننگ — {area}: فوری طور پٹہ {destination} گژھیو. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ پہاڑ پھٹنے کی وارننگ — Kashmiri Farmers: Protect crops/livestock. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_elderly": "⚠️ پہاڑ پھٹنے کی وارننگ — Kashmiri Seniors: Contact authorities. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_physically_challenged": "⚠️ پہاڑ پھٹنے کی وارننگ — Kashmiri Accessibility Support Active. فوری طور پٹہ {destination} گژھیو. 112 کریو فون.",
+    "tier1_volunteers": "⚠️ پہاڑ پھٹنے کی وارننگ — Kashmiri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ پہاڑ پھٹنے کی وارننگ — {area}: فوری طور پٹہ {destination} گژھیو. 112 کریو فون."
+  },
+  "W": {
+    "title": "جنگلی آگ ہوشیار",
+    "tier1_general": "⚠️ جنگلی آگ ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ جنگلی آگ ہوشیار — Kashmiri Farmers: Protect crops/livestock. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_elderly": "⚠️ جنگلی آگ ہوشیار — Kashmiri Seniors: Contact authorities. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_physically_challenged": "⚠️ جنگلی آگ ہوشیار — Kashmiri Accessibility Support Active. فوری طور پٹہ {destination} گژھیو. 112 کریو فون.",
+    "tier1_volunteers": "⚠️ جنگلی آگ ہوشیار — Kashmiri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ جنگلی آگ ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. 112 کریو فون."
+  },
+  "E": {
+    "title": "بھونچال ہوشیار",
+    "tier1_general": "⚠️ بھونچال ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ بھونچال ہوشیار — Kashmiri Farmers: Protect crops/livestock. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_elderly": "⚠️ بھونچال ہوشیار — Kashmiri Seniors: Contact authorities. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_physically_challenged": "⚠️ بھونچال ہوشیار — Kashmiri Accessibility Support Active. فوری طور پٹہ {destination} گژھیو. 112 کریو فون.",
+    "tier1_volunteers": "⚠️ بھونچال ہوشیار — Kashmiri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ بھونچال ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. 112 کریو فون."
+  },
+  "T": {
+    "title": "سونا می ہوشیار",
+    "tier1_general": "⚠️ سونا می ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ سونا می ہوشیار — Kashmiri Farmers: Protect crops/livestock. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_elderly": "⚠️ سونا می ہوشیار — Kashmiri Seniors: Contact authorities. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_physically_challenged": "⚠️ سونا می ہوشیار — Kashmiri Accessibility Support Active. فوری طور پٹہ {destination} گژھیو. 112 کریو فون.",
+    "tier1_volunteers": "⚠️ سونا می ہوشیار — Kashmiri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ سونا می ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. 112 کریو فون."
+  },
+  "H": {
+    "title": "لو ہوشیار",
+    "tier1_general": "⚠️ لو ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ لو ہوشیار — Kashmiri Farmers: Protect crops/livestock. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_elderly": "⚠️ لو ہوشیار — Kashmiri Seniors: Contact authorities. فوری طور پٹہ {destination} گژھیو.",
+    "tier1_physically_challenged": "⚠️ لو ہوشیار — Kashmiri Accessibility Support Active. فوری طور پٹہ {destination} گژھیو. 112 کریو فون.",
+    "tier1_volunteers": "⚠️ لو ہوشیار — Kashmiri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ لو ہوشیار — {area}: فوری طور پٹہ {destination} گژھیو. 112 کریو فون."
+  }
+}

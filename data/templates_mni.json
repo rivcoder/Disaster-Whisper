@@ -1,0 +1,72 @@
+{
+  "F": {
+    "title": "ঈশিং ইচাও চেকশিল থৌরাং",
+    "tier1_general": "⚠️ ঈশিং ইচাও চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ ঈশিং ইচাও চেকশিল থৌরাং — Manipuri Farmers: Protect crops/livestock. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_elderly": "⚠️ ঈশিং ইচাও চেকশিল থৌরাং — Manipuri Seniors: Contact authorities. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_physically_challenged": "⚠️ ঈশিং ইচাও চেকশিল থৌরাং — Manipuri Accessibility Support Active. থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ.",
+    "tier1_volunteers": "⚠️ ঈশিং ইচাও চেকশিল থৌরাং — Manipuri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent flood evacuation alert for {target_audience} located in {area}, Indore. The safe evacuation route passes through: {route_description}. The designated shelter is {destination}. Include the following verified information only — do not add or invent any locations, names, or routes not listed. Keep the message under 200 words. Begin with FLOOD ALERT.",
+    "fallback": "⚠️ ঈশিং ইচাও চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ."
+  },
+  "C": {
+    "title": "নুংশিৎ সিৎপা চেকশিল থৌরাং",
+    "tier1_general": "⚠️ নুংশিৎ সিৎপা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ নুংশিৎ সিৎপা চেকশিল থৌরাং — Manipuri Farmers: Protect crops/livestock. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_elderly": "⚠️ নুংশিৎ সিৎপা চেকশিল থৌরাং — Manipuri Seniors: Contact authorities. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_physically_challenged": "⚠️ নুংশিৎ সিৎপা চেকশিল থৌরাং — Manipuri Accessibility Support Active. থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ.",
+    "tier1_volunteers": "⚠️ নুংশিৎ সিৎপা চেকশিল থৌরাং — Manipuri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a clear, urgent cyclone shelter alert for {target_audience} in {area}, Indore. Nearest safe shelter: {destination}. Route: {route_description}. Include only verified locations. Under 200 words. Begin with CYCLONE ALERT.",
+    "fallback": "⚠️ নুংশিৎ সিৎপা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ."
+  },
+  "L": {
+    "title": "চিং মায় খাইনবা চেকশিল থৌরাং",
+    "tier1_general": "⚠️ চিং মায় খাইনবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ চিং মায় খাইনবা চেকশিল থৌরাং — Manipuri Farmers: Protect crops/livestock. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_elderly": "⚠️ চিং মায় খাইনবা চেকশিল থৌরাং — Manipuri Seniors: Contact authorities. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_physically_challenged": "⚠️ চিং মায় খাইনবা চেকশিল থৌরাং — Manipuri Accessibility Support Active. থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ.",
+    "tier1_volunteers": "⚠️ চিং মায় খাইনবা চেকশিল থৌরাং — Manipuri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a landslide evacuation alert for {target_audience} in {area}, Indore. Safe route (avoiding all slopes): {route_description}. Destination: {destination}. Use only verified locations. Under 200 words. Begin with LANDSLIDE ALERT.",
+    "fallback": "⚠️ চিং মায় খাইনবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ."
+  },
+  "W": {
+    "title": "উমং মৈ চাউবা চেকশিল থৌরাং",
+    "tier1_general": "⚠️ উমং মৈ চাউবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ উমং মৈ চাউবা চেকশিল থৌরাং — Manipuri Farmers: Protect crops/livestock. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_elderly": "⚠️ উমং মৈ চাউবা চেকশিল থৌরাং — Manipuri Seniors: Contact authorities. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_physically_challenged": "⚠️ উমং মৈ চাউবা চেকশিল থৌরাং — Manipuri Accessibility Support Active. থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ.",
+    "tier1_volunteers": "⚠️ উমং মৈ চাউবা চেকশিল থৌরাং — Manipuri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a wildfire evacuation alert for {target_audience} in {area}, Indore. Crosswind evacuation route: {route_description}. Destination: {destination}. Verified locations only. Under 200 words. Begin with WILDFIRE ALERT.",
+    "fallback": "⚠️ উমং মৈ চাউবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ."
+  },
+  "E": {
+    "title": "লৈবাক নিংবা চেকশিল থৌরাং",
+    "tier1_general": "⚠️ লৈবাক নিংবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ লৈবাক নিংবা চেকশিল থৌরাং — Manipuri Farmers: Protect crops/livestock. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_elderly": "⚠️ লৈবাক নিংবা চেকশিল থৌরাং — Manipuri Seniors: Contact authorities. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_physically_challenged": "⚠️ লৈবাক নিংবা চেকশিল থৌরাং — Manipuri Accessibility Support Active. থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ.",
+    "tier1_volunteers": "⚠️ লৈবাক নিংবা চেকশিল থৌরাং — Manipuri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate an earthquake safety alert for {target_audience} in {area}, Indore. Post-quake muster point: {destination}. Route (avoiding damaged structures): {route_description}. Verified locations only. Under 200 words. Begin with EARTHQUAKE ALERT.",
+    "fallback": "⚠️ লৈবাক নিংবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ."
+  },
+  "T": {
+    "title": "সুনামি চেকশিল থৌরাং",
+    "tier1_general": "⚠️ সুনামি চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ সুনামি চেকশিল থৌরাং — Manipuri Farmers: Protect crops/livestock. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_elderly": "⚠️ সুনামি চেকশিল থৌরাং — Manipuri Seniors: Contact authorities. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_physically_challenged": "⚠️ সুনামি চেকশিল থৌরাং — Manipuri Accessibility Support Active. থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ.",
+    "tier1_volunteers": "⚠️ সুনামি চেকশিল থৌরাং — Manipuri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a tsunami evacuation alert for {target_audience} in {area}. Inland evacuation route: {route_description}. High-ground destination: {destination}. Verified locations only. Under 200 words. Begin with TSUNAMI ALERT.",
+    "fallback": "⚠️ সুনামি চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ."
+  },
+  "H": {
+    "title": "অশা চাউবা চেকশিল থৌরাং",
+    "tier1_general": "⚠️ অশা চাউবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. Avoid danger zones.",
+    "tier1_agricultural": "⚠️ অশা চাউবা চেকশিল থৌরাং — Manipuri Farmers: Protect crops/livestock. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_elderly": "⚠️ অশা চাউবা চেকশিল থৌরাং — Manipuri Seniors: Contact authorities. থুনা {destination} দা ফিশাফম লৌখিনু.",
+    "tier1_physically_challenged": "⚠️ অশা চাউবা চেকশিল থৌরাং — Manipuri Accessibility Support Active. থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ.",
+    "tier1_volunteers": "⚠️ অশা চাউবা চেকশিল থৌরাং — Manipuri Responders: Mobilize immediately to {destination}.",
+    "tier2_prompt": "You are an official emergency response assistant for the Government of India. Generate a heatwave safety alert for {target_audience} in {area}, Indore. Cooling centre: {destination}. Route: {route_description}. Include heat safety tips. Verified locations only. Under 200 words. Begin with HEATWAVE ALERT.",
+    "fallback": "⚠️ অশা চাউবা চেকশিল থৌরাং — {area}: থুনা {destination} দা ফিশাফম লৌখিনু. 112 দা ফোল থৌ."
+  }
+}

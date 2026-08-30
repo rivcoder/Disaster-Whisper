@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="manifest" href="/manifest.json">
+
     <style>
         .home-container {
             max-width: 900px;
@@ -141,7 +143,7 @@
                 <div class="card-icon">📱</div>
                 <div class="card-title">Smartphone Companion</div>
                 <p class="card-desc">
-                    Simulate edge smartphones. Receive alerts offline via clipboard bridge or wireless airwaves. Run RAM tiering, deterministic rendering, or on-device SLM synthesis.
+                    Simulate edge smartphones. Receive alerts offline via clipboard bridge or wireless airwaves. Run local SLM synthesis, send SOS rescue signals, and explore nearby emergency support.
                 </p>
                 <div class="card-action">Open Mobile Emulator →</div>
             </a>
@@ -151,5 +153,14 @@
             Prepared for the Indian Space Research Organisation (ISRO) Publication Review &copy; 2026
         </footer>
     </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered successfully!', reg))
+                    .catch(err => console.error('Service Worker registration failed:', err));
+            });
+        }
+    </script>
 </body>
 </html>
