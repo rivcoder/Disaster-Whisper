@@ -105,8 +105,9 @@ def build_route_description(coordinates: List[Coord], language: str = "en") -> s
     """
     parts = []
     for i, coord in enumerate(coordinates):
-        lm    = find_nearest_landmark(coord)
-        label = lm.get("name_hi" if language == "hi" else "name", lm["name"])
+        lm = find_nearest_landmark(coord)
+        devnagari_langs = ["hi", "mr", "sa", "doi", "kok", "mai", "ne", "sd"]
+        label = lm.get("name_hi" if language in devnagari_langs else "name", lm["name"])
         parts.append(f"({i+1}) {label}")
     return " → ".join(parts)
 

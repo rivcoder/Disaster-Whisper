@@ -236,7 +236,8 @@ def _run_real_inference(prompt: str, model_id: str) -> str:
 
     use_4bit = False
     try:
-        import bitsandbytes  # noqa
+        import importlib
+        importlib.import_module("bitsandbytes")
         from transformers import BitsAndBytesConfig
         bnb_config = BitsAndBytesConfig(
             load_in_4bit=True,
@@ -402,9 +403,65 @@ def render_tier2(
     if key in _MOCK_RESPONSES:
         mock_text = _MOCK_RESPONSES[key]
     else:
-        from client.tier1_engine import render_tier1
-        t1 = render_tier1(hazard_code, role_flags, coordinates, language)
-        mock_text = t1["alert_text"]
+        from client.tier1_engine import _get_templates, find_nearest_landmark
+        
+        t = _get_templates(language)
+        hz_templates = t.get(hazard_code, t.get("F"))
+        
+        start_lm = find_nearest_landmark(coordinates[0], prefer_safe_zone=False)
+        end_lm = find_nearest_landmark(coordinates[-1], prefer_safe_zone=True)
+        
+        # Use Devnagari script for all Devnagari languages to ensure native voice synthesis
+        devnagari_langs = ["hi", "mr", "sa", "doi", "kok", "mai", "ne", "sd"]
+        name_key = "name_hi" if language in devnagari_langs else "name"
+        area = start_lm.get(name_key, start_lm["name"])
+        destination = end_lm.get(name_key, end_lm["name"])
+
+        
+        route_nodes = []
+        for coord in coordinates:
+            lm = find_nearest_landmark(coord)
+            label = lm.get(name_key, lm["name"])
+            route_nodes.append(label)
+        route_str = " → ".join(route_nodes)
+        
+        title_local = hz_templates.get("title", "ALERT")
+        avoid_danger_local = hz_templates.get("avoid_danger", "Avoid danger zones.")
+        farmers_local = hz_templates.get("farmers", "")
+        seniors_local = hz_templates.get("seniors", "")
+        accessible_local = hz_templates.get("accessible", "")
+        volunteers_local = hz_templates.get("volunteers", "")
+        call_local = hz_templates.get("call", "Call 112.")
+        
+        evac_instr = hz_templates.get("fallback", "").format(area=area, destination=destination)
+        
+        route_header_map = {
+            "en": "Designated Evacuation Corridor",
+            "hi": "निर्धारित निकासी मार्ग",
+            "mr": "निर्धारित स्थलांतर मार्ग",
+            "bn": "নির্ধারিত উচ্ছেদ রুট",
+            "gu": "નિયુક્ત સ્થળાંતર માર્ગ",
+            "ta": "நியமிக்கப்பட்ட வெளியேற்ற பாதை",
+            "te": "నిర్దేశిత తరలింపు మార్గం",
+            "ur": "مقررہ انخلا کا راستہ"
+        }
+        r_head = route_header_map.get(language, "Designated Evacuation Corridor")
+        
+        parts = [evac_instr]
+        if route_str:
+            parts.append(f"{r_head}: {route_str}.")
+        
+        if role_flags & 1:
+            parts.append(farmers_local.format(destination=destination))
+        if role_flags & 2:
+            parts.append(seniors_local.format(destination=destination))
+        if role_flags & 4:
+            parts.append(accessible_local.format(destination=destination))
+        if role_flags & 8:
+            parts.append(volunteers_local.format(destination=destination))
+            
+        mock_text = " ".join(parts)
+
 
 
     return {

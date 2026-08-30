@@ -462,12 +462,19 @@
         }
 
 
-        // Nearby Help Directory
-        const NEARBY_SERVICES = [
-            { name: "Indore General Hospital", type: "Hospital", coords: [22.7212, 75.8601], distance: "0.4 km", icon: "🏥" },
-            { name: "LIG Square Police Station", type: "Police", coords: [22.7328, 75.8765], distance: "2.3 km", icon: "👮" },
-            { name: "Apollo Medics Pharmacy", type: "Pharmacy", coords: [22.7188, 75.8552], distance: "0.3 km", icon: "💊" }
-        ];
+        // Haversine formula to compute distance in km between two GPS coordinates
+        function getHaversineDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Earth's radius in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
 
         document.addEventListener('DOMContentLoaded', () => {
             loadQueue();
@@ -488,6 +495,7 @@
                     userLatitude = pos.coords.latitude;
                     userLongitude = pos.coords.longitude;
                     document.getElementById('user-coords-lbl').innerText = `GPS: [${userLatitude.toFixed(4)}, ${userLongitude.toFixed(4)}]`;
+                    renderNearbyServices(); // refresh directory for real coordinate
                 }, err => {
                     console.log("Using default simulated Indore GPS coordinates.");
                 });
@@ -503,10 +511,57 @@
             }
         }
 
-        function renderNearbyServices() {
+        async function renderNearbyServices() {
             const listEl = document.getElementById('nearby-services-list');
+            if (!listEl) return;
+            
+            listEl.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); text-align:center; padding:10px;">🔍 Querying OpenStreetMap Overpass for emergency nodes...</div>';
+
+            const defaultMock = [
+                { name: "Indore General Hospital", type: "Hospital", coords: [22.7212, 75.8601], icon: "🏥" },
+                { name: "LIG Square Police Station", type: "Police", coords: [22.7328, 75.8765], icon: "👮" },
+                { name: "Apollo Medics Pharmacy", type: "Pharmacy", coords: [22.7188, 75.8552], icon: "💊" }
+            ];
+
+            let nodes = [];
+            try {
+                // Query OpenStreetMap database via Overpass API for amenities in 5km radius
+                const query = `[out:json][timeout:15];(node["amenity"="hospital"](around:5000,${userLatitude},${userLongitude});node["amenity"="police"](around:5000,${userLatitude},${userLongitude});node["amenity"="pharmacy"](around:5000,${userLatitude},${userLongitude}););out body;`;
+                const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.elements && data.elements.length > 0) {
+                        data.elements.forEach(el => {
+                            const type = el.tags.amenity;
+                            let icon = "🏥";
+                            if (type === "police") icon = "👮";
+                            if (type === "pharmacy") icon = "💊";
+
+                            nodes.push({
+                                name: el.tags.name || `${type.charAt(0).toUpperCase() + type.slice(1)} Node`,
+                                type: type.charAt(0).toUpperCase() + type.slice(1),
+                                coords: [el.lat, el.lon],
+                                icon: icon
+                            });
+                        });
+                    }
+                }
+            } catch (err) {
+                console.warn("Overpass API request failed. Reverting to offline mock defaults.");
+            }
+
+            if (nodes.length === 0) {
+                nodes = defaultMock;
+            }
+
+            nodes.forEach(node => {
+                node.distance = getHaversineDistance(userLatitude, userLongitude, node.coords[0], node.coords[1]);
+            });
+            nodes.sort((a, b) => a.distance - b.distance);
+
             listEl.innerHTML = '';
-            NEARBY_SERVICES.forEach(service => {
+            nodes.slice(0, 5).forEach(service => {
                 const row = document.createElement('div');
                 row.style.background = 'rgba(255,255,255,0.02)';
                 row.style.border = '1px solid var(--bg-card-border)';
@@ -517,6 +572,7 @@
                 row.style.alignItems = 'center';
                 row.style.cursor = 'pointer';
                 row.style.transition = 'all 0.2s';
+                row.style.marginTop = '6px';
                 
                 row.innerHTML = `
                     <div style="display:flex; align-items:center; gap:8px;">
@@ -526,10 +582,10 @@
                             <span style="font-size:0.65rem; color:var(--text-muted);">${service.type}</span>
                         </div>
                     </div>
-                    <span style="font-size:0.75rem; color:var(--accent-emerald); font-weight:bold;">${service.distance}</span>
+                    <span style="font-size:0.75rem; color:var(--accent-emerald); font-weight:bold;">${service.distance.toFixed(1)} km</span>
                 `;
                 row.onclick = () => {
-                    alert(`Emergency Node: ${service.name}\nType: ${service.type}\nLocation: [${service.coords[0]}, ${service.coords[1]}]\nEvacuation Direction: Head towards safest corridor.`);
+                    alert(`Emergency Node: ${service.name}\nType: ${service.type}\nLocation: [${service.coords[0].toFixed(4)}, ${service.coords[1].toFixed(4)}]\nDistance: ${service.distance.toFixed(2)} km`);
                 };
                 listEl.appendChild(row);
             });
@@ -654,6 +710,99 @@
                 sosQueue.push(chatPayload);
                 saveQueue();
                 processQueue();
+            };
+
+            // TTS Read Aloud Button
+            document.getElementById('tts-btn').onclick = () => {
+                const text = document.getElementById('render-alert-text').innerText;
+                if (!text || text === 'Waiting for alert source...' || text === 'Input alert above and decode to synthesize rich guidance logs.') {
+                    alert("No alert message to read aloud.");
+                    return;
+                }
+
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel(); // stop current reading
+
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    const selectedLang = document.getElementById('language-select').value;
+                    
+                    const langMap = {
+                        "en": "en-IN",
+                        "as": "as-IN",
+                        "bn": "bn-IN",
+                        "brx": "brx-IN",
+                        "doi": "doi-IN",
+                        "gu": "gu-IN",
+                        "hi": "hi-IN",
+                        "kn": "kn-IN",
+                        "ks": "ks-IN",
+                        "kok": "kok-IN",
+                        "mai": "mai-IN",
+                        "ml": "ml-IN",
+                        "mni": "mni-IN",
+                        "mr": "mr-IN",
+                        "ne": "ne-IN",
+                        "or": "or-IN",
+                        "pa": "pa-IN",
+                        "sa": "sa-IN",
+                        "sat": "sat-IN",
+                        "sd": "sd-IN",
+                        "ta": "ta-IN",
+                        "te": "te-IN",
+                        "ur": "ur-IN"
+                    };
+                    
+                    const targetLangCode = langMap[selectedLang] || "en-IN";
+                    utterance.lang = targetLangCode;
+
+                    // Try to find a voice that exactly matches the language prefix (e.g., "hi", "ta", etc.)
+                    const voices = window.speechSynthesis.getVoices();
+                    const targetPrefix = targetLangCode.split('-')[0].toLowerCase();
+                    let matchingVoice = voices.find(v => v.lang.toLowerCase().startsWith(targetPrefix));
+                    
+                    if (!matchingVoice) {
+                        // Fallback logic: Devnagari script languages can use the Hindi voice
+                        const devnagariLangs = ["hi", "mr", "sa", "doi", "kok", "mai", "ne", "sd"];
+                        if (devnagariLangs.includes(selectedLang)) {
+                            matchingVoice = voices.find(v => v.lang.toLowerCase().startsWith("hi"));
+                            if (matchingVoice) {
+                                utterance.lang = "hi-IN";
+                            }
+                        }
+                    }
+                    
+                    if (!matchingVoice) {
+                        // General fallback to any Indian English or Indian voice
+                        matchingVoice = voices.find(v => v.lang.toLowerCase().includes("in")) || 
+                                        voices.find(v => v.lang.toLowerCase().startsWith("en"));
+                    }
+
+                    if (matchingVoice) {
+                        utterance.voice = matchingVoice;
+                    }
+
+                    
+                    const btn = document.getElementById('tts-btn');
+                    btn.innerText = '🔊 Playing Audio...';
+                    btn.style.color = 'var(--accent-emerald)';
+                    btn.style.borderColor = 'var(--accent-emerald)';
+
+                    utterance.onend = () => {
+                        btn.innerText = '🔊 Read Aloud (Offline Voice)';
+                        btn.style.color = '';
+                        btn.style.borderColor = '';
+                    };
+
+                    utterance.onerror = () => {
+                        btn.innerText = '🔊 Read Aloud (Offline Voice)';
+                        btn.style.color = '';
+                        btn.style.borderColor = '';
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    alert("Text-to-speech synthesis is not supported on this browser.");
+                }
             };
         }
 
