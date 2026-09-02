@@ -2,7 +2,7 @@
   <img src="https://img.icons8.com/?size=256&id=V6h88zP9F9N3&format=png" alt="Disaster-Whisper Logo" width="120" />
   <h1>Disaster-Whisper</h1>
   <p><strong>Offline-First, Asymmetric Emergency Communication & Alerting System</strong></p>
-  <p><i>Built for the Smart India Hackathon (SIH)</i></p>
+  <p><i>A research backed proof of concept demostrating our proposed contribution to government disaster management developed as a prototype for SIH.</i></p>
 </div>
 
 <hr />
@@ -13,13 +13,13 @@
 
 During major disasters (floods, cyclones, earthquakes), internet connectivity is the first infrastructure to collapse. Disaster-Whisper solves this by compressing complex multi-point evacuation routes and targeted disaster metadata into a **sub-30-byte micro-payload**. This tiny payload is broadcasted over resilient, low-bandwidth airwaves and reconstructed on edge devices (smartphones) into rich, context-aware, and localized alerts—all without requiring an active internet connection.
 
-## ✨ Key Innovation: The Asymmetric Pipeline
+## Key Innovation: The Asymmetric Pipeline
 
 Our system leverages an **Asymmetric Computational Model**:
 - **Heavy Server (Command Center):** Performs intensive geospatial calculations, OpenStreetMap routing, Ramer-Douglas-Peucker (RDP) simplification, and ultra-dense binary compression.
 - **Lightweight Edge (Citizen Smartphone):** Receives the micro-payload, decodes it instantly, and uses **Zero-Dependency Deterministic Templates** to synthesize critical guidance logs on the device locally.
 
-## 🚀 Features
+## Features
 
 *   **Geodetic Compression Codec:** Compresses Google Maps/OSM polylines to 4-decimal precision (~11m accuracy), squeezing up to 5 waypoints, hazard type, and target audience into just 28 characters.
 *   **Fully Offline Alerts:** The client app translates the cryptic payload into a rich warning using an offline template engine—no API calls needed.
@@ -27,7 +27,7 @@ Our system leverages an **Asymmetric Computational Model**:
 *   **Hands-Free Automation:** Client dashboard auto-scans for new broadcasts, auto-decodes the payload, and automatically triggers an offline Text-to-Speech (TTS) engine to read the warning aloud.
 *   **Instant SOS Uplink:** A one-tap emergency beacon that cues loud localized sirens, vibrates the device, and queues a geolocation ping for rescuers when a cellular packet window opens.
 
-## 🏗️ System Architecture
+## System Architecture
 
 ### 1. Server-Side Pipeline (Government Command Station)
 1. **Route Optimizer:** Takes a set of street-level waypoints, validates bounds, and simplifies the corridor.
@@ -39,7 +39,7 @@ Our system leverages an **Asymmetric Computational Model**:
 2. **Decoder & Integrity Gate:** Verifies the XOR checksum. If corrupted by signal interference, the payload is rejected.
 3. **Template Engine:** Expands the tiny payload into a localized, human-readable evacuation plan.
 
-## 💻 Tech Stack
+## Tech Stack
 
 *   **Backend:** Python 3.13, Flask
 *   **Frontend:** Vanilla JavaScript, CSS3 (Glassmorphism UI), HTML5
@@ -47,7 +47,7 @@ Our system leverages an **Asymmetric Computational Model**:
 *   **APIs/Libraries:** Overpass API (Offline Hospital/Police node lookup), `deep-translator`
 *   **Architecture:** Progressive Web App (PWA) with Service Worker caching
 
-## 🛠️ Setup & Installation
+## Setup & Installation
 
 Create a Python virtual environment and install the required dependencies:
 
@@ -69,13 +69,13 @@ pip install -r requirements.txt
 pip install deep-translator
 ```
 
-## 🧪 Testing & Verification
+## Testing & Verification
 We have built a robust automated test suite covering the entire pipeline.
 ```bash
 python -m pytest tests/ -v
 ```
 
-## 🎮 Running the SIH Demo
+## Running the SIH Prototype
 
 **Step 1: Start the Centralized Server**
 ```bash
