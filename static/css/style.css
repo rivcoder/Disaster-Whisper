@@ -353,6 +353,14 @@ textarea {
     z-index: 1;
 }
 
+/* Dark mode conversion for OSM map tiles */
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
 .map-hint {
     font-size: 0.75rem;
     color: var(--text-secondary);

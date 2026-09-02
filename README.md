@@ -1,130 +1,94 @@
-# Disaster-Whisper: Asymmetric Emergency Communication & Alerting System
+<div align="center">
+  <img src="https://img.icons8.com/?size=256&id=V6h88zP9F9N3&format=png" alt="Disaster-Whisper Logo" width="120" />
+  <h1>Disaster-Whisper</h1>
+  <p><strong>Offline-First, Asymmetric Emergency Communication & Alerting System</strong></p>
+  <p><i>Built for the Smart India Hackathon (SIH)</i></p>
+</div>
 
-Disaster-Whisper is a publication-quality emergency communication framework designed to operate over congestion-prone or completely offline channels (e.g., SMS, Cell Broadcast, LoRa, BLE Mesh). The system optimizes and compresses complex multi-point evacuation routes and disaster metadata into compact sub-32-byte payloads, reconstructing rich, context-aware alerts on-device utilizing an Asymmetric Capability Model.
+<hr />
 
----
+## 📖 Overview
+
+**Disaster-Whisper** is a publication-quality emergency communication framework designed to operate over heavily congested or completely offline communication channels (e.g., SMS, Cell Broadcast, LoRa, BLE Mesh). 
+
+During major disasters (floods, cyclones, earthquakes), internet connectivity is the first infrastructure to collapse. Disaster-Whisper solves this by compressing complex multi-point evacuation routes and targeted disaster metadata into a **sub-30-byte micro-payload**. This tiny payload is broadcasted over resilient, low-bandwidth airwaves and reconstructed on edge devices (smartphones) into rich, context-aware, and localized alerts—all without requiring an active internet connection.
+
+## ✨ Key Innovation: The Asymmetric Pipeline
+
+Our system leverages an **Asymmetric Computational Model**:
+- **Heavy Server (Command Center):** Performs intensive geospatial calculations, OpenStreetMap routing, Ramer-Douglas-Peucker (RDP) simplification, and ultra-dense binary compression.
+- **Lightweight Edge (Citizen Smartphone):** Receives the micro-payload, decodes it instantly, and uses **Zero-Dependency Deterministic Templates** to synthesize critical guidance logs on the device locally.
+
+## 🚀 Features
+
+*   **Geodetic Compression Codec:** Compresses Google Maps/OSM polylines to 4-decimal precision (~11m accuracy), squeezing up to 5 waypoints, hazard type, and target audience into just 28 characters.
+*   **Fully Offline Alerts:** The client app translates the cryptic payload into a rich warning using an offline template engine—no API calls needed.
+*   **Real-time Auto-Translation:** HQ Broadcast messages are instantly translated into the user's preferred local language (Hindi, Tamil, Gujarati, etc.) using integrated `deep-translator`.
+*   **Hands-Free Automation:** Client dashboard auto-scans for new broadcasts, auto-decodes the payload, and automatically triggers an offline Text-to-Speech (TTS) engine to read the warning aloud.
+*   **Instant SOS Uplink:** A one-tap emergency beacon that cues loud localized sirens, vibrates the device, and queues a geolocation ping for rescuers when a cellular packet window opens.
 
 ## 🏗️ System Architecture
 
-The architecture is divided into two distinct operational phases:
+### 1. Server-Side Pipeline (Government Command Station)
+1. **Route Optimizer:** Takes a set of street-level waypoints, validates bounds, and simplifies the corridor.
+2. **Payload Encoder:** Compresses route coordinates, hazard classification, and targeted audience groups into a 4-part compact string layout: `[Hazard_Code][Role_Flag][Polyline_Payload][Checksum]`
+3. **Broadcaster:** Dispatches the encrypted payload alongside an optional fallback plain-text message.
 
-### 1. Server-Side Pipeline (Centralized Broadcast Stations)
-*   **Route Optimizer:** Takes a dense GPS track or set of street-level waypoints, validates bounds (India territory), and simplifies it using the Ramer-Douglas-Peucker (RDP) algorithm to a target (typically 5 points) evacuation corridor.
-*   **Payload Encoder:** Compresses route coordinates, hazard classification, and targeted audience groups into a 4-part compact string layout:
-    ```
-    Payload = [Hazard_Code] [Role_Flag] [Polyline_Payload] [Checksum]
-    ```
-    *   **Hazard Code (1 Byte):** Maps disaster categories (`F` = Flood, `C` = Cyclone, `L` = Landslide, `W` = Wildfire, `E` = Earthquake, `T` = Tsunami, `H` = Heatwave).
-    *   **Role Flag (1 Byte):** 4-bit bitmask mapped to ASCII hex representation ('0'-'F') identifying vulnerable target groups (Agricultural Workers, Elderly, Physically Challenged, Volunteer Responders).
-    *   **Polyline Payload (16–29 Bytes):** Modified Google maps polyline algorithm scale-adjusted to 4-decimal precision (±11m grid resolution), delta-encoded, zigzag integer converted, and packed into Base64-URL characters.
-    *   **Checksum (1 Byte):** Custom printable XOR checksum validating channel transmission integrity without network retransmission support.
-*   **Payload Assembler:** Constructs the compact string and calculates the character budget to guarantee it fits within the 160-character SMS limit with fallback text.
+### 2. Client-Side Pipeline (Citizen PWA)
+1. **Signal Ingestion:** Auto-scans local airwaves or parses SMS clipboard segments to circumvent OS sandboxes.
+2. **Decoder & Integrity Gate:** Verifies the XOR checksum. If corrupted by signal interference, the payload is rejected.
+3. **Template Engine:** Expands the tiny payload into a localized, human-readable evacuation plan.
 
-### 2. Client-Side Pipeline (Edge Smartphones & Feature Phones)
-*   **Deterministic Template Engine:** Enforces Plaintext Fallback & Template-based slot filling. Completely offline and deterministic (zero-dependency).
-*   **Pathway A Ingestion Bridge:** Ingests alerts via clipboard copy-detection bridge to circumvent restrictive OS sandboxes.
+## 💻 Tech Stack
 
----
+*   **Backend:** Python 3.13, Flask
+*   **Frontend:** Vanilla JavaScript, CSS3 (Glassmorphism UI), HTML5
+*   **Mapping:** Leaflet.js with OpenStreetMap (OSM) Tiles
+*   **APIs/Libraries:** Overpass API (Offline Hospital/Police node lookup), `deep-translator`
+*   **Architecture:** Progressive Web App (PWA) with Service Worker caching
 
-## 📁 Repository Structure
+## 🛠️ Setup & Installation
 
-```
-Disaster-Whisper/
-│
-├── codec/                      # Compression & Decompression logic
-│   ├── __init__.py
-│   ├── hazard.py               # Hazard type definitions
-│   ├── role.py                 # Role bitmask definitions
-│   ├── polyline.py             # Delta, zigzag, & base64 coordinate compression
-│   ├── checksum.py             # XOR checksum logic
-│   └── payload.py              # E2E payload packer/unpacker
-│
-├── server/                     # Server-side components
-│   ├── __init__.py
-│   ├── route_optimizer.py      # Route validation & RDP simplification
-│   └── alert_generator.py      # Audited payload compiler
-│
-├── client/                     # Client-side edge components
-│   ├── __init__.py
-│   ├── tier1_engine.py         # Slot-fill template alert renderer
-│   ├── validator.py            # Local landmark validation gate
-│   └── clipboard_bridge.py     # Clipboard bridge receiver (Pathway A)
-│
-├── data/                       # Offline JSON registries
-│   ├── hazard_registry.json
-│   ├── role_registry.json
-│   ├── landmarks.json          # Indore locality & coordinates registry
-│   ├── templates_en.json       # English alerting templates
-│   └── templates_hi.json       # Hindi alerting templates
-│
-├── tests/                      # Unit & integration test suites
-│   ├── test_codec.py
-│   ├── test_server.py
-│   └── test_client.py
-│
-├── templates/                  # Flask Web HTML Dashboard
-│   └── index.html
-│
-├── static/                     # Assets for Leaflet & CSS/JS controllers
-│   ├── css/style.css
-│   └── js/app.js
-│
-├── app.py                      # Flask web demo app
-├── demo.py                     # CLI end-to-end simulation script
-├── setup_model.py              # Utility to download/cache SLMs locally
-├── requirements.txt            # Package dependencies
-└── LICENSE
-```
+Create a Python virtual environment and install the required dependencies:
 
----
-
-## 🚀 Getting Started
-
-### 1. Installation & Environment Setup
-Create a Python virtual environment and install the required system libraries:
 ```bash
-python -m venv venv
-.\venv\Scripts\activate      # Windows
-source venv/bin/activate    # Linux/macOS
+# 1. Clone the repository and navigate into it
+cd Disaster-Whisper
 
+# 2. Create a virtual environment
+python -m venv venv
+
+# 3. Activate the environment
+# Windows:
+.\venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
+
+# 4. Install requirements
 pip install -r requirements.txt
+pip install deep-translator
 ```
 
-### 2. Run Automated Verification Tests
-Disaster-Whisper features a complete test suite covering the entire pipeline. Execute using `pytest`:
+## 🧪 Testing & Verification
+We have built a robust automated test suite covering the entire pipeline.
 ```bash
 python -m pytest tests/ -v
 ```
 
-### 3. Run the CLI Simulation Demo
-To verify the complete server-to-client pipeline from coordinate compression up to Tier 1 and Tier 2 prompt building, execute:
-```bash
-python demo.py
-```
+## 🎮 Running the SIH Demo
 
-
-
-### 5. Launch the Interactive Dashboard Web App
-Run the Flask server locally:
+**Step 1: Start the Centralized Server**
 ```bash
 python app.py
 ```
-Open your browser and navigate to: **`http://127.0.0.1:5000`**
 
----
+**Step 2: Access the Dashboards**
+Open your web browser (preferably in **Incognito/Private mode** to avoid PWA cache interference during development) and navigate to:
+*   **Command Center:** [http://127.0.0.1:5000/server](http://127.0.0.1:5000/server)
+*   **Citizen App:** [http://127.0.0.1:5000/client](http://127.0.0.1:5000/client)
 
-## 📊 Geodetic Compression Analysis
+**Step 3: The Demo Workflow**
+1. On the **Server** tab, select a Hazard (e.g., Flood), click 3-5 points on the map to draw a route, and type a custom HQ message.
+2. Click **Broadcast Alert**.
+3. Switch to the **Client** tab. The app will automatically scan, intercept the broadcast, decode the map coordinates, translate the HQ message, and read the alert aloud!
 
-| Coordinate Precision | Spatial Grid Resolution | Polyline Length (5 points) | Available Suffix (160-Char Limit) | Spatial Error Impact |
-| :--- | :--- | :--- | :--- | :--- |
-| **5 Decimals** | ~1.1 meters | 29 Characters | 128 Characters | Overkill for evacuation; increases size. |
-| **4 Decimals (Optimal)**| **~11.0 meters** | **24 Characters** | **133 Characters** | **Optimal balance; street-level resolution.** |
-| **3 Decimals** | ~110.0 meters | 16 Characters | 141 Characters | Too inaccurate; causes street selection errors. |
-
----
-
-## 🔒 Security & AI Hallucination Guardrails
-To prevent LLM hallucination in stressful scenarios, Disaster-Whisper operates a strict three-tier verification process:
-1.  **Template Grounding:** The prompt isolates the AI by specifying that only verified locations in the prompt's context may be generated.
-2.  **Strict Low-Temperature:** Inference runs at `temp = 0.15` to ensure output stability.
-3.  **Post-Inference Validation:** The validator parses the output text for any word resembling a landmark. If any locality keyword does not match Indore's offline `landmarks.json` registry, the alert is blocked from presentation and the Tier 1 template version is displayed.

@@ -371,7 +371,7 @@
                     opacity: 0.8,
                     dashArray: '5, 10'
                 }).addTo(map);
-                map.fitBounds(routePathLine.getBounds(), { padding: [30, 30] });
+                // Removed map.fitBounds to prevent aggressive auto-zooming
             }
         }
 
