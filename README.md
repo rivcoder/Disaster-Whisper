@@ -21,12 +21,8 @@ The architecture is divided into two distinct operational phases:
 *   **Payload Assembler:** Constructs the compact string and calculates the character budget to guarantee it fits within the 160-character SMS limit with fallback text.
 
 ### 2. Client-Side Pipeline (Edge Smartphones & Feature Phones)
-*   **Asymmetric Tier Detector:** Identifies hardware specifications (specifically system RAM):
-    *   **Tier 1 (< 4GB RAM):** Enforces Plaintext Fallback & Template-based slot filling. Completely offline and deterministic (zero-dependency).
-    *   **Tier 2 (≥ 4GB RAM):** Activates on-device Small Language Model (SLM) synthesis.
+*   **Deterministic Template Engine:** Enforces Plaintext Fallback & Template-based slot filling. Completely offline and deterministic (zero-dependency).
 *   **Pathway A Ingestion Bridge:** Ingests alerts via clipboard copy-detection bridge to circumvent restrictive OS sandboxes.
-*   **Local SLM Synthesis Engine:** Runs low-temperature (near-deterministic) generation via cached lightweight models (e.g., `Qwen/Qwen1.5-1.8B-Chat` or `google/gemma-2b-it`) using structured prompts. Memory is instantly cleared (`gc` + cache flushing) after execution to ensure device stability.
-*   **Output Validator:** A safety guard gating SLM output against an offline landmark registry database to reject hallucinated locations or directions before displaying them to the user. Triggers Tier 1 template fallback if validation fails.
 
 ---
 
@@ -50,9 +46,7 @@ Disaster-Whisper/
 │
 ├── client/                     # Client-side edge components
 │   ├── __init__.py
-│   ├── tier_detector.py        # RAM-based device profiling
 │   ├── tier1_engine.py         # Slot-fill template alert renderer
-│   ├── tier2_engine.py         # On-device SLM prompt & inference manager
 │   ├── validator.py            # Local landmark validation gate
 │   └── clipboard_bridge.py     # Clipboard bridge receiver (Pathway A)
 │
@@ -108,12 +102,7 @@ To verify the complete server-to-client pipeline from coordinate compression up 
 python demo.py
 ```
 
-### 4. Setting up a Local Small Language Model (Optional - Tier 2 path)
-If you wish to test real on-device AI synthesis instead of simulated mockups, download the recommended Qwen-1.8B-Chat model (~1.5GB):
-```bash
-python setup_model.py
-```
-*Note: If no local model is found, the system gracefully falls back to structured simulations with full logs.*
+
 
 ### 5. Launch the Interactive Dashboard Web App
 Run the Flask server locally:

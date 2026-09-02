@@ -8,10 +8,7 @@ It runs:
   1. Server-side alert generation and route optimization.
   2. Compact 4-part payload compression and SMS budgeting.
   3. Client-side reception and clipboard extraction (Pathway A).
-  4. Client-side RAM-based tier detection.
-  5. On-device alert synthesis via template slot-filling (Tier 1)
-     and structured prompt construction for SLM (Tier 2).
-  6. On-device validation of the synthesized alert.
+  4. On-device alert synthesis via deterministic template slot-filling.
 """
 
 import sys
@@ -34,10 +31,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from codec.payload import encode_payload, decode_payload, payload_breakdown
 from codec.role import build_role_flags, role_description
 from server.alert_generator import generate_alert_with_audit
-from client.tier_detector import get_system_info, TIER_2
 from client.tier1_engine import render_tier1, build_route_description
-from client.tier2_engine import render_tier2, is_model_available, build_slm_prompt
-from client.validator import validate_alert_output
 from client.clipboard_bridge import parse_sms_text
 
 # ANSI color codes for premium terminal output
@@ -160,25 +154,10 @@ def main():
     time.sleep(1.0)
 
     # -------------------------------------------------------------------------
-    # 4. CLIENT-SIDE HARDWARE TIER DETECTION
+    # 4. ALERT SYNTHESIS EXECUTION
     # -------------------------------------------------------------------------
-    print_header("ASYMMETRIC HARDWARE TIER DETECTION")
-    print(f"{BOLD}{WHITE}Detecting Device Specs...{RESET}")
-    sys_info = get_system_info()
-    print(f"  - Operating System:    {sys_info['os']}")
-    print(f"  - Logical CPU Cores:   {sys_info['cpu_cores']}")
-    print(f"  - Detected System RAM: {BOLD}{sys_info['ram_gb']:.2f} GB{RESET}")
-    print(f"  - RAM Tier Threshold:  {sys_info['ram_threshold_gb']} GB")
-    print(f"  - Target Category:     {BOLD}{YELLOW}{sys_info['tier_label']}{RESET}")
-    time.sleep(1.0)
-
-    # -------------------------------------------------------------------------
-    # 5. ASYMMETRIC LOGIC EXECUTION
-    # -------------------------------------------------------------------------
-    print_header("ALERT SYNTHESIS VIA ASYMMETRIC PATHWAYS")
-    
-    # Pathway 1: Tier 1 Logic (Standard / Low-Memory Path)
-    print(f"{BOLD}{UNDERLINE}Pathway I: Tier 1 - Lightweight Template Slot-Filling{RESET}")
+    print_header("ALERT SYNTHESIS")
+    print(f"{BOLD}{UNDERLINE}Standard Pathway - Lightweight Template Slot-Filling{RESET}")
     print(f"Rendering template alerts in English and Hindi (Zero-dependency, offline)...")
     
     t1_en = render_tier1(decoded["hazard"]["code"], decoded["role"]["value"], recon_coords, language="en")
@@ -190,64 +169,7 @@ def main():
     print(f"  {GREEN}{t1_hi['alert_text']}{RESET}")
     print("-" * 80)
     time.sleep(1.0)
-
-    # Pathway 2: Tier 2 Logic (Advanced / SLM Path)
-    print(f"{BOLD}{UNDERLINE}Pathway II: Tier 2 - On-Device Small Language Model (SLM) Synthesis{RESET}")
-    model_status = is_model_available()
-    print(f"  - SLM Support: {model_status['reason']}")
     
-    print(f"\n{BOLD}Step 2.1: Constructing Structured Instructions for SLM:{RESET}")
-    slm_prompt = build_slm_prompt(decoded["hazard"]["code"], decoded["role"]["value"], recon_coords, language="en")
-    print("=" * 80)
-    print(f"{YELLOW}{slm_prompt}{RESET}")
-    print("=" * 80)
-    
-    print(f"\n{BOLD}Step 2.2: Running On-Device Synthesis (Unloading after generation)...{RESET}")
-    # Force mock for demo unless the user explicitly ran setup_model.py
-    is_mock = not model_status["available"]
-    
-    t2_result = render_tier2(
-        decoded["hazard"]["code"],
-        decoded["role"]["value"],
-        recon_coords,
-        language="en",
-        force_mock=is_mock
-    )
-    
-    print(f"\n  {BOLD}[SLM Synthesized Output ({t2_result['model_used']})]{RESET}")
-    print(f"  {CYAN}{t2_result['alert_text']}{RESET}")
-    print("-" * 80)
-    time.sleep(1.0)
-
-    # -------------------------------------------------------------------------
-    # 6. POST-SYNTHESIS VALIDATION
-    # -------------------------------------------------------------------------
-    print_header("CLIENT-SIDE INTEGRITY VALIDATION")
-    print(f"{BOLD}{WHITE}Validating SLM output against offline database landmarks...{RESET}")
-    
-    val_result = validate_alert_output(
-        t2_result["alert_text"],
-        decoded["hazard"]["code"],
-        recon_coords,
-        language="en"
-    )
-    
-    print(f"  - Validation Status: {'[PASSED] ' + GREEN if val_result['valid'] else '[REJECTED] ' + RED}{'VALID' if val_result['valid'] else 'INVALID'}{RESET}")
-    
-    if val_result["warnings"]:
-        print(f"\n  {BOLD}{YELLOW}Warnings/Audits:{RESET}")
-        for w in val_result["warnings"]:
-            print(f"    ⚠️ {w}")
-            
-    if not val_result["valid"]:
-        print(f"\n  {BOLD}{RED}Validation Failures:{RESET}")
-        for error in val_result["issues"]:
-            print(f"    ❌ {error}")
-        print(f"\n{BOLD}{YELLOW}Fallback Triggered:{RESET} Falling back to Tier-1 template to prevent AI hallucination.")
-        print(f"  {GREEN}{t1_en['alert_text']}{RESET}")
-    else:
-        print(f"\n{BOLD}{GREEN}Alert matches landmark registry. Output approved for display to user.{RESET}")
-        
     print("\n" + "=" * 80)
     print(f"{BOLD}{GREEN}=== PIPELINE DEMO COMPLETED SUCCESSFULLY ==={RESET}")
     print("=" * 80 + "\n")

@@ -16,9 +16,9 @@ from flask import Flask, request, jsonify, render_template
 from codec.payload import decode_payload
 from client.clipboard_bridge import parse_sms_text
 from client.tier1_engine import render_tier1
-from client.tier2_engine import render_tier2
 from client.validator import validate_alert_output
 from server.alert_generator import generate_alert_with_audit
+from deep_translator import GoogleTranslator
 
 app = Flask(__name__)
 
@@ -162,7 +162,6 @@ def api_decode():
     req_data = request.get_json() or {}
     
     sms_text = req_data.get("sms_text", "")
-    tier     = int(req_data.get("tier", 1))
     language = req_data.get("language", "en")
 
     if not sms_text:
@@ -183,28 +182,28 @@ def api_decode():
         role_flags  = decoded_payload["role"]["value"]
         coordinates = decoded_payload["coordinates"]
 
-        # Run device-asymmetric logic
-        if tier == 2:
-            rendered_alert = render_tier2(
-                hazard_code=hazard_code,
-                role_flags=role_flags,
-                coordinates=coordinates,
-                language=language,
-            )
-            validation = validate_alert_output(
-                generated_text=rendered_alert["alert_text"],
-                hazard_code=hazard_code,
-                coordinates=coordinates,
-                language=language,
-            )
-        else:
-            rendered_alert = render_tier1(
-                hazard_code=hazard_code,
-                role_flags=role_flags,
-                coordinates=coordinates,
-                language=language,
-            )
-            validation = None
+        # Run standard deterministic template engine
+        rendered_alert = render_tier1(
+            hazard_code=hazard_code,
+            role_flags=role_flags,
+            coordinates=coordinates,
+            language=language,
+        )
+        
+        # Append the custom plaintext message if one was provided in the SMS
+        custom_message = extraction.get("suffix", "").strip()
+        if custom_message:
+            # Attempt to translate the custom message to the target language
+            try:
+                if language and language != "en":
+                    translator = GoogleTranslator(source='auto', target=language)
+                    custom_message = translator.translate(custom_message)
+            except Exception as e:
+                print(f"Translation failed: {e}")
+                
+            rendered_alert["alert_text"] += f"\n\n[HQ Broadcast]: {custom_message}"
+            
+        validation = None
 
 
         return jsonify({

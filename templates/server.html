@@ -314,8 +314,9 @@
                 throw new Error("L is not defined (Leaflet script failed to load)");
             }
             map = L.map('route-map').setView([22.7196, 75.8577], 13);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap'
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap',
+                maxZoom: 19
             }).addTo(map);
 
             map.on('click', (e) => {

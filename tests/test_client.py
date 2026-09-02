@@ -14,7 +14,6 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from client.tier_detector    import detect_tier, get_system_info, TIER_1, TIER_2
 from client.tier1_engine     import render_tier1, find_nearest_landmark, build_route_description
 from client.validator        import validate_alert_output
 from client.clipboard_bridge import parse_sms_text
@@ -29,31 +28,7 @@ INDORE_ROUTE = [
 ]
 
 
-class TestTierDetector:
 
-    def test_tier1_below_threshold(self):
-        assert detect_tier(ram_gb=2.0) == TIER_1
-        assert detect_tier(ram_gb=0.5) == TIER_1
-        assert detect_tier(ram_gb=3.9) == TIER_1
-
-    def test_tier2_at_and_above_threshold(self):
-        assert detect_tier(ram_gb=4.0) == TIER_2
-        assert detect_tier(ram_gb=8.0) == TIER_2
-        assert detect_tier(ram_gb=16.0)== TIER_2
-
-    def test_system_info_structure(self):
-        info = get_system_info()
-        assert "tier"          in info
-        assert "ram_gb"        in info
-        assert "tier_label"    in info
-        assert "slm_eligible"  in info
-        assert info["tier"]    in (TIER_1, TIER_2)
-        assert info["ram_gb"]  >= 0
-
-    def test_system_info_consistency(self):
-        info = get_system_info()
-        expected_tier = TIER_2 if info["ram_gb"] >= 4.0 else TIER_1
-        assert info["tier"] == expected_tier
 
 
 class TestTier1Engine:

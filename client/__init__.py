@@ -13,18 +13,12 @@ Modules:
     clipboard_bridge — Pathway A: extract payload from clipboard (OS-agnostic)
 """
 
-from client.tier_detector   import detect_tier, get_system_info
 from client.tier1_engine    import render_tier1
-from client.tier2_engine    import render_tier2, is_model_available
 from client.validator       import validate_alert_output
 from client.clipboard_bridge import read_payload_from_clipboard
 
 __all__ = [
-    "detect_tier",
-    "get_system_info",
     "render_tier1",
-    "render_tier2",
-    "is_model_available",
     "validate_alert_output",
     "read_payload_from_clipboard",
 ]

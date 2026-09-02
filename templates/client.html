@@ -123,7 +123,7 @@
             <div class="panel glass">
                 <div class="panel-header" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
                     <h2>⚠️ Evacuation Hub & Decryption</h2>
-                    <span class="airwaves-badge" style="background: rgba(16,185,129,0.15); color: var(--accent-emerald);">SLM Decoder Active</span>
+                    <span class="airwaves-badge" style="background: rgba(16,185,129,0.15); color: var(--accent-emerald);">Decoder Active</span>
                 </div>
                 <div class="panel-content" style="gap: 15px; position: relative;">
                     <!-- Loading Status -->
@@ -208,14 +208,14 @@
             <div class="diagnostics-panel glass">
 
                 <div class="panel-header" style="flex-direction: row; justify-content: space-between; align-items: center;">
-                    <h2>🔬 On-Device AI Diagnosis Panel</h2>
-                    <div class="airwaves-badge" style="background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.2); color: var(--accent-cyan);">Offline SLM Guardrails Active</div>
+                    <h2>🔬 On-Device Diagnosis Panel</h2>
+                    <div class="airwaves-badge" style="background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.2); color: var(--accent-cyan);">Offline Guardrails Active</div>
                 </div>
                 
                 <div class="diag-content" style="padding: 20px;">
                     <div class="diag-item">
                         <span class="diag-lbl">Detected Hardware profile:</span>
-                        <span class="diag-val" id="diag-ram-spec">Eligible for Local SLM Synthesis (Guardrails Enabled)</span>
+                        <span class="diag-val" id="diag-ram-spec">Standard Client Configuration</span>
                     </div>
 
                     <div class="diag-item">
@@ -249,7 +249,6 @@
         let userLatitude = 22.7196;
         let userLongitude = 75.8577;
 
-        let activeDeviceTier = 2; // Always compile via offline SLM endpoint
         let lastDecodedAlertText = '';
 
         // Alarm variables
@@ -461,6 +460,30 @@
             }
         }
 
+        async function autoScanAirwaves() {
+            try {
+                const res = await fetch('/api/active_broadcast');
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data.message && data.message !== lastDecodedAlertText) {
+                    lastDecodedAlertText = data.message;
+                    document.getElementById('paste-broadcast-input').value = data.message;
+                    
+                    const btn = document.getElementById('scan-airwaves-btn');
+                    btn.innerText = '✓ Auto-Captured!';
+                    btn.style.borderColor = 'var(--accent-emerald)';
+                    btn.style.color = 'var(--accent-emerald)';
+                    setTimeout(() => {
+                        btn.innerText = '📡 Scan Airwaves';
+                        btn.style.borderColor = '';
+                        btn.style.color = '';
+                    }, 1500);
+
+                    // Automatically trigger decode
+                    document.getElementById('decode-btn').click();
+                }
+            } catch (e) {}
+        }
 
         // Haversine formula to compute distance in km between two GPS coordinates
         function getHaversineDistance(lat1, lon1, lat2, lon2) {
@@ -486,6 +509,9 @@
             pollUserMessages();
             setInterval(pollUserMessages, 3000);
             
+            // Auto scan for incoming broadcasts
+            setInterval(autoScanAirwaves, 3000);
+
             // Start queue upload loop
             processQueue();
 
@@ -627,11 +653,7 @@
                 loader.classList.remove('hidden');
                 area.classList.add('hidden');
 
-                if (activeDeviceTier === 2) {
-                    document.getElementById('loader-text').innerText = 'Starting Local SLM Synthesis...';
-                } else {
-                    document.getElementById('loader-text').innerText = 'Unpacking payload...';
-                }
+                document.getElementById('loader-text').innerText = 'Unpacking payload...';
 
                 try {
                     const res = await fetch('/api/decode', {
@@ -639,7 +661,6 @@
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             sms_text: input,
-                            tier: activeDeviceTier,
                             language: document.getElementById('language-select').value
                         })
                     });
@@ -900,6 +921,11 @@
             } else {
                 listEl.innerHTML = '<li class="check-item pass"><span>✓ DETERMINISTIC ENCODING</span> <span>PASS (100% SECURE)</span></li>';
             }
+            
+            // Automatically trigger text-to-speech
+            setTimeout(() => {
+                document.getElementById('tts-btn').click();
+            }, 600);
         }
     </script>
 </body>
