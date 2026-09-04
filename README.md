@@ -23,9 +23,11 @@ Our system leverages an **Asymmetric Computational Model**:
 
 *   **Geodetic Compression Codec:** Compresses Google Maps/OSM polylines to 4-decimal precision (~11m accuracy), squeezing up to 5 waypoints, hazard type, and target audience into just 28 characters.
 *   **Fully Offline Alerts:** The client app translates the cryptic payload into a rich warning using an offline template engine—no API calls needed.
-*   **Real-time Auto-Translation:** HQ Broadcast messages are instantly translated into the user's preferred local language (Hindi, Tamil, Gujarati, etc.) using integrated `deep-translator`.
+*   **Offline Localized Templates:** Core emergency routes and instructions are translated completely offline. We used `deep-translator` at build-time to hard-code 22 distinct regional Indian languages into localized JSON templates, ensuring victims receive alerts in their native tongue without requiring a single API call.
 *   **Hands-Free Automation:** Client dashboard auto-scans for new broadcasts, auto-decodes the payload, and automatically triggers an offline Text-to-Speech (TTS) engine to read the warning aloud.
-*   **Instant SOS Uplink:** A one-tap emergency beacon that cues loud localized sirens, vibrates the device, and queues a geolocation ping for rescuers when a cellular packet window opens.
+*   **Asymmetric AI Architecture:** The system gracefully scales based on the victim's hardware. Low-end devices use the deterministic Tier-1 JSON templates. High-end devices (4GB+ RAM) execute a Tier-2 offline Small Language Model (e.g., Qwen-1.8B) to synthesize conversational alerts directly on the CPU.
+*   **Hallucination Validator:** A hardcoded safety gate (`client/validator.py`) intercepts the on-device AI output and cross-checks it against a verified local landmark registry, eliminating AI-invented locations before they reach the user.
+*   **Instant SOS Uplink:** A one-tap emergency beacon that queues a geolocation ping for rescuers when a cellular packet window opens.
 
 ## System Architecture
 
@@ -39,12 +41,22 @@ Our system leverages an **Asymmetric Computational Model**:
 2. **Decoder & Integrity Gate:** Verifies the XOR checksum. If corrupted by signal interference, the payload is rejected.
 3. **Template Engine:** Expands the tiny payload into a localized, human-readable evacuation plan.
 
+## 📂 Project Structure & Scale
+
+To ensure true offline survivability and localized accessibility without internet, the codebase is significantly scaled out:
+
+*   **22+ Localized Templates (`data/`):** We have engineered 22 distinct JSON template files (e.g., `templates_as.json` for Assamese, `templates_ta.json` for Tamil) allowing the offline tier-1 engine to dynamically generate emergency alerts in almost every major regional Indian language without hitting a translation API.
+*   **Dual-Dashboard Architecture (`templates/`):** 
+    *   `client.html`: The fully isolated Progressive Web App (PWA) for citizen smartphones.
+    *   `server.html`: The HQ Command Center dashboard featuring interactive Leaflet mapping.
+*   **Live SOS Telemetry & Rescue Uplink:** Built directly into the routing engine (`app.py`), citizen phones use standard geolocation to ping `/api/sos`, which HQ monitors in real-time via AJAX polling on the server dashboard for SOS coordination and status monitoring.
+
 ## Tech Stack
 
 *   **Backend:** Python 3.13, Flask
 *   **Frontend:** Vanilla JavaScript, CSS3 (Glassmorphism UI), HTML5
 *   **Mapping:** Leaflet.js with OpenStreetMap (OSM) Tiles
-*   **APIs/Libraries:** Overpass API (Offline Hospital/Police node lookup), `deep-translator`
+*   **APIs/Libraries:** Overpass API (Used at build-time to cache Hospital/Police nodes into the local offline registry), `deep-translator`
 *   **Architecture:** Progressive Web App (PWA) with Service Worker caching
 
 ## Setup & Installation
