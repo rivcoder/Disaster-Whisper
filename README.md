@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://img.icons8.com/?size=256&id=V6h88zP9F9N3&format=png" alt="Disaster-Whisper Logo" width="120" />
+  <img src="disaster-whisper-logo.jpeg" alt="Disaster-Whisper Logo" width="120" />
   <h1>Disaster-Whisper</h1>
   <p><strong>Offline-First, Asymmetric Emergency Communication & Alerting System</strong></p>
   <p><i>A research backed proof of concept demostrating our proposed contribution to government disaster management developed as a prototype for SIH.</i></p>
